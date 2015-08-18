@@ -17,7 +17,7 @@ class CreateProspectUsersTable extends Migration
         	$table->engine = 'InnoDB';
 			
 			// Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
 			// email address to send short link to
             $table->string('email')->unique();

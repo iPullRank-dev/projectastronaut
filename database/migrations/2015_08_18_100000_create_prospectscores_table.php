@@ -17,7 +17,7 @@ class CreateProspectScoresTable extends Migration
         	$table->engine = 'InnoDB';
 			
 			// Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
 			// Foreign Key for associating with prospects table; unique index constraint
 			$table->integer('company_id')->unique();

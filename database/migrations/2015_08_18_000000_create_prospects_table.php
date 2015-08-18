@@ -18,7 +18,7 @@ class CreateProspectsTable extends Migration
         	$table->engine = 'InnoDB';
 			
 			// Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
 			// full contact api data, pull using URL from data spreadsheet & insert
 			$table->string('fc_company_name');

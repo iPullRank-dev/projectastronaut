@@ -17,7 +17,7 @@ class CreateShortUrlsTable extends Migration
         	$table->engine = 'InnoDB';
 			
 			// Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
             // foreign key to prospects table for displaying links by company
             $table->integer('company_id')->index();
