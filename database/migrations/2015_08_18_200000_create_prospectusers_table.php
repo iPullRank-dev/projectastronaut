@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProspectUsersTable extends Migration
+class CreateProspectusersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateProspectUsersTable extends Migration
         	$table->engine = 'InnoDB';
 			
 			// Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
 			// email address to send short link to
             $table->string('email')->unique();

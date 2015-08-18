@@ -17,7 +17,7 @@ class CreateAdminUsersTable extends Migration
         	$table->engine = 'InnoDB';
 			
             // Primary Auto Incrementing Index
-			$table->increments('id')->primary();
+			$table->increments('id');
 			
 			// self explanatory
             $table->string('username')->unique();
