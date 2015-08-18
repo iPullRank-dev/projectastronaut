@@ -1,0 +1,72 @@
+#reporthead{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left:0px;
+    z-index: 801;
+    z-index: 300;
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+    height:50px;
+    background: #fff;
+    padding:10px;
+}
+
+#reporthead h1 {
+    color: #000;
+    font-family: 'Lato', 'Open Sans', Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    letter-spacing: -1.5px;
+    line-height: 31px;
+    margin: 0;
+    
+}
+
+.grade{
+    padding:0px 30px;
+}
+
+.gradebox{
+	position: relative;
+	width: 100%;		/* desired width */
+    background-color: rgba(0,0,0,0.5);
+    max-width: 300px;
+    margin:0 auto;
+}
+.gradebox:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+
+.gradecontent{
+    position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+         -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.grademain{
+     position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cinfo{
+    padding:0px 40px;
+}
+
+@media screen and (max-width:1280px){
+    .cinfo{
+        padding:0px 10px;
+    }
+    .grade{
+        padding:0px 10px;
+    }
+}
