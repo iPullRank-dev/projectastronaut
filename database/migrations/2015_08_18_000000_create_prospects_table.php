@@ -30,7 +30,6 @@ class CreateProspectsTable extends Migration
 			$table->string('fc_address_line1');
 			$table->string('fc_address_line2');
 			$table->string('fc_address_locality');
-			$table->string('fc_address_line1');
 			$table->string('fc_address_region_name');
 			$table->string('fc_address_postal_code');
 			$table->string('fc_address_country_name');
