@@ -1,0 +1,11 @@
+.contactimg{
+        width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.contacttitle{
+    text-align: center;
+}
