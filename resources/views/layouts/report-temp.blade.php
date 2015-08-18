@@ -43,166 +43,60 @@
 
   <section>
 
+ <div id="reporthead">
+          <h1>Astronaut</h1>
+</div>
 
-<!-- BEGIN SIDEBAR -->
-
-      <div class="sidebar">
-
-        <div class="logopanel">
-
-          <h1><a href="dashboard.html">Astronaut</a></h1>
-
-        </div>
-
-        <div class="sidebar-inner">
-
-          <div class="sidebar-top">
-                <form action="#" method="post" class="searchform" id="search-results">
-
-              <input type="text" class="form-control" name="keyword" placeholder="Search here...">
-
-            </form>
-              
-            </div>
-
-          <div class="menu-title">
-
-            <span>Navigation</span> 
-
-           
-
-          </div>
-
-          <ul class="nav nav-sidebar">
-
-            
-
-            <li class="sideitemb">
-
-              <a href="dash"><i class="fa fa-home"></i><span>Dashboard</span> </a>
-
-
-            </li>
-               <li class="sideitemb">
-
-              <a href="reportset"><i class="fa fa-file-text"></i><span>Report Setup</span> </a>
-
-
-            </li>
-              <li class="sideitemb">
-
-              <a href="allcompanies"><i class="fa fa-briefcase"></i><span>All Companies</span> </a>
-
-
-            </li>
-              <li class="sideitemb">
-
-              <a href="new"><i class="fa fa-plus"></i><span>New Company</span> </a>
-
-
-            </li>
-
-
-          </ul>
-
-          <div class="sidebar-widgets" style=""></div>
-
-          <div class="sidebar-footer clearfix" style="">
-
-            <a class="pull-left footer-settings" href="#" data-rel="tooltip" data-placement="top" data-original-title="Settings">
-
-            <i class="icon-settings"></i></a>
-
-        
-
-          </div>
-
-        </div>
-
-      </div>
 
       <!-- END SIDEBAR -->
-      
-      <div class="main-content">
+<div class="main-content" style="margin-left:0px;min-height:500px;">
+            <div class="page-content" style="margin:0px;padding-top:70px;">
+                <!-- PAGE CONTENT -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="grade">
+                            <div class="gradebox">
+                                <div class="gradecontent">
+                                    <div class="grademain">
+                                        @yield('grade')
+                                    </div>
+                                </div>
+                                     
+                            </div>
+                        </div>
+                        <div class="cinfo">
+                        <div class="panel" style="max-width:280px; margin:0 auto 20 auto;">
+                            @yield('company')
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    @yield('quad1')
+                                </div>
+                                <div class="panel">
+                            @yield('quad2')
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel">
+                            @yield('quad3')
+                        </div>
+                                <div class="panel">
+                            @yield('quad4')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- BEGIN TOPBAR -->
-
-        <div class="topbar">
-
-              
-          <div class="header-left">       <div class="topnav">
-
-              <a class="menutoggle" href="#" data-toggle="sidebar-collapsed"><span class="menu__handle"><span>Menu</span></span></a>
-              
-              </div></div>
-
-          <div class="header-right">
-
-            <ul class="header-menu nav navbar-nav">
-
-
-              <!-- BEGIN USER DROPDOWN -->
-
-              <li class="dropdown" id="user-header">
-
-                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-
-
-                <span class="username">Hi,</span>
-
-                </a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <a href="#"><i class="icon-user"></i><span>My Profile</span></a>
-
-                  </li>
-
-                  <li>
-
-                    <a href="#"><i class="icon-calendar"></i><span>My Calendar</span></a>
-
-                  </li>
-
-                  <li>
-
-                    <a href="#"><i class="icon-settings"></i><span>Account Settings</span></a>
-
-                  </li>
-
-                  <li>
-
-                    <a href="includes/logout.php"><i class="icon-logout"></i><span>Logout</span></a>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <!-- END USER DROPDOWN -->
-
-              <!-- CHAT BAR ICON -->
-
-      
-
-            </ul>
-
-          </div>
-
-          <!-- header-right -->
-
+                </div>
             </div>
+        </div>
 
-        <!-- END TOPBAR -->
-        
-        <div class="page-content">
 
-			@yield('content')
 
-		</div>
  <!-- END PAGE CONTENT -->
 
       </div>
@@ -212,32 +106,6 @@
     </section>
 
 
-
-<div id="morphsearch" class="morphsearch">
-
-
-
-      <form class="morphsearch-form">
-
-        <input class="morphsearch-input" type="search" placeholder="Search...">
-
-        <button class="morphsearch-submit" type="submit">Search</button>
-
-      </form>
-
-      <div class="morphsearch-content withScroll mCustomScrollbar _mCS_5" style="height: auto;"><div class="mCustomScrollBox mCS-light" id="mCSB_5" style="position:relative; height:100%; overflow:hidden; max-width:100%;"><div class="mCSB_container mCS_no_scrollbar" style="position: relative; top: 0px;">
-
-       
-
-      </div><div class="mCSB_scrollTools" style="position: absolute; display: none;"><div class="mCSB_draggerContainer"><div class="mCSB_dragger" style="position: absolute; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="position:relative;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
-
-      <!-- /morphsearch-content -->
-
-      <span class="morphsearch-close"></span>
-
-    </div>
-
-<!-- Preloader -->
 
 <div class="loader-overlay">
 
@@ -350,7 +218,7 @@
 <script src="../resources/assets/js/widgets/widget_weather.js"></script>
 
 <script src="../resources/assets/js/widgets/todo_list.js"></script>
-
+    
 <script src="../resources/assets/customjs/table_editable.js"></script>
 
 @yield('pagejs')
