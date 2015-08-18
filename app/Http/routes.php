@@ -22,3 +22,11 @@ Route::get('/dash', function () {
 Route::get('/reportset', function () {
     return view('reportset');
 });
+
+Route::get('/allcompanies', function () {
+    return view('allcompanies');
+});
+
+Route::get('/new', function () {
+    return view('new');
+});
