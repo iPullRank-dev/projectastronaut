@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/dash', function () {
     return view('dash');
 });
+
+Route::get('/reportset', function () {
+    return view('reportset');
+});
