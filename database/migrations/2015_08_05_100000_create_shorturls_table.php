@@ -31,6 +31,9 @@ class CreateShortUrlsTable extends Migration
 			// unique id for the user, generated client side and set as an evercookie
 			$table->string('uuid');
 			
+			// unique url name... ie inc500.ipullrank.com/CompanyName
+			$table->string('url_hash')->unique();
+			
 			// soft delete flag, automagically managed
 			$table->softDeletes();
 			
