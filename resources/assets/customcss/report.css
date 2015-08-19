@@ -31,7 +31,7 @@
 .gradebox{
 	position: relative;
 	width: 100%;		/* desired width */
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.2);
     max-width: 300px;
     margin:0 auto;
 }
@@ -58,8 +58,21 @@
   transform: translateY(-50%);
 }
 
+.grademain p{
+    margin:0px;
+    text-align: center;
+}
+
 .cinfo{
     padding:0px 40px;
+}
+
+.cinfop{
+    max-width:280px; margin:0 auto 20 auto;
+}
+
+.cinfopm{
+    display: none;
 }
 
 @media screen and (max-width:1280px){
@@ -69,4 +82,57 @@
     .grade{
         padding:0px 10px;
     }
+}
+
+@media (min-width:600px) and (max-width:992px){
+    .cinfo{
+            padding: 0px;
+    /* float: left; */
+    width: 70%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    }
+    .grade{
+        padding:0px;
+        float: left;
+        width:30%;
+        margin-bottom:20px;
+    }
+    .gradebox{
+        max-width: 500px;
+    }
+    .cinfop{
+        max-width: 650px;
+        height: 100%;
+    }
+}
+
+@media (max-width:600px){
+
+    .grade{
+        padding:0px;
+    }
+    
+    .gradebox{
+        max-width: 600px;
+    }
+    
+    .cinfo{
+        padding:0px;
+    }
+    
+    .cinfop{
+        display: none;
+    }
+    
+    .cinfopm{
+        display: block;
+        background-color: #fff;
+    }
+    
+    
 }
