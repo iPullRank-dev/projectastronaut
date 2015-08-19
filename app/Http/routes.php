@@ -30,3 +30,7 @@ Route::get('/allcompanies', function () {
 Route::get('/new', function () {
     return view('new');
 });
+
+Route::get('/report', function () {
+    return view('report');
+});

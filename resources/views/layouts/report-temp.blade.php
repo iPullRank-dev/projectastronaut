@@ -44,7 +44,12 @@
   <section>
 
  <div id="reporthead">
+        <div style="float:left;">
           <h1>Astronaut</h1>
+        </div>
+        <div style="float:right">
+            <button type="button" class="btn btn-dark"><i class="fa fa-paper-plane" style="padding-right:8px;"></i>Invite</button></div>
+        <div class="fixer"></div>
 </div>
 
 
@@ -54,39 +59,80 @@
                 <!-- PAGE CONTENT -->
                 <div class="row">
                     <div class="col-md-3">
+                        <div style="position:relative;">
                         <div class="grade">
                             <div class="gradebox">
                                 <div class="gradecontent">
+                                    <div style="height:100%;">
                                     <div class="grademain">
-                                        @yield('grade')
+                                        <p style="font-size: 40px;
+                                            color: rgba(255,255,255,0.9);">@yield('grade')</p>
+                                        <p>Grade</p>
+                                    </div>
                                     </div>
                                 </div>
                                      
                             </div>
                         </div>
                         <div class="cinfo">
-                        <div class="panel" style="max-width:280px; margin:0 auto 20 auto;">
+                        <div class="panel cinfop">
                             @yield('company')
                         </div>
+                        <div class="panel cinfopm">
+                          <div class="panel-heading">
+                            <h4>
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                              Collapsible Group Item #1
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                             
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="fixer"></div>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="panel">
-                                    @yield('quad1')
+                                    <div class="panel-header">
+                                        <h3>Portlet Header 1</h3>
+                                    </div>
+                                    <div class="panel-content">
+                                        @yield('quad1')
+                                    </div>
                                 </div>
                                 <div class="panel">
-                            @yield('quad2')
-                                </div>
+                                    <div class="panel-header">
+                                        <h3>Portlet Header 2</h3>
+                                    </div>
+                                    <div class="panel-content">
+                                        @yield('quad2')
+                                    </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="panel">
-                            @yield('quad3')
-                        </div>
-                                <div class="panel">
-                            @yield('quad4')
+                                    <div class="panel-header">
+                                        <h3>Portlet Header 3</h3>
+                                    </div>
+                                    <div class="panel-content">
+                                        @yield('quad3')
+                                    </div>
                                 </div>
+                                <div class="panel">
+                                    <div class="panel-header">
+                                        <h3>Portlet Header 4</h3>
+                                    </div>
+                                    <div class="panel-content">
+                                        @yield('quad4')
+                                    </div>
+                            </div>
                             </div>
                         </div>
                     </div>
