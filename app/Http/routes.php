@@ -15,17 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dash', function () {
-    return view('dash');
-});
+Route::get('/dash', 'dashboard@index');
 
 Route::get('/reportset', function () {
     return view('reportset');
 });
 
-Route::get('/allcompanies', function () {
-    return view('allcompanies');
-});
+Route::get('/allcompanies', 'AllCompanies@index');
 
 Route::get('/new', function () {
     return view('new');
