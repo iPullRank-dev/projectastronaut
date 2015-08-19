@@ -1,12 +1,16 @@
 @extends('layouts.master')
 
+
 @section('pagetitle','New Company')
+
 
 @endsection
 
 @section('content')
 
+
    <div class="header">
+
             <h2>Add <strong>New</strong></h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -31,6 +35,5 @@
 
 
 @section('pagejs')
-
 
 @endsection
