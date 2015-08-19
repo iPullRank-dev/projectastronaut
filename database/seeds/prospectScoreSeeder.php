@@ -13,7 +13,7 @@ class prospectScoreSeeder extends Seeder
      */
     public function run()
     {
-        DB::table()->insert([
+        DB::table('prospectscores')->insert([
 			'company_id' => rand(1,430952),
 			'final_score' => rand(0,100),
 			'created_at' => date('Y-m-d G:i:s')

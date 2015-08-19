@@ -14,7 +14,7 @@ class shortUrlSeeder extends Seeder
      */
     public function run()
     {
-        DB::table()->insert([
+        DB::table('shorturls')->insert([
 			'email' => str_random(10) . "@company.com",
 			'uuid' => rand(45351432,4390157809143902);
 			'user_id' => rand(1,500),
