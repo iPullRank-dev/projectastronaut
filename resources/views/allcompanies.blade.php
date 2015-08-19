@@ -27,97 +27,20 @@
                    <table class="table table-dynamic table-hover dataTable">
                     <thead>
                       <tr>
-                        <th>First Name</th>
+                        <th>Company Name</th>
                         <th>Last Name</th>
                         <th>Points</th>
                         <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr onclick="window.document.location='company.php';">
-                        <td>Smith</td>
-                        <td>John</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-        
-                          </tr>
-                      <tr>
-                        <td>Johnson</td>
-                        <td>Alexa</td>
-                        <td>220</td>
-                        <td>super Admin</td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Brown</td>
-                        <td>Bobby</td>
-                        <td>545</td>
-                        <td>super Admin</td>
-                        
-                      </tr>
-                      <tr>
-                        <td>Miller</td>
-                        <td>James</td>
-                        <td>525</td>
-                        <td>ipsume dolor</td>
-                  
-                      </tr>
-                      <tr>
-                        <td>Harris</td>
-                        <td>Samantha</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        
-                      </tr>
-                      <tr>
-                        <td>Thomson</td>
-                        <td>Scott</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Aishmen</td>
-                        <td>Samuel</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Addams</td>
-                        <td>Kim</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                     
-                      </tr>
-                      <tr>
-                        <td>Morris</td>
-                        <td>Heather</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Aster</td>
-                        <td>Fred</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Carry</td>
-                        <td>John</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                        
-                      </tr>
-                      <tr>
-                        <td>Paul</td>
-                        <td>Billy</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        
-                      </tr>
+                        <?php
+                        foreach ($companies as $company){
+                            echo "<tr onclick='window.document.location='dash.blade.php';'>";
+                        echo "<td>" . $company->fc_company_name . "</td>";
+                        echo "</tr>";
+                        };
+                        ?> 
                     </tbody>
                   </table>
                    
