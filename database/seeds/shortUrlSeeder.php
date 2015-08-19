@@ -14,9 +14,10 @@ class shortUrlSeeder extends Seeder
      */
     public function run()
     {
+		$faker = Faker\Factory::create();
+
         DB::table('shorturls')->insert([
-			'email' => str_random(10) . "@company.com",
-			'uuid' => rand(45351432,4390157809143902);
+			'uuid' => $faker->uuid,
 			'user_id' => rand(1,500),
 			'visited' => rand(0,10),
 			'company_id' => rand(1,2500),
