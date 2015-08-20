@@ -14,10 +14,19 @@ class DisplayReport extends Controller
      *
      * @return Response
      */
+
+	// show the report
     public function index()
     {
         //
     }
+	
+	// Show the page with the modal for the unidentified user
+    public function unidentified()
+    {
+        //
+    }
+
 
     /**
      * Show the form for creating a new resource.
