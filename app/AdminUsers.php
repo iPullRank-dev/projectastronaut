@@ -1,5 +1,5 @@
 <?php
-namespace Astronaut;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * All Query Builder options under "Database" in the Laravel Documentation should be available to this Model under that namespace.
  * 
  * Example for Controllers:
- * $valid_logins = Astronaut\AdminUsers::where('activated', 1)
+ * $valid_logins = App\AdminUsers::where('activated', 1)
                ->orderBy('username', 'desc')
                ->get();
  * 
