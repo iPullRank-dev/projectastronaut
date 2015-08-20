@@ -17,6 +17,7 @@ class CompanyView extends Controller
     public function index()
     {
         //
+		return view("allcompany");
     }
 
     /**

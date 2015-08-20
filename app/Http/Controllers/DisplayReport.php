@@ -16,15 +16,17 @@ class DisplayReport extends Controller
      */
 
 	// show the report
-    public function index()
+    public function index($id)
     {
-        //
+		//return "Yo does this work?";
+		return view("report");
     }
 	
 	// Show the page with the modal for the unidentified user
     public function unidentified()
     {
         //
+		return view("report");
     }
 
 

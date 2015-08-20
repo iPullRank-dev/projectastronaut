@@ -17,6 +17,7 @@ class ReportSetup extends Controller
     public function index()
     {
         //
+		return view("reportset");
     }
 
     /**
