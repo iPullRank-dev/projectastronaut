@@ -15,18 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dash', 'dashboard@index');
+Route::get('/display-report/{id}', 'DisplayReport@index');
+Route::get('/display-unknown/{id}', 'DisplayReport@unidentified');
+Route::get('/admin/login', 'Login@index');
+Route::get('/admin/report-setup/', 'ReportSetup@index');
+Route::get('/admin/company-view', 'CompanyView@index');
+Route::get('/admin/company-view-detail/{id}', 'CompanyView@detail');
+Route::get('/admin/new-company', 'NewCompany@index');
+Route::get('/admin/upload/', 'Upload@index');
+Route::get('/admin/uploaded/', 'Upload@display');
+Route::get('/admin/all-companies/', 'AllCompanies@index');
 
-Route::get('/reportset', function () {
-    return view('reportset');
-});
 
-Route::get('/allcompanies', 'AllCompanies@index');
-
-Route::get('/new', function () {
-    return view('new');
-});
-
-Route::get('/report', function () {
-    return view('report');
-});
