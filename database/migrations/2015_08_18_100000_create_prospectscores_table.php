@@ -22,6 +22,12 @@ class CreateProspectScoresTable extends Migration
 			// Foreign Key for associating with prospects table; unique index constraint
 			$table->integer('company_id')->unique();
 			
+			// report metrics
+			$table->integer('unnatural_links'); 
+			$table->integer('spam_score');
+			$table->integer('trust_metrics');
+			$table->integer('link_popularity');
+			
 			// final score formatted as 000.00 to 100.00
 			$table->double('final_score', 5, 2);
 			

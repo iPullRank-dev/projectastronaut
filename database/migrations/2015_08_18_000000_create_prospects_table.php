@@ -34,6 +34,9 @@ class CreateProspectsTable extends Migration
 			$table->string('fc_address_postal_code');
 			$table->string('fc_address_country_name');
 			
+			// raw JS, HTML, etc for retargeting this specific company
+			$table->longText('retargeting_script');
+			
 			// soft delete flag, automagically managed
 			$table->softDeletes();
 			

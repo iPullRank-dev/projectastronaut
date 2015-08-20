@@ -1,5 +1,5 @@
 <?php
-namespace Astronaut;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * All Query Builder options under "Database" in the Laravel Documentation should be available to this Model under that namespace.
  * 
  * Example for Controllers:
- * $user_urls = Astronaut\ShortUrls::where('user_id', 1)
+ * $user_urls = App\ShortUrls::where('user_id', 1)
                ->get();
  * 
  */
