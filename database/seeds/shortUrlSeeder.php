@@ -21,7 +21,8 @@ class shortUrlSeeder extends Seeder
 			'user_id' => rand(1,500),
 			'visited' => rand(0,10),
 			'company_id' => rand(1,2500),
-			'created_at' => date('Y-m-d G:i:s')
+			'created_at' => date('Y-m-d G:i:s'),
+			'url_hash' => base64_encode($faker->uuid)
 		]);
     }
 }
