@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/display-report/{id}', 'DisplayReport@index');
+Route::get('/display-report', 'DisplayReport@unidentified');
 Route::get('/display-unknown/{id}', 'DisplayReport@unidentified');
 Route::get('/admin/login', 'Login@index');
 Route::get('/admin/report-setup/', 'ReportSetup@index');
