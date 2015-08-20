@@ -19,6 +19,15 @@ class DisplayReport extends Controller
     public function index($id)
     {
 		//return "Yo does this work?";
+
+		// need all pageviews over time
+		//$analyticsData = LaravelAnalytics::getVisitorsAndPageViews(7);
+
+		// need conversions over time
+		// $conversions = LaravelAnalytics::performQuery($startDate, $endDate, $metrics, $others = array());
+
+		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
+		//return view("report",$data);
 		return view("report");
     }
 	

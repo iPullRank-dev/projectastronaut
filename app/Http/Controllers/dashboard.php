@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,10 @@ class dashboard extends Controller
     public function index()
     {
         //
-		return view("dash");
+		//$companyStatus = \Astronaut\ShortUrls::find(1);
+		$companyStatus = DB::select('select * from shorturls');
+		
+		return view("dash",$companyStatus);
     }
 
     /**
