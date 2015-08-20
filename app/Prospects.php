@@ -1,5 +1,5 @@
 <?php
-namespace Astronaut;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * All Query Builder options under "Database" in the Laravel Documentation should be available to this Model under that namespace.
  * 
  * Example for Controllers:
- * $companies = Astronaut\Prospects::orderBy('id', 'asc')
+ * $companies = App\Prospects::orderBy('id', 'asc')
                ->get();
  * 
  */
@@ -18,7 +18,21 @@ class Prospects extends Model
     use SoftDeletes;
 	
 	protected $dates = ['deleted_at'];	
-	protected $fillable = ['fc_company_name','fc_logo_url','fc_website','fc_approx_employees','fc_founded','fc_overview','fc_address_line1','fc_address_line2','fc_address_locality','fc_address_line1','fc_address_region_name','fc_address_postal_code','fc_address_country_name'];
+	protected $fillable = [
+		'fc_company_name',
+		'fc_logo_url',
+		'fc_website',
+		'fc_approx_employees',
+		'fc_founded','fc_overview',
+		'fc_address_line1',
+		'fc_address_line2',
+		'fc_address_locality',
+		'fc_address_line1',
+		'fc_address_region_name',
+		'fc_address_postal_code',
+		'fc_address_country_name',
+		'retargeting_script',
+	];
 }
 
 ?>
