@@ -1,16 +1,4 @@
-<?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
- 
-if (login_check($mysqli) == true) {
-    $logged = 'in';
-     header('Location: ../dashboard.php');
-} else {
-    $logged = 'out';
-}
-?>
+
 
 <html class="" lang="en">
 
@@ -22,49 +10,35 @@ if (login_check($mysqli) == true) {
 
   <meta name="description" content="Project Astronaut">
 
-  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="../resources/assets/images/favicon.png" type="image/png">
 
   <title>Project Astronaut - Build 0.1</title>
 
   <link href="http://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet" type="text/css">
 
-  <link href="assets/css/style.css" rel="stylesheet"> <!-- MANDATORY -->
+  <link href="../resources/assets/css/style.css" rel="stylesheet"> <!-- MANDATORY -->
 
-  <link href="assets/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
+  <link href="../resources/assets/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
 
-  <link href="assets/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
+  <link href="../resources/assets/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
     
-  <link href="assets/css/custom.css" rel="stylesheet"> <!-- CUSTOM -->
+  <link href="../resources/assets/css/custom.css" rel="stylesheet"> <!-- CUSTOM -->
 
-  <link href="assets/plugins/datatables/dataTables.min.css" rel="stylesheet">
+  <link href="../resources/assets/plugins/datatables/dataTables.min.css" rel="stylesheet">
 
-  <link href="page-builder/plugins/slider-pips/jquery-ui-slider-pips.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 
 
-  <script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  <script src="../resources/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     
-     <script type="text/JavaScript" src="js/sha512.js"></script> 
-        <script type="text/JavaScript" src="js/forms.js"></script> 
+
 
 
 
 </head>
 
-
-<!--
-<?php
-        if (login_check($mysqli) == true) {
-                        echo '<p>Currently logged ' . $logged . ' as ' . htmlentities($_SESSION['username']) . '.</p>';
- 
-            echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';
-        } else {
-                        echo '<p>Currently logged ' . $logged . '.</p>';
-                        echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";
-                }
-?> -->
 
     <body class="account separate-inputs" data-page="login">
         <!-- BEGIN LOGIN BOX -->
@@ -196,15 +170,15 @@ if (login_check($mysqli) == true) {
                 </form>
             </div>-->
         </div>
-        <script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script>
-        <script src="assets/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
-        <script src="assets/plugins/gsap/main-gsap.min.js"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/plugins/backstretch/backstretch.min.js"></script>
-        <script src="assets/plugins/bootstrap-loading/lada.min.js"></script>
-        <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-        <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
-        <script src="assets/js/pages/login-v1.js"></script>
+        <script src="../resources/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../resources/assets/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+        <script src="../resources/assets/plugins/gsap/main-gsap.min.js"></script>
+        <script src="../resources/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../resources/assets/plugins/backstretch/backstretch.min.js"></script>
+        <script src="../resources/assets/plugins/bootstrap-loading/lada.min.js"></script>
+        <script src="../resources/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+        <script src="../resources/assets/plugins/jquery-validation/additional-methods.min.js"></script>
+        <script src="../resources/assets/js/pages/login-v1.js"></script>
     </body>
 
 </html>
