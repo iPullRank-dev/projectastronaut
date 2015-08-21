@@ -9,7 +9,7 @@ return
          *
          * Should look like: ga:xxxxxxxx.
          */
-        'siteId' => env('ANALYTICS_SITE_ID'),
+        'siteId' => env('ga:UA-25039889-1'),
 
         /*
          * Set the client id
@@ -17,7 +17,7 @@ return
          * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
          */
-        'clientId' => env('ANALYTICS_CLIENT_ID'),
+        'clientId' => env('998499714268-q9053o0kfju2ecot64ft59c9m1g4neft.apps.googleusercontent.com'),
 
         /*
          * Set the service account name
@@ -25,13 +25,13 @@ return
          * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@developer.gserviceaccount.com
          */
-        'serviceEmail' => env('ANALYTICS_SERVICE_EMAIL'),
+        'serviceEmail' => env('998499714268-q9053o0kfju2ecot64ft59c9m1g4neft@developer.gserviceaccount.com'),
 
         /*
          * You need to download a p12-certifciate from the Google API console
          * Be sure to store this file in a secure location.
          */
-        'certificatePath' => storage_path('laravel-analytics/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-privatekey.p12'),
+        'certificatePath' => storage_path('laravel-analytics/ipullrank-f04aee17c39b.p12'),
 
         /*
          * The amount of minutes the Google API responses will be cached.
