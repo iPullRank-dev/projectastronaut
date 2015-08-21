@@ -8,7 +8,6 @@
 
      <div class="header">
             <h2>Dash<strong>board</strong></h2>
-            
           </div>
     <div class="row">
         <div class="col-md-7">
@@ -107,29 +106,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
+                      <?php
+                        foreach ($data as $item){
+                            echo "<tr onclick='window.document.location='dash.blade.php';'>";
+                        echo "<td>" . $item->company_id . "</td>";
+                        echo "</tr>";
+                        };
+                        ?> 
                     </tbody>
                 </table>
                 
