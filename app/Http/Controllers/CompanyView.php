@@ -20,6 +20,12 @@ class CompanyView extends Controller
 		return view("allcompany");
     }
 
+    public function detail()
+    {
+        //
+		return view("companyview");
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
