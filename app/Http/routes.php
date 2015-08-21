@@ -30,5 +30,8 @@ Route::get('/admin/new-company', 'NewCompany@index');
 Route::get('/admin/upload/', 'Upload@index');
 Route::get('/admin/uploaded/', 'Upload@display');
 Route::get('/admin/dashboard/', 'dashboard@index');
+Route::get('/ajax', 'Ajax@index');
+Route::get('/ajax-upload', 'Ajax@upload');
+Route::get('/ajax-new-company', 'Ajax@newCompany');
 
 

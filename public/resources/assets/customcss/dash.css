@@ -1,0 +1,7 @@
+.dashstyle tr{
+    cursor: pointer;
+}
+
+.dashstyle tr:hover{
+    background-color: rgba(0,0,0,0.05);
+}

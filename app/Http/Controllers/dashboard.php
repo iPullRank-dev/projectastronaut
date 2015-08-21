@@ -20,8 +20,10 @@ class dashboard extends Controller
         //
 		//$companyStatus = \Astronaut\ShortUrls::find(1);
 		$companyStatus = DB::select('select * from shorturls');
+        $newProspects = DB::select('select * from prospectusers order by id desc limit 14');
+        $prospects = DB::select('select * from prospectusers');
 		
-		return view("dash",['data' => $companyStatus]);
+		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects]);
     }
 
     /**
