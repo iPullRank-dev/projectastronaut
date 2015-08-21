@@ -32,5 +32,6 @@ Route::get('/admin/all-companies/', 'AllCompanies@index');
 Route::get('/admin/dashboard/', 'dashboard@index');
 Route::get('/ajax', 'Ajax@index');
 Route::get('/ajax-upload', 'Ajax@upload');
+Route::get('/ajax-new-company', 'Ajax@newCompany');
 
 

@@ -21,7 +21,7 @@ class dashboard extends Controller
 		//$companyStatus = \Astronaut\ShortUrls::find(1);
 		$companyStatus = DB::select('select * from shorturls');
 		
-		return view("dash",$companyStatus);
+		return view("dash",["data" => $companyStatus]);
     }
 
     /**
