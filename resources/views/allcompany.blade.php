@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-header">
-                    <h3>Edit<strong>Report</strong></h3>
+                    <h3>Company<strong>List</strong></h3>
                 </div>
                 <div class="panel-content">
                     
