@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class dashboard extends Controller
+class AllCompanies extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,8 @@ class dashboard extends Controller
     public function index()
     {
         //
-		//$companyStatus = \Astronaut\ShortUrls::find(1);
-		$companyStatus = DB::select('select * from shorturls');
-        $newProspects = DB::select('select * from prospectusers order by id desc limit 14');
-        $prospects = DB::select('select * from prospectusers');
-		// $analytcs 
-
-		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects]);
+        $prospects = DB::select('select * from prospects');
+		return view("allcompanies",['data'=>$companies]);
     }
 
     /**
