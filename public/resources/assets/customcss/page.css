@@ -18,3 +18,19 @@
     padding: 10px;
     margin-bottom: 15px;
 }
+
+.allcomp tr{
+    cursor: pointer;
+}
+
+.allcomp tr:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+
+.clogo{
+    width:40px;
+    height:40px;
+    border-radius:20px;
+    overflow: hidden;
+}
+

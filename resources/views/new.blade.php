@@ -8,6 +8,28 @@
 
 @section('content')
 
+<!--upload modal-->
+
+<div class="modal fade" id="uploadnew" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Report</strong> Upload</h4>
+      </div>
+      <div class="modal-body">
+          <div class="uploadbox">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload" class="uploadinput" >
+    <input type="submit" value="Upload" name="submit"  class="btn btn-dark">
+</form>
+          </div></div></div></div></div>
+        
+        
+
+<!-- main part-->
+
 
    <div class="header">
 
@@ -25,7 +47,7 @@
             <div style="height:50vh;position:relative;"><div style="    position: absolute;
     top: 50%;
     transform: translateY(-50%);text-align:center;width:100%;">
-             <button type="button" class="btn btn-dark" ><i class="fa fa-upload"></i>Upload</button>
+             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#uploadnew"><i class="fa fa-upload"></i>Upload</button>
                 </div></div>
             
         </div>
