@@ -38,7 +38,7 @@ $(function() {
                 window.location.href = "dashboard.html";
             }, 2000);
         });
-        $.backstretch(["assets/images/gallery/as.jpg"],
+        $.backstretch(["../resources/assets/images/gallery/as.jpg"],
         {
             fade: 600,
             duration: 4000
@@ -111,7 +111,7 @@ $(function() {
         /* Hide / Show Background Image */
         $('#image-cb').change(function() {
             if ($(this).is(":checked")) {
-                $.backstretch(["assets/images/gallery/as.jpg"], {
+                $.backstretch(["../resources/assets/images/gallery/as.jpg"], {
                     fade: 600,
                     duration: 4000
                 });
@@ -122,7 +122,7 @@ $(function() {
         /* Add / Remove Slide Image */
         $('#slide-cb').change(function() {
             if ($(this).is(":checked")) {
-                $.backstretch(["assets/images/gallery/login4.jpg", "assets/images/gallery/login3.jpg", "assets/images/gallery/login2.jpg", "assets/images/gallery/as.jpg"], {
+                $.backstretch(["assets/images/gallery/login4.jpg", "assets/images/gallery/login3.jpg", "assets/images/gallery/login2.jpg", "../resources/assets/images/gallery/as.jpg"], {
                     fade: 600,
                     duration: 4000
                 });
@@ -195,7 +195,7 @@ $(function() {
     if($('body').data('page')== 'signup'){
 
        var form = $(".form-signup");
-       $.backstretch(["assets/images/gallery/as.jpg"],
+       $.backstretch(["../resources/assets/images/gallery/as.jpg"],
        {
         fade: 600,
         duration: 4000
@@ -265,7 +265,7 @@ $(function() {
        /* Hide / Show Background Image */
        $('#image-cb').change(function() {
         if ($(this).is(":checked")) {
-            $.backstretch(["assets/images/gallery/as.jpg"], {
+            $.backstretch(["../resources/assets/images/gallery/as.jpg"], {
                 fade: 600,
                 duration: 4000
             });
