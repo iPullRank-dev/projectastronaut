@@ -91,7 +91,7 @@
             </li>
               <li class="sideitemb">
 
-              <a href="company-view"><i class="fa fa-briefcase"></i><span>All Companies</span> </a>
+              <a href="all-companies"><i class="fa fa-briefcase"></i><span>All Companies</span> </a>
 
 
             </li>

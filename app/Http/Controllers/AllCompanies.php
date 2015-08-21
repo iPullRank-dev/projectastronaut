@@ -19,7 +19,7 @@ class AllCompanies extends Controller
     {
         //
         $prospects = DB::select('select * from prospects');
-		return view("allcompanies",['data'=>$companies]);
+		return view("allcompany",['data'=>$prospects]);
     }
 
     /**
