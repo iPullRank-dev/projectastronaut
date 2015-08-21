@@ -35,9 +35,7 @@ class dashboard extends Controller
         $finalGA['schema'] = array('date','conversion','sessions');
         $finalGA['rows'] = $gaResponse['rows'];
         $finalGA['totals'] = $gaResponse['totalsForAllResults'];
-        
-        $finalGA = json_encode($finalGA);
-
+                
 		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects,"analytics"=>$finalGA]);
     }
 
