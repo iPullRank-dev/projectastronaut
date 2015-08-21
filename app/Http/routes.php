@@ -19,19 +19,20 @@ Route::get('/', 'Login@index');
 
 Route::get('/display-report?id={id}', 'DisplayReport@index');
 Route::get('/display-report', 'DisplayReport@unidentified');
-Route::get('/display-unknown?id={id}', 'DisplayReport@unidentified');
+//Route::get('/display-unknown?id={id}', 'DisplayReport@unidentified');
 Route::get('/admin/', 'Login@index');
 Route::get('/admin/login', 'Login@index');
 Route::get('/admin/report-setup/', 'ReportSetup@index');
 Route::get('/admin/company-view', 'CompanyView@index');
 Route::get('/admin/company-view-detail?={id}', 'CompanyView@detail');
 Route::get('/admin/new-company', 'NewCompany@index');
-Route::get('/admin/upload/', 'Upload@index');
-Route::get('/admin/uploaded/', 'Upload@display');
+//Route::get('/admin/upload/', 'Upload@index');
+//Route::get('/admin/uploaded/', 'Upload@display');
 Route::get('/admin/all-companies/', 'AllCompanies@index');
 Route::get('/admin/dashboard/', 'dashboard@index');
 Route::get('/ajax', 'Ajax@index');
 Route::get('/ajax-upload', 'Ajax@upload');
 Route::get('/ajax-new-company', 'Ajax@newCompany');
+Route::get('/user-detail?id={id}', 'userdata@index');
 
 
