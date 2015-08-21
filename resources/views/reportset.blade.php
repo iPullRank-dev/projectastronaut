@@ -6,7 +6,7 @@
 
 @section('content')
 
-<!--modal-->
+<!--upload modal-->
 
 <div class="modal fade" id="uploadmodal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog ">
@@ -16,15 +16,16 @@
         <h4 class="modal-title"><strong>Report</strong> Upload</h4>
       </div>
       <div class="modal-body">
+          <div class="uploadbox">
         <form action="upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" >
-    <input type="submit" value="Upload Image" name="submit"  class="btn btn-dark">
+    <input type="file" name="fileToUpload" id="fileToUpload" class="uploadinput" >
+    <input type="submit" value="Upload" name="submit"  class="btn btn-dark">
 </form>
-      </div>
-      <div class="modal-footer">
+          </div></div>
+      <!--<div class="modal-footer">
         <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>
