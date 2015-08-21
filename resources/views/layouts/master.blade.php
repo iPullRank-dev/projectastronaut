@@ -355,6 +355,8 @@
 
 <script src="../resources/assets/customjs/table_editable.js"></script>
 
+<script src="../resources/assets/customjs/global.js"></script>
+
 @yield('pagejs')
 
 <!-- END PAGE SCRIPTS -->

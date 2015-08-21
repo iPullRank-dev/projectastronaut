@@ -41,11 +41,13 @@ window.myLineChart = new Chart(document.getElementById("myChart").getContext("2d
 
 
   $('#table-newcontact').dataTable( {
-    "iDisplayLength": 4,
         "ordering": false,
         "info":     false,
       "filter":   false,
-      "bLengthChange": false, 
+      "bLengthChange": false,
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false
       
   } );
     

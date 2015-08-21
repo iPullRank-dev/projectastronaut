@@ -9,7 +9,7 @@
      <div class="header">
             <h2>Dash<strong>board</strong></h2>
           </div>
-    <div class="row">
+    <div class="row dashstyle">
         <div class="col-md-7">
             <div><span style="width: 10px;height: 10px;background-color: rgba(220,220,220,1);display: inline-block;margin: 0 5;"></span>Pageviews
                 <span style="width: 10px;height: 10px;background-color: rgba(151,187,205,1);display: inline-block;margin: 0 5;">
@@ -28,67 +28,28 @@
                 <table class="table" id="table-newcontact">
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
+                        <th>Company</th>
                         <th>Email</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Steve</td>
-                        <td>Urkel</td>
-                        <td>@steve</td>
-                      </tr>
+                     <?php
+                        foreach ($newusers as $item){
+                            echo "<tr onclick=\"window.document.location='dashboard';\">";
+                        echo "<td>" . $item->full_name . "</td>";
+                        echo "<td>" . $item->company . "</td>";
+                        echo "<td>" . $item->email . "</td>";
+                        echo "</tr>";
+                        };
+                        ?> 
                     </tbody>
                 </table>
             </div>
             </div>
           </div>
     </div>
-    <div class="row">
+    <div class="row dashstyle">
         <div class="col-md-12">
         
             <div class="panel">
@@ -99,17 +60,20 @@
                    <table class="table table-dynamic">
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Title</th>
                         <th>Email</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                        foreach ($data as $item){
-                            echo "<tr onclick='window.document.location='dash.blade.php';'>";
-                        echo "<td>" . $item->company_id . "</td>";
+                        foreach ($allcontacts as $item){
+                            echo "<tr onclick=\"window.document.location='dashboard';\">";
+                        echo "<td>" . $item->full_name . "</td>";
+                        echo "<td>" . $item->company . "</td>";
+                        echo "<td>" . $item->title . "</td>";
+                        echo "<td>" . $item->email . "</td>";
                         echo "</tr>";
                         };
                         ?> 
