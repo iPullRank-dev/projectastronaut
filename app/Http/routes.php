@@ -34,5 +34,13 @@ Route::get('/ajax', 'Ajax@index');
 Route::get('/ajax-upload', 'Ajax@upload');
 Route::get('/ajax-new-company', 'Ajax@newCompany');
 Route::get('/user-detail?id={id}', 'userdata@index');
+Route::get('tests', 'tests@index');
+
+/*Route::get('test', function () {
+    return LaravelAnalytics->getVisitorsAndPageViews();
+});*/
+
+
+ 
 
 
