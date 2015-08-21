@@ -24,7 +24,19 @@ class dashboard extends Controller
         $prospects = DB::select('select * from prospectusers');
 		// $analytcs 
 
-		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects]);
+        $kickoffdate = new \DateTime('2015-8-21');
+        $dt = new \DateTime('2015-8-1');
+        $others = array("dimensions" => "ga:date");
+        
+        // lazy inefficient way to get this in the format that I want
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        //print_r($gaResponse);
+
+        $finalGA['schema'] = array('date','conversion','sessions');
+        $finalGA['rows'] = $gaResponse['rows'];
+        $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+                
+		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects,"analytics"=>$finalGA]);
     }
 
     /**

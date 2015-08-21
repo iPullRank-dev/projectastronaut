@@ -7,13 +7,13 @@
 @section('content')
 
      <div class="header">
-            <h2>company_name <strong>Performance</strong></h2>
+            <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li><a href="dashboad.html">Astronaut</a>
                 </li>
                 <li>All Companies</li>
-                  <li class="active">company_name</li>
+                  <li class="active"><?php echo $data[0]->fc_company_name ?></li>
               </ol>
             </div>
           </div>
@@ -29,7 +29,7 @@
                     <img src="#">
                 </div>
                 <div class="companytitle">
-                    <h2>company_name</h2>
+                    <h2><?php echo $data[0]->fc_company_name ?></h2>
                 </div>
             </div>    
         </div>
@@ -58,115 +58,22 @@
                    <table class="table table-dynamic dataTable" id="table-editable">
                     <thead>
                       <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Points</th>
-                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Email</th>
                         <th class="text-right">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Smith</td>
-                        <td>John</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right">
-                            <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> 
-                            
-                             
-                            <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                            
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Johnson</td>
-                        <td>Alexa</td>
-                        <td>220</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Brown</td>
-                        <td>Bobby</td>
-                        <td>545</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Miller</td>
-                        <td>James</td>
-                        <td>525</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Harris</td>
-                        <td>Samantha</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Thomson</td>
-                        <td>Scott</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Aishmen</td>
-                        <td>Samuel</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Addams</td>
-                        <td>Kim</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Morris</td>
-                        <td>Heather</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Aster</td>
-                        <td>Fred</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Carry</td>
-                        <td>John</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Paul</td>
-                        <td>Billy</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>   <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
+                      <?php
+                        foreach ($contacts as $item){
+                            echo "<tr onclick=\"window.document.location='/admin/user-detail=" . $item->id . "';\">";
+                        echo "<td>" . $item->full_name . "</td>";
+                        echo "<td>" . $item->title . "</td>";
+                        echo "<td>" . $item->email . "</td>";
+                        echo "</tr>";
+                        };
+                        ?> 
                     </tbody>
                   </table>
                    

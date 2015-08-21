@@ -1,33 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CompanyView extends Controller
+
+class tests extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index($id)
-    {
-        
-        $companyDetail = DB::select('select * from prospects where id='.$id);
-        $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
-		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts]);
-    }
-
-    public function detail()
+    public function index()
     {
         //
-		return view("companyview");
+        //return \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:107200333')->getVisitorsAndPageViews();
+        
+        // iPullRank analytics
+       // return \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->getVisitorsAndPageViews(); // will use the given siteId
+
+        $kickoffdate = new \DateTime('2015-8-21');
+        $dt = new \DateTime('2015-8-1');
+        $others = array("dimensions" => "ga:date");
+        
+        // lazy inefficient way to get this in the format that I want
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        //print_r($gaResponse);
+
+        $finalGA['schema'] = array('date','conversion','sessions');
+        $finalGA['rows'] = $gaResponse['rows'];
+        $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+        
+        echo json_encode($finalGA);
+        
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
