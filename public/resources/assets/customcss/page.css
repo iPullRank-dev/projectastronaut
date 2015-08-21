@@ -2,3 +2,19 @@
 @import "contact.css";
 @import "report.css";
 @import "dash.css";
+
+.uploadbox{
+        width: 50%;
+    margin: 0 auto;
+}
+
+.uploadbox .btn{
+       margin: 0 auto;
+    display: block;
+}
+
+.uploadinput{
+    background-color: rgba(0,0,0,0.05);
+    padding: 10px;
+    margin-bottom: 15px;
+}
