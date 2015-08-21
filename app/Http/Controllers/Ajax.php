@@ -32,6 +32,18 @@ class Ajax extends Controller
 		return json_encode(array("response" => "200", "message" => "Ajax Upload is under construction"));
     }
 
+	/**
+     * Add New Company
+     *
+     * @return Response
+     */
+    public function newCompany()
+    {
+        //
+
+		return json_encode(array("response" => "200", "message" => "Ajax New Company is under construction"));
+    }
+
 
     /**
      * Show the form for creating a new resource.
