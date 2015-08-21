@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class AllCompanies extends Controller
     public function index()
     {
         //
-		return view("allcompanies");
+        $prospects = DB::select('select * from prospects');
+		return view("allcompanies",['data'=>$companies]);
     }
 
     /**
