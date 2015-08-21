@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use MongoDB;
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +16,7 @@ class CompanyView extends Controller
      */
     public function index($id)
     {
-        //
+        
         $companyDetail = DB::select('select * from prospects where id='.$id);
 		return view("companyview",['data'=>$companyDetail]);
     }
