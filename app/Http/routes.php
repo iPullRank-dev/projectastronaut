@@ -23,7 +23,6 @@ Route::get('/display-report', 'DisplayReport@unidentified');
 Route::get('/admin/', 'Login@index');
 Route::get('/admin/login', 'Login@index');
 Route::get('/admin/report-setup/', 'ReportSetup@index');
-
 Route::get('/admin/company-view?id={id}', 'CompanyView@index');
 //Route::get('/admin/company-view-detail?={id}', 'CompanyView@detail');
 
