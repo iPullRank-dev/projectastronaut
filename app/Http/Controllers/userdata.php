@@ -18,7 +18,7 @@ class userdata extends Controller
     {
         //
         $users = array("response"=>"200","message"=>"No data yet");
-        return view ("user-detail",["data"=>$users]);
+        return view ("contact",["data"=>$users]);
     }
 
     public function useranalytics()
