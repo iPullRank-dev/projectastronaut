@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class dashboard extends Controller
+
+class tests extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,10 @@ class dashboard extends Controller
     public function index()
     {
         //
-		//$companyStatus = \Astronaut\ShortUrls::find(1);
-		$companyStatus = DB::select('select * from shorturls');
-        $newProspects = DB::select('select * from prospectusers order by id desc limit 14');
-        $prospects = DB::select('select * from prospectusers');
-		// $analytcs 
+        //return \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:107200333')->getVisitorsAndPageViews();
+        
+        // iPullRank analytics
+       // return \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->getVisitorsAndPageViews(); // will use the given siteId
 
         $kickoffdate = new \DateTime('2015-8-21');
         $dt = new \DateTime('2015-8-1');
@@ -36,9 +35,8 @@ class dashboard extends Controller
         $finalGA['rows'] = $gaResponse['rows'];
         $finalGA['totals'] = $gaResponse['totalsForAllResults'];
         
-        $finalGA = json_encode($finalGA);
-
-		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects,"analytics"=>$finalGA]);
+        echo json_encode($finalGA);
+        
     }
 
     /**
