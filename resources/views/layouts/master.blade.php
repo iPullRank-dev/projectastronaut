@@ -79,26 +79,26 @@
 
             <li class="sideitemb">
 
-              <a href="dash"><i class="fa fa-home"></i><span>Dashboard</span> </a>
+              <a href="dashboard"><i class="fa fa-home"></i><span>Dashboard</span> </a>
 
 
             </li>
                <li class="sideitemb">
 
-              <a href="reportset"><i class="fa fa-file-text"></i><span>Report Setup</span> </a>
+              <a href="report-setup"><i class="fa fa-file-text"></i><span>Report Setup</span> </a>
 
 
             </li>
               <li class="sideitemb">
 
-              <a href="allcompanies"><i class="fa fa-briefcase"></i><span>All Companies</span> </a>
+              <a href="company-view"><i class="fa fa-briefcase"></i><span>All Companies</span> </a>
 
 
             </li>
               <li class="sideitemb">
 
 
-              <a href="new"><i class="fa fa-plus"></i><span>New Company</span> </a>
+              <a href="new-company"><i class="fa fa-plus"></i><span>New Company</span> </a>
 
 
 

@@ -1,0 +1,48 @@
+.sidebar .logopanel h1 a {
+    background: none;
+    color:#fff;
+}
+
+@media (max-width:1090px) and (min-width:768px){
+    .col-sm-6{margin-left: 25%;}
+}
+
+.sideitemb:hover > a > span,.sideitemb:hover > a >i{
+        -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    opacity: 1 !important;
+}
+
+.sidefix .sidebar {
+    position: fixed;
+    right: auto;
+    left: 0;
+    bottom: 0;
+    z-index: 202;
+}
+
+#logbox{
+    margin:0 auto !important;
+    float:none !important;
+}
+
+
+.main-content .page-content{
+    height:inherit;
+}
+
+
+table{
+    font-size:12px;
+}
+
+.fixer{clear:both;}
+
+@media screen and (min-width:1024px){
+
+.menutoggle{display:none;}
+}
+
