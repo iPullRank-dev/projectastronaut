@@ -17,7 +17,21 @@ class Ajax extends Controller
     public function index()
     {
         //
+		return json_encode(array("response" => "200", "message" => "Ajax is under construction"));
     }
+
+	/**
+     * Upload file
+     *
+     * @return Response
+     */
+    public function upload()
+    {
+        //
+
+		return json_encode(array("response" => "200", "message" => "Ajax Upload is under construction"));
+    }
+
 
     /**
      * Show the form for creating a new resource.
