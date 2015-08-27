@@ -1,11 +1,27 @@
 $(document).ready(function() {
 //chart functions
 
+
+console.log(gadata);
+var n = gadata.rows.length;
+var gdate = [];
+var gConversion = [];
+var gSessions = [];
+    
+for(var i = 0; i < n; i++){
+    gdate[i] = gadata.rows[i][0];
+    gConversion[i] = gadata.rows[i][1];
+    gSessions[i] = gadata.rows[i][2];  
+};
+
+console.log(gdate);
+console.log('aaa' + n);    
+    
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.maintainAspectRatio = false;
 
 var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: gdate,
     datasets: [
         {
             label: "My First dataset",
@@ -15,7 +31,7 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: gSessions
         },
         {
             label: "My Second dataset",
@@ -25,7 +41,7 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: gConversion
         }
     ]
 };

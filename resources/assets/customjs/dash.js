@@ -1,6 +1,9 @@
 $(document).ready(function() {
 //chart functions
 
+    
+    
+    
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.maintainAspectRatio = false;
 

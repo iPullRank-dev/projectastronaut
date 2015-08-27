@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,11 +14,12 @@ class userdata extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index($id)
     {
         //
+        $userdata = DB::select('select * from prospectusers where id='.$id);
         $users = array("response"=>"200","message"=>"No data yet");
-        return view ("contact",["data"=>$users]);
+        return view ("contact",["data"=>$userdata]);
     }
 
     public function useranalytics()

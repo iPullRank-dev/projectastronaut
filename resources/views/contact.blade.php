@@ -12,8 +12,8 @@
               <ol class="breadcrumb">
                 <li><a href="dashboad.html">Astronaut</a>
                 </li>
-                <li>{{company_name}}</li>
-                  <li class="active">{{contact_name}}</li>
+                <li><?php echo $data[0]->company ?></li>
+                  <li class="active"><?php echo $data[0]->full_name ?></li>
               </ol>
             </div>
           </div>
@@ -21,10 +21,10 @@
         <div class="col-md-12">
             <div style="float:left;text-align:center;">
                 <div class="contactimg">
-                    <img src="#">
+                    <?php echo "<img src='" . $data[0]->fc_gravatar . "' height='80' >"?>
                 </div>
                 <div class="contacttitle">
-                    <h3>{{contact_name}}</h3>
+                    <h3><?php echo $data[0]->full_name ?></h3>
                 </div>    
             </div>
             <div style="float:right;">

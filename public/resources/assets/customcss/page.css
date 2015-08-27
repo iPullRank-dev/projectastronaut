@@ -2,6 +2,7 @@
 @import "contact.css";
 @import "report.css";
 @import "dash.css";
+@import "companyview.css";
 
 .uploadbox{
         width: 50%;
@@ -19,15 +20,15 @@
     margin-bottom: 15px;
 }
 
-.allcomp tr{
+.allcomp tr,.companyviewlist tr{
     cursor: pointer;
 }
 
-.allcomp tr:hover{
+.allcomp tr:hover,.companyviewlist tr:hover{
     background-color: rgba(0,0,0,0.05);
 }
 
-.clogo{
+.clogo,.uhead{
     width:40px;
     height:40px;
     border-radius:20px;

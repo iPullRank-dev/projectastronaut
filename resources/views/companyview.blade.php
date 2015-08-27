@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
-
+    <script>
+        var companyid = <?php echo json_encode($data[0]->id); ?>;
+        var companyname = <?php echo json_encode($data[0]->fc_company_name); ?>;
+    </script>
      <div class="header">
             <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
             <div class="breadcrumb-wrapper">
@@ -26,7 +29,7 @@
     text-align: center;
     width: 100%;">
                 <div class="companyimg">
-                    <img src="#">
+                    <?php echo "<img src='" . $data[0]->fc_logo_url . "' height='120' >" ?>
                 </div>
                 <div class="companytitle">
                     <h2><?php echo $data[0]->fc_company_name ?></h2>
@@ -43,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel">
+            <div class="panel companyviewlist">
                 <div class="panel-header">
                     <h3>All<strong>Contacts</strong></h3>
                 </div>
@@ -51,13 +54,14 @@
                     <div>
                     <button type="button" class="btn btn-dark" style="float:right;margin-left:0px;"><i class="fa fa-download"></i>Export</button>
                          
-                    <button type="button" class="btn btn-success" style="float:right;" id="addnewrow"><i class="fa fa-plus"></i>Add New Line</button>
+                    <button type="button" class="btn btn-success" style="float:right;" id="user_new"><i class="fa fa-plus"></i>Add New Line</button>
                    
                         <div class="fixer"></div>
                     </div>
-                   <table class="table table-dynamic dataTable" id="table-editable">
+                   <table class="table dataTable" id="table-editable2">
                     <thead>
                       <tr>
+                          <th></th>
                         <th>Name</th>
                         <th>Title</th>
                         <th>Email</th>
@@ -67,10 +71,12 @@
                     <tbody>
                       <?php
                         foreach ($contacts as $item){
-                            echo "<tr onclick=\"window.document.location='/admin/user-detail=" . $item->id . "';\">";
+                            echo "<tr>";
+                        echo "<td><div class='uhead'><img src='" . $item->fc_gravatar . "' height='40'></div></td>";
                         echo "<td>" . $item->full_name . "</td>";
                         echo "<td>" . $item->title . "</td>";
                         echo "<td>" . $item->email . "</td>";
+                        echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a> <a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
                         echo "</tr>";
                         };
                         ?> 
@@ -89,5 +95,6 @@
 @section('pagejs')
 
 <script src="../resources/assets/customjs/company.js"></script>
+<script src="../resources/assets/customjs/companyviewtable.js"></script>
 
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -28,7 +30,8 @@ class DisplayReport extends Controller
 
 		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
 		//return view("report",$data);
-		return view("report");
+		$reportdata = DB::select('select * from prospectscores where id='.$id);
+		return view("report",["data"=>$reportdata]);
     }
 	
 	// Show the page with the modal for the unidentified user

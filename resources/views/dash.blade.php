@@ -5,13 +5,15 @@
 @endsection
 
 @section('content')
-
+    <script type="text/javascript">
+        var gadata = <?php echo json_encode($analytics);?>;
+    </script>
      <div class="header">
             <h2>Dash<strong>board</strong></h2>
           </div>
     <div class="row dashstyle">
         <div class="col-md-7">
-            <div><span style="width: 10px;height: 10px;background-color: rgba(220,220,220,1);display: inline-block;margin: 0 5;"></span>Pageviews
+            <div><span style="width: 10px;height: 10px;background-color: rgba(220,220,220,1);display: inline-block;margin: 0 5;"></span>Sessions
                 <span style="width: 10px;height: 10px;background-color: rgba(151,187,205,1);display: inline-block;margin: 0 5;">
                 </span>Conversions</div>
             <div style="margin-bottom:20px;">
@@ -69,7 +71,7 @@
                     <tbody>
                       <?php
                         foreach ($allcontacts as $item){
-                            echo "<tr onclick=\"window.document.location='/admin/user-detail?id=" . $item->id . "';\">";
+                            echo "<tr onclick=\"window.document.location='user-detail=" . $item->id . "';\">";
                         echo "<td>" . $item->full_name . "</td>";
                         echo "<td>" . $item->company . "</td>";
                         echo "<td>" . $item->title . "</td>";

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -110,4 +112,66 @@ class Ajax extends Controller
     {
         //
     }
+    
+    public function insertuser()
+    {
+    	if (isset($_POST['userdata']))
+    	{
+    		$newdata = $_POST['userdata'];
+    		
+    		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5]];
+    		
+    		$id = DB::table('prospectusers')->insertGetId($indata);
+    		
+    		//DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
+    		
+		return $id;
+		
+		}else{
+		return 'false call';
+		};
+    }
+    
+    public function deleteuser()
+    {
+    	if (isset($_POST['deleteuser']))
+    	{
+    		$delete = $_POST['deleteuser'];
+    		
+    		DB::table('prospectusers')->where('email', '=', $delete)->delete();
+    		
+    		//DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
+    		
+		return "success!";
+		
+		}else{
+		return 'false call';
+		};
+    }
+    
+    public function updateuser()
+    {
+    	if (isset($_POST['update']))
+    	{
+    		$updater= $_POST['update'];
+    		
+    		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0]];
+    		
+    		DB::table('prospectusers')
+            ->where('email', $updater[3])
+            ->update($updateitem);
+    		
+    		$uid = DB::table('prospectusers')
+            ->where('email', '=', $updater[3])
+            ->get();
+            
+            $output = $uid[0] -> id;
+    		
+		return $output;
+		
+		}else{
+		return 'false call';
+		};
+    }
+    
 }

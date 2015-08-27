@@ -34,9 +34,12 @@ Route::get('/admin/new-company', 'NewCompany@index');
 Route::get('/admin/all-companies/', 'AllCompanies@index');
 Route::get('/admin/dashboard/', 'dashboard@index');
 Route::get('/ajax', 'Ajax@index');
+Route::post('/ajax-insertuser', 'Ajax@insertuser');
+Route::post('/ajax-deleteuser', 'Ajax@deleteuser');
+Route::post('/ajax-updateuser', 'Ajax@updateuser');
 Route::get('/ajax-upload', 'Ajax@upload');
 Route::get('/ajax-new-company', 'Ajax@newCompany');
-Route::get('/user-detail={id}', 'userdata@index');
+Route::get('/admin/user-detail={id}', 'userdata@index');
 Route::get('tests', 'tests@index');
 
 /*Route::get('test', function () {

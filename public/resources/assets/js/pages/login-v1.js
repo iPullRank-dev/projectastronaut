@@ -1,3 +1,5 @@
+
+
 function copyrightPos(){
     var windowHeight = $(window).height();
     if(windowHeight < 700) {

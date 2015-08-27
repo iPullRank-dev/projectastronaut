@@ -4,7 +4,7 @@
 
 
 @section('grade')
-A
+<?php echo $data[0]->final_score ?>
 @endsection
 
 

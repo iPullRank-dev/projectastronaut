@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <meta name="description" content="Project Astronaut">
+    
+  <meta name="csrf_token" content="{{ csrf_token() }}" />    
 
   <link rel="shortcut icon" href="../resources/assets/images/favicon.png" type="image/png">
 
