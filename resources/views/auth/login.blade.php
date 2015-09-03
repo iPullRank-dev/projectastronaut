@@ -47,7 +47,8 @@
                 <div class="col-sm-6 col-md-4 col-md-offset-4" id="logbox">
                     <div class="account-wall">
                         <p style="text-align:center;color:#fff;font-size:35px;font-weight:200;">ASTRONAUT<strong style="font-size:20px;">Beta</strong></p><br/>
-                        <form class="form-signin" action="includes/process_login.php" method="post" name="login_form" role="form">
+                        <form class="form-signin" action="/admin/login" method="post" name="login_form" role="form">
+                            {!! csrf_field() !!}
                             <div class="append-icon">
                                 <input type="text" name="email" id="username" class="form-control form-white email" placeholder="Email" required>
                                 <i class="icon-user"></i>
@@ -56,20 +57,13 @@
                                 <input type="password" name="password"  id="password" class="form-control form-white password" placeholder="Password" required>
                                 <i class="icon-lock"></i>
                             </div>
-                            
-                             <?php
-        if (isset($_GET['error'])) {
-            echo '<p style="text-align:center;color:#fff;">Check your email or password.</p>';
-        }
-?> 
-                            
-                            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);"  class="btn btn-lg btn-danger btn-block ladda-button" >
+              
+                            <input type="submit" value="Login"
+                  class="btn btn-lg btn-danger btn-block ladda-button" >
                         
                             <div class="clearfix">
                                 <!--<p class="pull-left m-t-20"><a id="password" href="#">Forgot password?</a></p>-->
-                                <p class="m-t-20" style="text-align:center;"><a href="register.php">New here? Sign up</a></p>
+                                <p class="m-t-20" style="text-align:center;"><a href="register">New here? Sign up</a></p>
                             </div>
                         </form>
                         <!--<form class="form-password" role="form">

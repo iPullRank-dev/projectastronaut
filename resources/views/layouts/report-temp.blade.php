@@ -48,12 +48,43 @@
           <h1>Astronaut</h1>
         </div>
         <div style="float:right">
-            <button type="button" class="btn btn-dark"><i class="fa fa-paper-plane" style="padding-right:8px;"></i>Invite</button></div>
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#inviteModal"><i class="fa fa-paper-plane" style="padding-right:8px;"></i>Invite</button></div>
         <div class="fixer"></div>
 </div>
 
 
       <!-- END SIDEBAR -->
+      
+      <!--popup-->
+      <div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Send</strong>Invitation</h4>
+      </div>
+      <div class="modal-body">
+          <div class="invitebox">
+        <form  method="post" enctype="multipart/form-data">
+            <label>The email you want to invite:</label>
+    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" >
+            <label>Message:</label>
+            <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
+            <div style="text-align:right;margin-top:20px;">
+    <input type="submit" value="Send" name="submit"  class="btn btn-dark">
+            </div>
+</form>
+          </div></div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
+<!--main content-->      
+      
+      
 <div class="main-content" style="margin-left:0px;min-height:500px;">
             <div class="page-content" style="margin:0px;padding-top:70px;">
                 <!-- PAGE CONTENT -->
@@ -82,13 +113,13 @@
                           <div class="panel-heading">
                             <h4>
                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                              Collapsible Group Item #1
+                              @yield('companymname')
                               </a>
                             </h4>
                           </div>
                           <div id="collapseOne" class="panel-collapse collapse">
                             <div class="panel-body">
-                             
+                             @yield('companym')
                             </div>
                           </div>
                         </div>

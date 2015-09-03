@@ -38,7 +38,7 @@
                     <tbody>
                      <?php
                         foreach ($newusers as $item){
-                            echo "<tr onclick=\"window.document.location='dashboard';\">";
+                            echo "<tr onclick=\"window.document.location='user-detail=" . $item->id . "';\">";
                         echo "<td>" . $item->full_name . "</td>";
                         echo "<td>" . $item->company . "</td>";
                         echo "<td>" . $item->email . "</td>";

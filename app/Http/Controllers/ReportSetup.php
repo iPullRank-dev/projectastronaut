@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +16,28 @@ class ReportSetup extends Controller
      *
      * @return Response
      */
+        public function __construct()
+	{
+    $this->middleware('auth');
+	}  
+     
     public function index()
     {
-        //
-		return view("reportset");
+    
+    	$test = DB::table('prospects')
+    		->get();
+    		
+    	if(count($test)>0){	
+        $record = DB::table('prospects')
+            ->Join('prospectscores', 'prospects.id', '=', 'prospectscores.company_id')
+            ->select('prospects.id','prospects.fc_company_name','prospects.fc_website','prospectscores.final_score')
+            ->get();
+        
+        
+		return view("reportset",["data" => $record]);
+		}else{
+		return view("reportsetnodata");
+		};
     }
 
     /**

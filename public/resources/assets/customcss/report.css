@@ -31,7 +31,7 @@
 .gradebox{
 	position: relative;
 	width: 100%;		/* desired width */
-    background-color: rgba(0,0,0,0.2);
+    background-color:rgba(0,0,0,0.1);
     max-width: 300px;
     margin:0 auto;
 }
@@ -71,8 +71,21 @@
     max-width:280px; margin:0 auto 20 auto;
 }
 
+
+.cinfo img{
+    width:80px;
+    height:80px;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
 .cinfopm{
     display: none;
+}
+
+
+#reportcompany{
+    padding:30px 20px;
 }
 
 @media screen and (max-width:1280px){
@@ -95,6 +108,7 @@
     top: 0;
     padding-bottom: 20px;
     padding-left: 20px;
+    
     }
     .grade{
         padding:0px;
@@ -108,6 +122,27 @@
     .cinfop{
         max-width: 650px;
         height: 100%;
+        overflow: auto;
+    }
+    
+    .ctitle{
+        float:left;
+        width:30%;
+    }
+    
+    .ctitle h2{
+        font-size:20px;
+    }
+    
+    .cdetail{
+        float:right;
+        width:70%;
+        box-sizing: border-box;
+        padding-left: 20px;
+    }
+    
+    .cdetail h3:first-child{
+        margin-top: 0px;
     }
 }
 

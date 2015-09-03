@@ -52,7 +52,7 @@
 
         <div class="logopanel">
 
-          <h1><a href="dashboard.html">Astronaut</a></h1>
+          <h1><a href="dashboard">Astronaut</a></h1>
 
         </div>
 
@@ -152,13 +152,13 @@
                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 
 
-                <span class="username">Hi,</span>
+                <span class="username">Hi, {{$loginuser}}</span>
 
                 </a>
 
                 <ul class="dropdown-menu">
 
-                  <li>
+                  <!--<li>
 
                     <a href="#"><i class="icon-user"></i><span>My Profile</span></a>
 
@@ -174,11 +174,11 @@
 
                     <a href="#"><i class="icon-settings"></i><span>Account Settings</span></a>
 
-                  </li>
+                  </li>-->
 
                   <li>
 
-                    <a href="includes/logout.php"><i class="icon-logout"></i><span>Logout</span></a>
+                    <a href="logout"><i class="icon-logout"></i><span>Logout</span></a>
 
                   </li>
 
@@ -355,7 +355,6 @@
 
 <script src="../resources/assets/js/widgets/todo_list.js"></script>
 
-<script src="../resources/assets/customjs/table_editable.js"></script>
 
 <script src="../resources/assets/customjs/global.js"></script>
 

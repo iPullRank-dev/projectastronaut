@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class dashboard extends Controller
 {
@@ -15,6 +16,12 @@ class dashboard extends Controller
      *
      * @return Response
      */
+        public function __construct()
+	{
+    $this->middleware('auth');
+	} 
+     
+     
     public function index()
     {
         //
@@ -35,6 +42,7 @@ class dashboard extends Controller
         $finalGA['schema'] = array('date','conversion','sessions');
         $finalGA['rows'] = $gaResponse['rows'];
         $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+        
                 
 		return view("dash",["data" => $companyStatus,"newusers" =>$newProspects,"allcontacts"=>$prospects,"analytics"=>$finalGA]);
     }

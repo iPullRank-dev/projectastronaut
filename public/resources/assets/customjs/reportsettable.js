@@ -43,40 +43,9 @@ $(function () {
         }
 
         var oTable = $('#table-editable').dataTable({
-            "aLengthMenu": [
-                [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
-            ],
-            "sDom" : "<'row'<'col-md-6 filter-left'f><'col-md-6'T>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-            "oTableTools" : {
-                "sSwfPath": "../assets/global/plugins/datatables/swf/copy_csv_xls_pdf.swf",
-                "aButtons":[
-                    {
-                        "sExtends":"pdf",
-                        "mColumns":[0, 1, 2, 3],
-                        "sPdfOrientation":"landscape"
-                    },
-                    {
-                        "sExtends":"print",
-                        "mColumns":[0, 1, 2, 3],
-                        "sPdfOrientation":"landscape"
-                    },{
-                        "sExtends":"xls",
-                        "mColumns":[0, 1, 2, 3],
-                        "sPdfOrientation":"landscape"
-                    },{
-                        "sExtends":"csv",
-                        "mColumns":[0, 1, 2, 3],
-                        "sPdfOrientation":"landscape"
-                    }
-                ]
-            },
-            // set the initial value
-            "iDisplayLength": 10,
-            "bPaginate": false,
-            "sPaginationType": "bootstrap",
+             "iDisplayLength": 10,
             "oLanguage": {
-                "sLengthMenu": "_MENU_ records per page",
+                
                 "oPaginate": {
                     "sPrevious": "Prev",
                     "sNext": "Next"
@@ -148,6 +117,8 @@ $(function () {
         });
 
         $('.dataTables_filter input').attr("placeholder", "Search a user...");
+        
+        
 
     };
 

@@ -37,6 +37,8 @@ class CreateAdminUsersTable extends Migration
 			
 			// auto updated created_at and modified_at columns for EloquentORM, automagically managed
             $table->timestamps();
+            
+            $table->rememberToken();
         });
     }
 

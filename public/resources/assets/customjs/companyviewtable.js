@@ -46,7 +46,7 @@ $(function () {
             
             var uid = 0;
              $.ajax({ 
-                 url: "/public/ajax-updateuser", 
+                 url: "../ajax-updateuser", 
                  async:false, 
                  type: "POST", 
                  beforeSend: function (xhr) {
@@ -91,7 +91,7 @@ $(function () {
             
             var uid = 0;
              $.ajax({ 
-                 url: "/public/ajax-insertuser", 
+                 url: "../ajax-insertuser", 
                  async:false, 
                  type: "POST", 
                  beforeSend: function (xhr) {
@@ -191,7 +191,7 @@ $(function () {
             
             
             $.ajax({ 
-                 url: "/public/ajax-deleteuser", 
+                 url: "../ajax-deleteuser", 
                  async:false, 
                  type: "POST", 
                  beforeSend: function (xhr) {
@@ -209,7 +209,7 @@ $(function () {
                 });
             
             
-            
+            nEditing = null;
             oTable.fnDeleteRow(nRow);
             
             // alert("Deleted! Do not forget to do some ajax to sync with backend :)");

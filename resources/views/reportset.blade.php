@@ -8,7 +8,9 @@
 
 <!--upload modal-->
 
-<div class="modal fade" id="uploadmodal" tabindex="-1" role="dialog" aria-hidden="true">
+
+
+<div class="modal fade" id="uploadmodal" tabindex="-1" role="dialog" aria-hidden="true" >
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
@@ -30,6 +32,28 @@
   </div>
 </div>
 
+<!--code modal-->
+
+<div class="modal fade" id="codemodal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Code</strong>Editing</h4>
+      </div>
+      <div class="modal-body">
+          <div id="codebody"></div>
+          <button class="btn btn-dark" id="codesave">Save</button>
+          <div class="fixer"></div>
+          </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+
 <!--main content-->
 
 
@@ -37,7 +61,7 @@
             <h2>Report <strong>Setup</strong></h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li><a href="dashboad.html">Astronaut</a>
+                <li><a href="./dashboard">Astronaut</a>
                 </li>
                 <li class="active">Report Setup</li>
               </ol>
@@ -51,124 +75,32 @@
                 </div>
                 <div class="panel-content">
                     <div >
-                    <button type="button" class="btn btn-dark" style="float:left;margin-left:0px;"  data-toggle="modal" data-target="#uploadmodal"><i class="fa fa-upload"></i>Upload</button>
+                    <button type="button" id="upfile" class="btn btn-dark" style="float:left;margin-left:0px;"><i class="fa fa-upload"></i>Upload</button>
                          <button type="button" class="btn btn-success" style="float:right;"><i class="fa fa-print"></i>Print Reports</button>
                     <button type="button" class="btn btn-success" style="float:right;"  id="table-edit_new"><i class="fa fa-plus"></i>Add New Line</button>
                    
                         <div class="fixer"></div>
                     </div>
-                   <table class="table table-dynamic dataTable" id="table-editable">
+                   <table class="table  dataTable" id="table-editable">
                     <thead>
                       <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Points</th>
-                        <th>Status</th>
+                        <th>Company</th>
+                        <th>Company site</th>
+                        <th>score</th>
                         <th class="text-right">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Smith</td>
-                        <td>John</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right">
-                            <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> 
-                            
-                            <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a>
-                            <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                            
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Johnson</td>
-                        <td>Alexa</td>
-                        <td>220</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Brown</td>
-                        <td>Bobby</td>
-                        <td>545</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Miller</td>
-                        <td>James</td>
-                        <td>525</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>  <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Harris</td>
-                        <td>Samantha</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Thomson</td>
-                        <td>Scott</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a>  <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Aishmen</td>
-                        <td>Samuel</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Addams</td>
-                        <td>Kim</td>
-                        <td>435</td>
-                        <td>super Admin</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Morris</td>
-                        <td>Heather</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Aster</td>
-                        <td>Fred</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Carry</td>
-                        <td>John</td>
-                        <td>987</td>
-                        <td>ipsume dolor</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Paul</td>
-                        <td>Billy</td>
-                        <td>567</td>
-                        <td class="center">nothing</td>
-                        <td class="text-right"><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="fa fa-file-code-o"></i></a> <a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>
-                        </td>
-                      </tr>
+                      <?php
+                        foreach ($data as $item){
+                            echo "<tr>";
+                        echo "<td>" . $item->fc_company_name . "</td>";
+                        echo "<td>" . $item->fc_website . "</td>";
+                        echo "<td>" . $item->final_score . "</td>";
+                        echo "<td class='text-right'><a class='btn btn-sm btn-default' href='../display-report=" . $item->id ."'>Preview</a><a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='btn btn-sm btn-default' name='code' value='" . $item->id . "'><i class='fa fa-file-code-o'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";   
+                        echo "</tr>";
+                        };
+                        ?> 
                     </tbody>
                   </table>
                    
@@ -184,6 +116,8 @@
 
 @section('pagejs')
 
-<script src="../resources/assets/customjs/dash.js"></script>
+<script src="../resources/assets/customjs/reportsettable.js"></script>
+
+<script src="../resources/assets/customjs/reportset.js"></script>
 
 @endsection

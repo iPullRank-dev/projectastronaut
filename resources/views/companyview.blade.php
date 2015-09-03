@@ -13,9 +13,9 @@
             <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li><a href="dashboad.html">Astronaut</a>
+                <li><a href="./dashboard">Astronaut</a>
                 </li>
-                <li>All Companies</li>
+                  <li><a href="./all-companies">All Companies</a></li>
                   <li class="active"><?php echo $data[0]->fc_company_name ?></li>
               </ol>
             </div>

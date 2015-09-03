@@ -15,14 +15,14 @@
     return view('welcome');
 });*/
 
-Route::get('/', 'Login@index');
+//Route::get('/', 'Login@index');
 
 Route::get('/admin/company-view={id}', 'CompanyView@index');
 Route::get('/display-report={id}', 'DisplayReport@index');
 Route::get('/display-report', 'DisplayReport@unidentified');
 
-Route::get('/admin/', 'Login@index');
-Route::get('/admin/login', 'Login@index');
+//Route::get('/admin/', 'Login@index');
+//Route::get('/admin/login', 'Login@index');
 Route::get('/admin/report-setup/', 'ReportSetup@index');
 
 Route::get('/admin/company-view-detail={id}', 'CompanyView@detail');
@@ -41,12 +41,24 @@ Route::get('/ajax-upload', 'Ajax@upload');
 Route::get('/ajax-new-company', 'Ajax@newCompany');
 Route::get('/admin/user-detail={id}', 'userdata@index');
 Route::get('tests', 'tests@index');
+Route::post('/ajax-loadcode', 'Ajax@loadcode');
+Route::post('/ajax-savecode', 'Ajax@savecode');
 
 /*Route::get('test', function () {
     return LaravelAnalytics->getVisitorsAndPageViews();
 });*/
 
+// Authentication routes...
+Route::get('/', function(){return redirect('admin/login');});
+Route::get('/admin/', function(){return redirect('admin/login');});
+Route::get('/home',function(){return redirect('admin/dashboard');});
+Route::get('admin/login', 'Auth\AuthController@getLogin');
+Route::post('admin/login', 'Auth\AuthController@postLogin');
+Route::get('admin/logout', 'Auth\AuthController@getLogout');
 
+// Registration routes...
+Route::get('admin/register', 'Auth\AuthController@getRegister');
+Route::post('admin/register', 'Auth\AuthController@postRegister');
  
 
 

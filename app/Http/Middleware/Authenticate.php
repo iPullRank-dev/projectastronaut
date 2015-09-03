@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate
 {
@@ -38,9 +39,13 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                return redirect()->guest('admin/login');
             }
         }
+        
+                $loginuser = Auth::User();
+        $loginuser = $loginuser -> username;
+        view()->share('loginuser', $loginuser);
 
         return $next($request);
     }

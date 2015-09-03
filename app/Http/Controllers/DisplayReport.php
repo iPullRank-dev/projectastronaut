@@ -30,8 +30,9 @@ class DisplayReport extends Controller
 
 		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
 		//return view("report",$data);
-		$reportdata = DB::select('select * from prospectscores where id='.$id);
-		return view("report",["data"=>$reportdata]);
+		$reportdata = DB::select('select * from prospectscores where company_id='.$id);
+        $companyinfo = DB::select('select * from prospects where id='.$id);
+		return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo]);
     }
 	
 	// Show the page with the modal for the unidentified user

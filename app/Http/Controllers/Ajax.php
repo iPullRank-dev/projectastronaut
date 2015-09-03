@@ -174,4 +174,40 @@ class Ajax extends Controller
 		};
     }
     
+    public function loadcode()
+    {
+    	if (isset($_POST['codeid']))
+    	{	
+    		$companyid = $_POST['codeid'];
+    		$code = DB::table('prospects')
+            ->where('id', '=', $companyid)
+            ->select('code_zone')
+            ->get();
+    		
+    		$output = $code[0] -> code_zone;
+    		
+    		return $output;
+    		
+		}else{
+		return 'false call';
+		};
+    }
+    
+    public function savecode()
+    {
+    	if (isset($_POST['scode']))
+    	{	
+			$savecode = $_POST['scode'];
+    		
+    		DB::table('prospects')
+            ->where('id', '=', $savecode[0])
+            ->update(['code_zone' => $savecode[1]]);
+    		
+    		return 'success';
+    		
+		}else{
+		return 'false call!!';
+		};
+    }
+    
 }
