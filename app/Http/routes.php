@@ -44,6 +44,8 @@ Route::get('tests', 'tests@index');
 Route::post('/ajax-loadcode', 'Ajax@loadcode');
 Route::post('/ajax-savecode', 'Ajax@savecode');
 
+Route::post('/ajax-userurl', 'Ajax@userurl');
+
 /*Route::get('test', function () {
     return LaravelAnalytics->getVisitorsAndPageViews();
 });*/

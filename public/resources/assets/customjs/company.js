@@ -28,12 +28,13 @@ window.myLineChart = new Chart(document.getElementById("testChart").getContext("
     
 
 
-//table functions
+//url modal
+    
+  
 
     
     
-
-//add row
-
+    
+    
     
 } )

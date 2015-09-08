@@ -41,6 +41,10 @@ table{
 
 .fixer{clear:both;}
 
+table .btn.edit {
+    margin-right: 10;
+}
+
 @media screen and (min-width:1024px){
 
 .menutoggle{display:none;}

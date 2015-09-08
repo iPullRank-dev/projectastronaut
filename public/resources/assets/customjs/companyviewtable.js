@@ -41,8 +41,10 @@ $(function () {
             for(var i = 0;i <= 3; i++){
                 passdata[i] = jqInputs[i].value;
             };
+            passdata[4] = companyid;
             
             //ajax call to db
+            
             
             var uid = 0;
              $.ajax({ 
@@ -59,7 +61,7 @@ $(function () {
                  data: { update: passdata} , 
                  success: function(data) {
                  console.log(data);
-                uid = data;
+                     uid = data;
                     }, 
                  error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
                 });
@@ -67,14 +69,11 @@ $(function () {
             console.log(jqInputs[0].value);
             
             
-            
-            console.log(passdata);
-            console.log(uid);
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
             oTable.fnDraw();
         }
         
@@ -118,7 +117,7 @@ $(function () {
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
             oTable.fnDraw();
         }
         
@@ -265,6 +264,31 @@ $(function () {
         });
 
         $('.dataTables_filter input').attr("placeholder", "Search a user...");
+        
+        $("a[name='userurl']").live('click', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('value');
+            console.log(id);
+            $.ajax({ 
+                 url: "../ajax-userurl", 
+                 async:false, 
+                 type: "POST", 
+                 beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+                 data: { userid: id} , 
+                 success: function(data) {
+                     $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data +"' class='form-control form-white'>");
+                     
+                     $('#urlModal').modal('show');
+                    }, 
+                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
+                });
+            });
 
     };
 

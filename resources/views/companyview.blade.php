@@ -9,6 +9,22 @@
         var companyid = <?php echo json_encode($data[0]->id); ?>;
         var companyname = <?php echo json_encode($data[0]->fc_company_name); ?>;
     </script>
+
+
+<!--modal-->
+
+<div class="modal fade" id="urlModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Contact</strong>URL</h4>
+      </div>
+      <div class="modal-body">
+          <div id="urlboxbody"></div>
+        </div></div></div></div>
+
+<!--main-->
      <div class="header">
             <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
             <div class="breadcrumb-wrapper">
@@ -76,7 +92,7 @@
                         echo "<td>" . $item->full_name . "</td>";
                         echo "<td>" . $item->title . "</td>";
                         echo "<td>" . $item->email . "</td>";
-                        echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a> <a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
+                        echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a> <a class='btn btn-sm btn-default' name='userurl' value='" . $item->id . "'><i class='fa fa-link'></i></a> <a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
                         echo "</tr>";
                         };
                         ?> 

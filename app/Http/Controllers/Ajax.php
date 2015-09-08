@@ -123,8 +123,17 @@ class Ajax extends Controller
     		
     		$id = DB::table('prospectusers')->insertGetId($indata);
     		
+            $inurl = $newdata[4] . '_' . $newdata[3];
+
+            $hased = base64_encode($inurl);
+
+            $urldata = ['company_id' => $newdata[4], 'user_id' => $id, 'url_hash' => $hased];
+
+            DB::table('shorturls') ->insert($urldata);
     		//DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
     		
+
+
 		return $id;
 		
 		}else{
@@ -156,7 +165,7 @@ class Ajax extends Controller
     		$updater= $_POST['update'];
     		
     		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0]];
-    		
+
     		DB::table('prospectusers')
             ->where('email', $updater[3])
             ->update($updateitem);
@@ -167,7 +176,15 @@ class Ajax extends Controller
             
             $output = $uid[0] -> id;
     		
-		return $output;
+            $inurl = $updater[4] . '_' . $updater[3];
+
+            $hased = base64_encode($inurl);
+
+            DB::table('shorturls')
+            ->where('user_id', '=', $output)
+            ->update(['url_hash' => $hased]);
+
+		    return $output;
 		
 		}else{
 		return 'false call';
@@ -208,6 +225,37 @@ class Ajax extends Controller
 		}else{
 		return 'false call!!';
 		};
+    }
+
+    public function userurl()
+    {
+        if (isset($_POST['userid']))
+        {   
+            $user = $_POST['userid'];
+            
+            $hashurl = DB::table('shorturls')
+            ->where('user_id', '=', $user)
+            ->select('url_hash')
+            ->get();
+
+            $output = $hashurl[0]-> url_hash;
+            
+            
+            //return $output;
+
+            //$a = DB::table('prospects')
+            //->where('id', '=', $uesr)
+            //->select('code_zone')
+            //->get();
+            
+            //$outa = $a[0] -> code_zone;
+            
+            return $output;
+            
+            
+        }else{
+        return 'false call!!';
+        };
     }
     
 }

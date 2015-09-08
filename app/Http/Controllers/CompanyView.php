@@ -25,6 +25,16 @@ class CompanyView extends Controller
         
         $companyDetail = DB::select('select * from prospects where id='.$id);
         $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
+
+        //$companycontacts = DB::table('prospectusers')
+        //    ->Join('shorturls', function($join) use ($id) {
+        //        $join->on('prospectusers.id','=','shorturls.user_id')
+        //             ->where('prospectusers.company_id','=',$id);   
+        //    })
+        //    ->select('prospectusers.*','shorturls.visited','shorturls.url_hash')
+        //    ->get();
+
+
 		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts]);
     }
 

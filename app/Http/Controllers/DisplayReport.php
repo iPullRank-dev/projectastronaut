@@ -30,8 +30,17 @@ class DisplayReport extends Controller
 
 		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
 		//return view("report",$data);
-		$reportdata = DB::select('select * from prospectscores where company_id='.$id);
-        $companyinfo = DB::select('select * from prospects where id='.$id);
+        $realid = 0;
+        if(base64_encode(base64_decode($id, true)) === $id){
+            $unhash = base64_decode($id);
+            $position = strpos($unhash,"_");
+            $realid = substr($unhash, 0, $position);
+        }else{
+            //this should only be avaliable during development
+            $realid = $id;
+        };
+		$reportdata = DB::select('select * from prospectscores where company_id='.$realid);
+        $companyinfo = DB::select('select * from prospects where id='.$realid);
 		return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo]);
     }
 	
