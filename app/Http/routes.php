@@ -19,6 +19,7 @@
 
 Route::get('/admin/company-view={id}', 'CompanyView@index');
 Route::get('/display-report={id}', 'DisplayReport@index');
+Route::get('/display-report-authed={id}', 'DisplayReport@authed');
 Route::get('/display-report', 'DisplayReport@unidentified');
 
 //Route::get('/admin/', 'Login@index');
@@ -45,6 +46,12 @@ Route::post('/ajax-loadcode', 'Ajax@loadcode');
 Route::post('/ajax-savecode', 'Ajax@savecode');
 
 Route::post('/ajax-userurl', 'Ajax@userurl');
+
+Route::post('/ajax-reportauth', 'Ajax@reportauth');
+Route::post('/ajax-reportauthemail', 'Ajax@reportauthemail');
+Route::post('/ajax-sendmail', 'Ajax@sendmail');
+Route::post('/ajax-sendmail2', 'Ajax@sendmail2');
+Route::get('/testmail', 'tests@sendmail');
 
 /*Route::get('test', function () {
     return LaravelAnalytics->getVisitorsAndPageViews();

@@ -35,15 +35,23 @@ class DisplayReport extends Controller
             $unhash = base64_decode($id);
             $position = strpos($unhash,"_");
             $realid = substr($unhash, 0, $position);
+            //$position = strpos($unhash,"=");
+            //$userid = substr($unhash, $position+1, strlen($unhash)-$position-1);
+            $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
+            $companyinfo = DB::select('select * from prospects where id='.$realid);
+            return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo,"hash"=>$id]);
         }else{
             //this should only be avaliable during development
             $realid = $id;
+            $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
+            $companyinfo = DB::select('select * from prospects where id='.$realid);
+            return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo]);
         };
-		$reportdata = DB::select('select * from prospectscores where company_id='.$realid);
-        $companyinfo = DB::select('select * from prospects where id='.$realid);
-		return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo]);
+		
     }
 	
+    
+
 	// Show the page with the modal for the unidentified user
     public function unidentified()
     {

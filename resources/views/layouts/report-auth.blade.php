@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <meta name="description" content="Project Astronaut">
+    
+    <meta name="csrf_token" content="{{ csrf_token() }}" /> 
 
   <link rel="shortcut icon" href="../resources/assets/images/favicon.png" type="image/png">
 
@@ -40,89 +42,64 @@
 
 </head>
 <body class="fixed-topbar fixed-sidebar color-default theme-sdtl  sidefix">
-
+@yield('passdata')
   <section>
 
  <div id="reporthead">
+        <div style="float:left;">
           <h1>Astronaut</h1>
+        </div>
+        <div style="float:right">
+      </div>
+        <div class="fixer"></div>
 </div>
 
 
       <!-- END SIDEBAR -->
+      
+      <!--popup-->
+      <div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Send</strong>Invitation</h4>
+      </div>
+      <div class="modal-body">
+          <div class="invitebox">
+        <form  method="post" enctype="multipart/form-data">
+            <label>The email you want to invite:</label>
+    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" >
+            <label>Message:</label>
+            <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
+            <div style="text-align:right;margin-top:20px;">
+    <input type="submit" value="Send" name="submit"  class="btn btn-dark">
+            </div>
+</form>
+          </div></div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
+<!--main content-->      
+      
+      
 <div class="main-content" style="margin-left:0px;min-height:500px;">
             <div class="page-content" style="margin:0px;padding-top:70px;">
                 <!-- PAGE CONTENT -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="grade">
-                            <div class="gradebox">
-                                <div class="gradecontent">
-                                    <div class="grademain">
-                                        a
-                                    </div>
-                                </div>
-                                     
-                            </div>
-                        </div>
-                        <div class="cinfo">
-                        <div class="panel" style="max-width:280px; margin:0 auto 20 auto;">
-                            <div class="panel-header">
-                                    <h3>Portlet Header</h3>
-                            </div>
-                            <div class="panel-content">
-                                <p>This is an example of a basic header.</p>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel">
-                            <div class="panel-header">
-                                    <h3>Portlet Header 1</h3>
-                            </div>
-                            <div class="panel-content">
-                                <p>This is an example of a basic header.</p>
-                            </div>
-                                </div>
-                                <div class="panel">
-                            <div class="panel-header">
-                                    <h3>Portlet Header 2</h3>
-                            </div>
-                            <div class="panel-content">
-                                <p>This is an example of a basic header.</p>
-                            </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel">
-                            <div class="panel-header">
-                                    <h3>Portlet Header</h3>
-                            </div>
-                            <div class="panel-content">
-                                <p>This is an example of a basic header.</p>
-                            </div>
-                        </div>
-                                <div class="panel">
-                            <div class="panel-header">
-                                    <h3>Portlet Header</h3>
-                            </div>
-                            <div class="panel-content">
-                                <p>This is an example of a basic header.</p>
-                            </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+          
                 </div>
             </div>
-        </div>
+        
+
+
 
  <!-- END PAGE CONTENT -->
 
-      </div>
+      
 
       <!-- END MAIN CONTENT -->
 
@@ -241,10 +218,12 @@
 <script src="../resources/assets/js/widgets/widget_weather.js"></script>
 
 <script src="../resources/assets/js/widgets/todo_list.js"></script>
-
+    
 <script src="../resources/assets/customjs/table_editable.js"></script>
 
 @yield('pagejs')
+
+<!-- END PAGE SCRIPTS -->
 
 </body>
 

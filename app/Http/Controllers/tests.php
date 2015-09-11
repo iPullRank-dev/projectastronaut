@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
+use Mail;
 
 class tests extends Controller
 {
@@ -103,5 +105,22 @@ class tests extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sendmail()
+    {
+        
+            
+            $user = DB::table('prospectusers')->where('id','=', 123)->first();
+            $url = DB::table('shorturls')->where('id','=', 123)->first();
+
+            Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
+            $m->to($user->email, $user->full_name)->subject('Your Unique access to PA');
+            });
+
+
+            return view("emails.newuser");
+            
+        
     }
 }

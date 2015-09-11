@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <meta name="description" content="Project Astronaut">
+    
+  <meta name="csrf_token" content="{{ csrf_token() }}" />     
 
   <link rel="shortcut icon" href="../resources/assets/images/favicon.png" type="image/png">
 
@@ -39,8 +41,9 @@
 
 
 </head>
+    <div id="authcover"></div>    
 <body class="fixed-topbar fixed-sidebar color-default theme-sdtl  sidefix">
-
+@yield('passdata')
   <section>
 
  <div id="reporthead">
@@ -55,7 +58,7 @@
 
       <!-- END SIDEBAR -->
       
-      <!--popup-->
+      <!--popup invite-->
       <div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-hidden="true" >
   <div class="modal-dialog ">
     <div class="modal-content">
@@ -65,15 +68,103 @@
       </div>
       <div class="modal-body">
           <div class="invitebox">
-        <form  method="post" enctype="multipart/form-data">
+              <p>Please be aware that the information in the report is highly sensative. Once you send the invitation the people you invite will get the access to the full report.</p><br/>
+        <form>
+            <label>The full name of the people you want to invire:</label>
+    <input type="text" name="invite_name" id="invite_name" class="form-control form-white" >
+            <label>The title of this person in your company:</label>
+    <input type="text" name="invite_title" id="invite_title" class="form-control form-white" >
             <label>The email you want to invite:</label>
     <input type="email" name="invite_email" id="invite_email" class="form-control form-white" >
             <label>Message:</label>
             <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
             <div style="text-align:right;margin-top:20px;">
-    <input type="submit" value="Send" name="submit"  class="btn btn-dark">
+    <input type="submit" value="Send" name="submitinvite"  class="btn btn-dark">
             </div>
-</form>
+              </form>
+          </div></div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
+      <!--popup verify-->
+      
+      <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title"><strong>Verify</strong>Information</h4>
+      </div>
+      <div class="modal-body">
+          <div class="invitebox">
+            <p>Sorry, We can't recognize this device or browser.</p>
+              <form>
+            <label>Please Enter Your Email for Validation</label>
+    <input type="email" name="verify_email" id="verify_email" class="form-control form-white" >
+            <p id="verifyalert"></p>
+            <div style="text-align:right;margin-top:20px;">
+    <input type="submit" value="Verify" name="verify"  class="btn btn-dark">
+            </div>
+              </form>
+          </div></div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
+      <!--popup new-->
+      
+      <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title"><strong>New</strong>Visitor</h4>
+      </div>
+      <div class="modal-body">
+          <div class="invitebox">
+            <p>Looks like you are new here. Please fill in the form to get access to the content.</p>
+              <form>
+            <label>Email</label>
+    <input type="email" name="new_email" id="mew_email" class="form-control form-white" >
+                  
+                  <label>Full Name</label>
+    <input type="text" name="new_name" id="new_name" class="form-control form-white" >
+                  
+                  <label>Title in the Company</label>
+    <input type="text" name="new_title" id="new_title" class="form-control form-white" >
+        
+            <div style="text-align:right;margin-top:20px;">
+    <input type="submit" value="Verify" name="newsubmit"  class="btn btn-dark">
+            </div>
+              </form>
+
+          </div></div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
+      <!--popup done-->
+      
+      <div class="modal fade" id="doneModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title"><strong>New</strong>Visitor</h4>
+      </div>
+      <div class="modal-body">
+          <div class="invitebox">
+            <p>Done! Please check your email box for the visit link for you.</p>
           </div></div>
       <!--<div class="modal-footer">
         <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>

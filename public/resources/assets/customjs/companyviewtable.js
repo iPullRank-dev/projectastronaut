@@ -282,7 +282,7 @@ $(function () {
         },
                  data: { userid: id} , 
                  success: function(data) {
-                     $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data +"' class='form-control form-white'>");
+                     $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data +"' class='form-control form-white' autofocus/>");
                      
                      $('#urlModal').modal('show');
                     }, 

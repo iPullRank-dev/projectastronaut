@@ -4,12 +4,6 @@
 
 @section('passdata')
 
-<script>
-        var hash = <?php echo json_encode($hash); ?>;
-        var c_name = <?php echo json_encode($companyinfo[0]->fc_company_name);?>;
-        var c_id = <?php echo json_encode($companyinfo[0]->id);?>;
-</script>
-
 @endsection
 
 
@@ -89,7 +83,8 @@ echo $data[0]->final_score;};
 @section('pagejs')
 
     <script src="http://cdn.jsdelivr.net/fingerprintjs2/0.7.0/fingerprint2.min.js"></script>
-    <script src="../resources/assets/customjs/report.js"></script>
-
+    <script>
+        $('#authcover').fadeOut();
+</script>
 
 @endsection
