@@ -19,7 +19,8 @@
       </div>
       <div class="modal-body">
           <div class="uploadbox">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="uploadnew" method="post" enctype="multipart/form-data" files="true">
+            {!! csrf_field() !!}
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload" class="uploadinput" >
     <input type="submit" value="Upload" name="submit"  class="btn btn-dark">

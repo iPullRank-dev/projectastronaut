@@ -19,9 +19,12 @@
       </div>
       <div class="modal-body">
           <div class="uploadbox">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" class="uploadinput" >
+        <form action="uploadreport" method="post" enctype="multipart/form-data" files="true">
+            {!! csrf_field() !!}
+    Select  Prospects CSV file:
+    <input type="file" name="prospectsToUpload" id="prospectsToUpload" class="uploadinput" >
+    Select  Contacts CSV file:
+    <input type="file" name="contactsToUpload" id="contactsToUpload" class="uploadinput" >
     <input type="submit" value="Upload" name="submit"  class="btn btn-dark">
 </form>
           </div></div></div></div></div>

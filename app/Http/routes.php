@@ -15,7 +15,7 @@
     return view('welcome');
 });*/
 
-//Route::get('/', 'Login@index');
+Route::get('aaa', function(){return view('pdf');});
 
 Route::get('/admin/company-view={id}', 'CompanyView@index');
 Route::get('/display-report={id}', 'DisplayReport@index');
@@ -25,6 +25,7 @@ Route::get('/display-report', 'DisplayReport@unidentified');
 //Route::get('/admin/', 'Login@index');
 //Route::get('/admin/login', 'Login@index');
 Route::get('/admin/report-setup/', 'ReportSetup@index');
+Route::post('/admin/uploadreport/', 'ReportSetup@uploadreport');
 
 Route::get('/admin/company-view-detail={id}', 'CompanyView@detail');
 
@@ -47,11 +48,16 @@ Route::post('/ajax-savecode', 'Ajax@savecode');
 
 Route::post('/ajax-userurl', 'Ajax@userurl');
 
+Route::get('admin/print={id}', 'ReportSetup@printreport');
+
+
 Route::post('/ajax-reportauth', 'Ajax@reportauth');
 Route::post('/ajax-reportauthemail', 'Ajax@reportauthemail');
 Route::post('/ajax-sendmail', 'Ajax@sendmail');
 Route::post('/ajax-sendmail2', 'Ajax@sendmail2');
 Route::get('/testmail', 'tests@sendmail');
+
+Route::post('/admin/uploadnew','NewCompany@upload');
 
 /*Route::get('test', function () {
     return LaravelAnalytics->getVisitorsAndPageViews();

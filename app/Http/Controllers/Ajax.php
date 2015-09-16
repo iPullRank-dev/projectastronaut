@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use DB;
 use Mail;
+use PDF;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -360,5 +361,7 @@ class Ajax extends Controller
         return 'false call!!';
         };
     }
+
+   
 
 }

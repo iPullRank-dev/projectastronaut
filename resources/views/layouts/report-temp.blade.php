@@ -24,7 +24,7 @@
     
   <link href="../resources/assets/css/custom.css" rel="stylesheet"> <!-- CUSTOM -->
     
-  <link href="../resources/assets/customcss/page.css" rel="stylesheet">  <!-- PAGE CSS-->   
+  <link href="../resources/assets/customcss/report.css" rel="stylesheet">  <!-- PAGE CSS-->   
 
   <link href="../resources/assets/plugins/datatables/dataTables.min.css" rel="stylesheet">
 
@@ -176,7 +176,7 @@
 <!--main content-->      
       
       
-<div class="main-content" style="margin-left:0px;min-height:500px;">
+<div class="main-content report-main" style="margin-left:0px;min-height:500px;">
             <div class="page-content" style="margin:0px;padding-top:70px;">
                 <!-- PAGE CONTENT -->
                 <div class="row">
@@ -223,7 +223,7 @@
                             <div class="col-md-6">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Portlet Header 1</h3>
+                                        <h3>Unnatural Linking - <strong>Poor</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad1')
@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Portlet Header 2</h3>
+                                        <h3>Spam Score - <strong>Good</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad2')
@@ -241,7 +241,7 @@
                             <div class="col-md-6">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Portlet Header 3</h3>
+                                        <h3>Trust Metrics - <strong>Average</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad3')
@@ -249,7 +249,7 @@
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Portlet Header 4</h3>
+                                        <h3>Link Popularity and Visibility - <strong>Good</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad4')

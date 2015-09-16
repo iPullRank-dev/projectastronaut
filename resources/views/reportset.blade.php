@@ -19,9 +19,12 @@
       </div>
       <div class="modal-body">
           <div class="uploadbox">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" class="uploadinput" >
+        <form action="uploadreport" method="post" enctype="multipart/form-data" files="true">
+            {!! csrf_field() !!}
+    Select  Prospects CSV file:
+    <input type="file" name="prospectsToUpload" id="prospectsToUpload" class="uploadinput" >
+    Select  Contacts CSV file:
+    <input type="file" name="contactsToUpload" id="contactsToUpload" class="uploadinput" >
     <input type="submit" value="Upload" name="submit"  class="btn btn-dark">
 </form>
           </div></div>
@@ -72,21 +75,24 @@
             <div class="panel">
                 <div class="panel-header">
                     <h3>Edit<strong>Report</strong></h3>
+                    
+                    
                 </div>
                 <div class="panel-content">
                     <div >
                     <button type="button" id="upfile" class="btn btn-dark" style="float:left;margin-left:0px;"><i class="fa fa-upload"></i>Upload</button>
-                         <button type="button" class="btn btn-success" style="float:right;"><i class="fa fa-print"></i>Print Reports</button>
-                    <button type="button" class="btn btn-success" style="float:right;"  id="table-edit_new"><i class="fa fa-plus"></i>Add New Line</button>
+                         <a type="button" class="btn btn-success" style="float:right;" id="print" href="./print" target="_blank"><i class="fa fa-print"></i>Print Reports</a>
+                    <!--<button type="button" class="btn btn-success" style="float:right;"  id="table-edit_new"><i class="fa fa-plus"></i>Add New Line</button>-->
                    
                         <div class="fixer"></div>
                     </div>
                    <table class="table  dataTable" id="table-editable">
                     <thead>
                       <tr>
+                          <th class="checkall" style="padding-left:8px;"><input type="checkbox" id="checkall"></th>
                         <th>Company</th>
-                        <th>Company site</th>
-                        <th>score</th>
+                        <th>Grade</th>
+                        <th># of Contacts</th>
                         <th class="text-right">Action</th>
                       </tr>
                     </thead>
@@ -94,10 +100,11 @@
                       <?php
                         foreach ($data as $item){
                             echo "<tr>";
+                            echo "<td><input type='checkbox' name='checks' value='" . $item->id . "'></td>";
                         echo "<td>" . $item->fc_company_name . "</td>";
-                        echo "<td>" . $item->fc_website . "</td>";
                         echo "<td>" . $item->final_score . "</td>";
-                        echo "<td class='text-right'><a class='btn btn-sm btn-default' href='../display-report=" . $item->id ."'>Preview</a><a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='btn btn-sm btn-default' name='code' value='" . $item->id . "'><i class='fa fa-file-code-o'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";   
+                        echo "<td>" . $item->user_total . "</td>";
+                        echo "<td class='text-right'><a class='btn btn-sm btn-default' href='../display-report=" . $item->id ."'>Preview</a> <a class='btn btn-sm btn-default' name='code' value='" . $item->id . "'><i class='fa fa-file-code-o'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";   
                         echo "</tr>";
                         };
                         ?> 

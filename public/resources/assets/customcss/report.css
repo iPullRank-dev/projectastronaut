@@ -59,6 +59,7 @@
 
 .gradecontent{
     position:  absolute;
+    background-color: rgba(49,157,181,0.1);
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -99,9 +100,21 @@
     display: none;
 }
 
+.main-content .page-content .panel-content{
+
+    padding-bottom:20px;
+    
+}
 
 #reportcompany{
     padding:30px 20px;
+}
+
+.report-main .panel-header{
+
+    background-color:#319DB5;
+    color:#fff;
+    
 }
 
 @media screen and (max-width:1280px){

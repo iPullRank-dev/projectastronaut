@@ -1,4 +1,5 @@
-   $('#upfile').on('click', function (e) {
+$(document).ready(function() {   
+$('#upfile').on('click', function (e) {
             e.preventDefault();
             if (confirm("Upload a new .csv file will overwrite all the exist data, do you want to continue? ") == false) {
                 return;
@@ -62,3 +63,24 @@
                  error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
                 });
     });
+
+$('#print').on('click',function(e){
+    e.preventDefault();
+    var i = 0;
+    $('tbody').find('tr').each(function(){
+        if($(this).find('input').is(':checked')){
+        i++;
+        var id = $(this).find('input').val();
+        window.open("./print=" + id);
+        };
+    });
+    if(i == 0){
+        alert('No report is selected');
+    }
+});
+
+ $("#checkall").on('ifClicked',function () {
+     console.log('a');
+     $('input:checkbox').not(this).iCheck('toggle');
+ });
+});

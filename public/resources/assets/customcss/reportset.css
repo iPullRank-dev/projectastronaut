@@ -8,3 +8,10 @@
     float:right;
     margin-top: 15px;
 }
+
+.checkall:before{display: none;
+}
+
+.checkall{
+        padding-left:8px;
+}

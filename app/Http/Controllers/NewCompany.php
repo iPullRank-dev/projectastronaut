@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Input;
+
+use DB;
+
+Use Excel;
+
 class NewCompany extends Controller
 {
     /**
@@ -24,6 +30,41 @@ class NewCompany extends Controller
     {
         //
 		return view("new");
+    }
+
+    public function upload()
+    {
+        //
+ 
+        // GET ALL THE INPUT DATA , $_GET,$_POST,$_FILES.
+        
+        $file = Input::file('fileToUpload');
+           // SET UPLOAD PATH
+        $destinationPath = 'uploads';
+            // GET THE FILE EXTENSION
+        $extension = $file->getClientOriginalExtension();
+            // RENAME THE UPLOAD WITH RANDOM NUMBER
+        $fileName = 'test.' . $extension;
+            // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
+        $upload_success = $file->move($destinationPath, $fileName);
+        
+        // IF UPLOAD IS SUCCESSFUL SEND SUCCESS MESSAGE OTHERWISE SEND ERROR MESSAGE
+        if ($upload_success) {
+
+        
+
+            $data = Excel::load('public/uploads/test.csv', function($reader) {
+            })->toArray();
+
+        foreach ($data[0] as $key => $value) {
+                $final[$key] = $value;
+            }    
+
+        $id = DB::table('prospects')->insertGetId($final);
+
+        return view("test",["results"=>$data[0]['fc_company_name']]);    
+            
+        }
     }
 
     /**
