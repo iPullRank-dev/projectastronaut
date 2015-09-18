@@ -15,3 +15,11 @@
 .checkall{
         padding-left:8px;
 }
+
+#tab-1 label{
+    text-transform: uppercase;
+}
+
+#tab-1 input[name="id"]{
+    display: none;
+}

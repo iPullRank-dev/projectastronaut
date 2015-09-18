@@ -45,11 +45,13 @@ Route::get('/admin/user-detail={id}', 'userdata@index');
 Route::get('tests', 'tests@index');
 Route::post('/ajax-loadcode', 'Ajax@loadcode');
 Route::post('/ajax-savecode', 'Ajax@savecode');
+Route::post('/ajax-loadeditor', 'Ajax@editor');
 
 Route::post('/ajax-userurl', 'Ajax@userurl');
 
 Route::get('admin/print={id}', 'ReportSetup@printreport');
 
+Route::post('/ajax-deletecompany', 'Ajax@deletecompany');
 
 Route::post('/ajax-reportauth', 'Ajax@reportauth');
 Route::post('/ajax-reportauthemail', 'Ajax@reportauthemail');
@@ -58,6 +60,7 @@ Route::post('/ajax-sendmail2', 'Ajax@sendmail2');
 Route::get('/testmail', 'tests@sendmail');
 
 Route::post('/admin/uploadnew','NewCompany@upload');
+Route::post('/admin/updatecompany','ReportSetup@updatecompany');
 
 /*Route::get('test', function () {
     return LaravelAnalytics->getVisitorsAndPageViews();

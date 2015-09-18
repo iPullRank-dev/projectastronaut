@@ -74,13 +74,38 @@ $(function () {
             nEditing = nRow;
         });
 
-        $('#table-editable a.delete').live('click', function (e) {
+            $('#table-editable a.delete').live('click', function (e) {
             e.preventDefault();
-            if (confirm("Are you sure to delete this row ?") == false) {
+            if (confirm("Delete a company will delete information, score and all contacts of it, are you sure?") == false) {
                 return;
             }
             var nRow = $(this).parents('tr')[0];
+            var aData = oTable.fnGetData(nRow);
+            var company_name = aData[1];
+            console.log(company_name);
+            
+            
+            $.ajax({ 
+                 url: "../ajax-deletecompany", 
+                 async:false, 
+                 type: "POST", 
+                 beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+                 data: { deletecompany: company_name} , 
+                 success: function(data) {
+                 console.log(data)
+                    }, 
+                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
+                });
+            
+            nEditing = null;
             oTable.fnDeleteRow(nRow);
+            
             // alert("Deleted! Do not forget to do some ajax to sync with backend :)");
         });
 

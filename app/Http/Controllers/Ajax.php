@@ -362,6 +362,50 @@ class Ajax extends Controller
         };
     }
 
+    public function deletecompany()
+    {
+        if (isset($_POST['deletecompany']))
+        {
+            $delete = $_POST['deletecompany'];
+
+            $find = DB::table('prospects')->where('fc_company_name','=',$delete)->first();
+
+            $id = $find -> id;
+            
+            DB::table('prospects')->where('id', '=', $id)->delete();
+
+            DB::table('prospectusers')->where('company_id', '=', $id)->delete();
+
+            DB::table('shorturls')->where('company_id', '=', $id)->delete();
+
+            
+            //DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
+            
+        return "success!";
+        
+        }else{
+            return 'false call';
+        };
+    }
+
+    public function editor()
+    {
+        if (isset($_POST['companyid']))
+        {
+            $id = $_POST['companyid'];
+
+            $info = DB::table('prospects')->where('id','=',$id)->first();
+
+            $grade = DB::table('prospectscores')->where('company_id','=',$id)->first();
+
+            //DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
+            $passdata = [$info,$grade];
+        return $passdata;
+        
+        }else{
+            return 'false call';
+        };
+    }
    
 
 }

@@ -97,14 +97,14 @@
 
 
             </li>
-              <li class="sideitemb">
+              <!--<li class="sideitemb">
 
 
               <a href="new-company"><i class="fa fa-plus"></i><span>New Company</span> </a>
 
 
 
-            </li>
+            </li>-->
 
 
           </ul>

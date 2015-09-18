@@ -15,6 +15,8 @@ use PDF;
 
 Use Excel;
 
+use Schema;
+
 class ReportSetup extends Controller
 {
     /**
@@ -54,14 +56,18 @@ class ReportSetup extends Controller
     }
 
 
-    public function uploadreport()
+    public function uploadreport(Request $request)
     {
-        //companyfile
+            //companyfile
+        $clean = $request->input('clean');
 
+        if($clean){
         DB::table('prospects')->truncate();
         DB::table('prospectscores')->truncate();
         DB::table('prospectusers')->truncate();
         DB::table('shorturls')->truncate();
+        };
+
 
         $companyfile = Input::file('prospectsToUpload');
            // SET UPLOAD PATH
@@ -70,8 +76,13 @@ class ReportSetup extends Controller
             // RENAME THE UPLOAD WITH RANDOM NUMBER
         $fileName = 'company.' . 'csv';
             // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
+        if($companyfile == null){
+            $upload_success = true;
+            $company_watcher = 0;
+        }else{
         $upload_success = $companyfile->move($destinationPath, $fileName);
-        
+        $company_watcher = 1;
+        };
         //contactfile
 
 
@@ -82,7 +93,13 @@ class ReportSetup extends Controller
             // RENAME THE UPLOAD WITH RANDOM NUMBER
         $fileName = 'contact.' . 'csv';
             // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
+        if($contactfile == null){
+            $upload_success_2 = true;
+            $contact_watcher = 0;
+        }else{
         $upload_success_2 = $contactfile->move($destinationPath, $fileName);
+        $contact_watcher = 1;
+        };
         
 
         // IF UPLOAD IS SUCCESSFUL SEND SUCCESS MESSAGE OTHERWISE SEND ERROR MESSAGE
@@ -95,7 +112,7 @@ class ReportSetup extends Controller
             })->toArray(); 
 
             //prospects+prospectsocres
-
+            if ($company_watcher != 0){
             $n = count($companydata);
 
             for($i=0;$i<$n;$i++){
@@ -109,9 +126,11 @@ class ReportSetup extends Controller
                 $storescore['company_id'] = $companyid;
                 DB::table('prospectscores')->insert($storescore);
 
-            }
+            };};
             //prospectusers&shorturls
 
+
+            if ($contact_watcher != 0){
             $n = count($contactdata);
 
             for($i=0;$i<$n;$i++){
@@ -130,7 +149,7 @@ class ReportSetup extends Controller
                 $urldata['url_hash'] = $hased;
                 DB::table('shorturls') ->insert($urldata);
 
-            }
+            };};
 
             return redirect('/admin/report-setup/');
          }   
@@ -142,7 +161,28 @@ class ReportSetup extends Controller
         $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
         $companyinfo = DB::select('select * from prospects where id='.$realid);
         return PDF::loadView("pdf",["data"=>$reportdata,"companyinfo"=>$companyinfo])->stream();
-    }  
+    } 
+
+    public function updatecompany(Request $request)
+    {
+        $input = $request->all();
+        foreach ($input as $key => $value) {
+            if(Schema::hasColumn('prospects', $key)){
+                $cinfo[$key] = $value;
+            }elseif (Schema::hasColumn('prospectscores', $key)) {
+                $cgrade[$key] = $value;
+            };
+        };
+        DB::table('prospects')
+            ->where('id', $input['id'])
+            ->update($cinfo);
+
+        DB::table('prospectscores')
+            ->where('company_id', $input['id'])
+            ->update($cgrade);    
+        
+        return redirect('/admin/report-setup/');
+    }   
 
     
 }

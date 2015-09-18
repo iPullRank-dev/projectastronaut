@@ -22,7 +22,7 @@
         <form action="uploadreport" method="post" enctype="multipart/form-data" files="true">
             {!! csrf_field() !!}
     Select  Prospects CSV file:
-    <input type="file" name="prospectsToUpload" id="prospectsToUpload" class="uploadinput" >
+    <input type="file" name="prospectsToUpload" id="prospectsToUpload" class="uploadinput" required >
     Select  Contacts CSV file:
     <input type="file" name="contactsToUpload" id="contactsToUpload" class="uploadinput" >
     <input type="submit" value="Upload" name="submit"  class="btn btn-dark">
