@@ -45,7 +45,13 @@ class DisplayReport extends Controller
             $realid = $id;
             $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
             $companyinfo = DB::select('select * from prospects where id='.$realid);
-            return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo]);
+            $copy = DB::select('select * from copytext');
+            foreach ($copy as $value) {
+                $currentquad = $value -> quad;
+                $finder = $reportdata[0]->$currentquad;
+                $copydata[$currentquad] = $value -> $finder;
+            }
+            return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo,"copycontent" => $copydata]);
         };
 		
     }

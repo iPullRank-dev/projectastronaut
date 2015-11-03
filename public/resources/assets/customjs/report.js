@@ -72,6 +72,14 @@ function sendMail2(id,msg){
     
 };
 
+function countdowntimer(){
+    var i = 3;
+    setInterval(function(){
+        $('#countdown').html(i);
+        i-=1;
+    },1000)
+}
+
 
 new Fingerprint2().get(function(result){
   authProcess(result);
@@ -143,6 +151,8 @@ $("input[name='newsubmit']").on('click', function (e) {
                      $('#newModal').modal('hide');
                      $('#doneModal').modal('show');
                      sendMail(data);
+                     countdowntimer();
+                     setTimeout(function(){ window.location = "http://www.ipullrank.com";}, 3000);
                      }, 
                  error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
                 });

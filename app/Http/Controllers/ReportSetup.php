@@ -116,8 +116,15 @@ class ReportSetup extends Controller
             $n = count($companydata);
 
             for($i=0;$i<$n;$i++){
-                $storescore['final_score'] = $companydata[$i]['final_score'];
-                unset($companydata[$i]['final_score']);
+                //$storescore['final_score'] = $companydata[$i]['final_score'];
+                //$storescore['quad1'] = $companydata[$i]['quad1'];
+                //$storescore['quad2'] = $companydata[$i]['quad2'];
+                //$storescore['quad3'] = $companydata[$i]['quad3'];
+                //$storescore['quad4'] = $companydata[$i]['quad4'];
+                //unset($companydata[$i]['final_score']);
+
+                $keyrecorder = array_search("final_score", array_keys($companydata[$i]));
+                $storescore = array_splice($companydata[$i], $keyrecorder);
 
                 foreach ($companydata[$i] as $key => $value) {
                     $indata[$key] = $value;

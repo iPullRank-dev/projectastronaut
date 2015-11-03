@@ -79,6 +79,29 @@ echo $data[0]->final_score;};
 
 @endsection
 
+@section('quad1')
+
+<div><?php echo $copycontent['quad1'] ?></div>
+
+@endsection
+
+@section('quad2')
+
+<div><?php echo $copycontent['quad2'] ?></div>
+
+@endsection
+
+@section('quad3')
+
+<div><?php echo $copycontent['quad3'] ?></div>
+
+@endsection
+
+@section('quad4')
+
+<div><?php echo $copycontent['quad4'] ?></div>
+
+@endsection
 
 @section('pagejs')
 

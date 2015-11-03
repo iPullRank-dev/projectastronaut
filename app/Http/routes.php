@@ -51,6 +51,8 @@ Route::post('/ajax-userurl', 'Ajax@userurl');
 
 Route::get('admin/print={id}', 'ReportSetup@printreport');
 
+Route::get('admin/exportppl={id}', 'CompanyView@export');
+
 Route::post('/ajax-deletecompany', 'Ajax@deletecompany');
 
 Route::post('/ajax-reportauth', 'Ajax@reportauth');

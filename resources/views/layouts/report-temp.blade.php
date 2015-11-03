@@ -75,7 +75,7 @@
             <label>The title of this person in your company:</label>
     <input type="text" name="invite_title" id="invite_title" class="form-control form-white" >
             <label>The email you want to invite:</label>
-    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" >
+    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" required>
             <label>Message:</label>
             <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
             <div style="text-align:right;margin-top:20px;">
@@ -92,7 +92,7 @@
       
       <!--popup verify-->
       
-      <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-hidden="true" >
+      <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
@@ -120,7 +120,7 @@
       
       <!--popup new-->
       
-      <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true" >
+      <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
@@ -155,7 +155,7 @@
       
       <!--popup done-->
       
-      <div class="modal fade" id="doneModal" tabindex="-1" role="dialog" aria-hidden="true" >
+      <div class="modal fade" id="doneModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
@@ -165,6 +165,7 @@
       <div class="modal-body">
           <div class="invitebox">
             <p>Done! Please check your email box for the visit link for you.</p>
+              <p>You will be redirected to Astronaut home in <span id="countdown">3</span> seconds.</p>
           </div></div>
       <!--<div class="modal-footer">
         <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>

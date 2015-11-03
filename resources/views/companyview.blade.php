@@ -68,7 +68,8 @@
                 </div>
                 <div class="panel-content">
                     <div>
-                    <button type="button" class="btn btn-dark" style="float:right;margin-left:0px;"><i class="fa fa-download"></i>Export</button>
+                    <a type="button" class="btn btn-dark" style="float:right;margin-left:0px;" href="./exportppl=<?php echo $data[0]->id?>" target="_blank"><i class="fa fa-download"></i>Export</a>
+
                          
                     <button type="button" class="btn btn-success" style="float:right;" id="user_new"><i class="fa fa-plus"></i>Add New Line</button>
                    

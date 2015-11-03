@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use DB;
+
+Use Excel;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -36,6 +39,18 @@ class CompanyView extends Controller
 
 
 		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts]);
+    }
+
+    public function export($id){
+        $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
+        foreach ($companycontacts as $value) {
+            $data[] = (array)$value;  
+        };
+        Excel::create('Filename', function($excel)use($data) {
+            $excel->sheet('sheet1',function($sheet)use($data){
+                $sheet->fromArray($data);
+            });
+        })->download('xls');
     }
 
     public function detail()
