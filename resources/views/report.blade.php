@@ -17,12 +17,12 @@
 
 <?php 
 
-//if(isset($data)){
-//echo $data[0]->final_score;};
+if(isset($data)){
+echo $data[0]->final_score;};
 
 ?>
 
-B
+
 @endsection
 
 @section('company')
@@ -89,26 +89,46 @@ B
 
 @section('quad1')
 
-One thing Google takes very seriously is the existence of unnatural links pointing to your website and you're currently in the danger zone for some major penalties. When it comes to your link profile, "black hat" tactics such as purchasing links, excessive link exchanges, blog spam, comment spam and online directories are a sure-fire way of getting hit with Google penalties that can take up to several months to resolve. While proper link building methods can seem exhaustive and time-consuming, it is crucial to the success of your online business.
+<div><?php echo $copycontent['quad1'] ?></div>
 
 @endsection
 
 @section('quad2')
 
-    Spam is the four-letter word that no online marketer wants to hear but you've managed to keep your link profile squeaky clean! Your high domain diversity is nothing short of stellar and when it comes to meaty content and internal links, you've got it going on! Less is more when it comes to spam flags and your count is under five; way to go rock star!
+<div><?php echo $copycontent['quad2'] ?></div>
 
 @endsection
 
 @section('quad3')
 
-We've noticed that you're working hard to score high on Trust Metrics but you're not quite where you should be. With all the tips out there on Google Rankings, it's easy to think that an abundance of site links and high page rank is enough to be considered a trustworthy domain. Newsflash, domain authority and diversity are far superior contributors to stellar Trust Metrics. While Trust Metrics can be a complex animal to conquer, solutions are right around the corner.
+<div><?php echo $copycontent['quad3'] ?></div>
 
 @endsection
 
 @section('quad4')
 
-You're so popular that even Google's raving about you! Your link popularity is through the roof which attracts lots of eyes to your content. Your domain is linking to many power players of the web and your link distribution is impressive. You understand that while keywords, anchor text and page rank are important factors, domain authority and diversity is crucial. Congrats on being part of the SEO cool crowd!
+<div><?php echo $copycontent['quad4'] ?></div>
 
+@endsection
+
+<?php
+        $level=array("a"=>"Excellent","b"=>"Good","c"=>"Average","d"=>"Poor");
+?>
+
+@section('quad1-level')
+    <?php echo $level[strtolower($data[0]->quad1)]?>
+@endsection
+
+@section('quad2-level')
+    <?php echo $level[strtolower($data[0]->quad2)]?>
+@endsection
+
+@section('quad3-level')
+    <?php echo $level[strtolower($data[0]->quad3)]?>
+@endsection
+
+@section('quad4-level')
+    <?php echo $level[strtolower($data[0]->quad4)]?>
 @endsection
 
 @section('pagejs')

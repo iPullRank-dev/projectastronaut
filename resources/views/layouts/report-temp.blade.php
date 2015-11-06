@@ -1,4 +1,4 @@
-<html class="" lang="en">
+<html lang="en">
 
 <head>
 
@@ -30,9 +30,6 @@
 
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-
-
   <script src="../resources/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     
      <!--<script type="text/JavaScript" src="js/sha512.js"></script> 
@@ -40,10 +37,22 @@
 
 
 
-</head>
-    <div id="authcover"></div>    
+</head> 
 <body class="fixed-topbar fixed-sidebar color-default theme-sdtl  sidefix">
+    <script>
+  dataLayer = [];
+    </script>
+    <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PQKN3J"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQKN3J');</script>
+<!-- End Google Tag Manager -->
 @yield('passdata')
+    <div id="authcover"></div>   
   <section>
 
  <div id="reporthead">
@@ -68,7 +77,9 @@
       </div>
       <div class="modal-body">
           <div class="invitebox">
-              <p>Please be aware that the information in the report is highly sensative. Once you send the invitation the people you invite will get the access to the full report.</p><br/>
+              <p>Spread The Word.<br/>
+Awesome, you're almost ready to invite the rest of your dream team to view the report. Fill out the short form below and we'll deliver it lightning speed!
+</p><br/>
         <form>
             <label>The full name of the people you want to invire:</label>
     <input type="text" name="invite_name" id="invite_name" class="form-control form-white" >
@@ -101,7 +112,7 @@
       </div>
       <div class="modal-body">
           <div class="invitebox">
-            <p>Sorry, We can't recognize this device or browser.</p>
+            <p>Whoops, We Don’t Recognize Your Device Or Browser! </p>
               <form>
             <label>Please Enter Your Email for Validation</label>
     <input type="email" name="verify_email" id="verify_email" class="form-control form-white" >
@@ -129,7 +140,7 @@
       </div>
       <div class="modal-body">
           <div class="invitebox">
-            <p>Looks like you are new here. Please fill in the form to get access to the content.</p>
+            <p>You seem to be new to our site but boy, we are glad to see you! We’ve got some exciting content prepared for you but first, we need you to fill out the short form below.</p>
               <form>
             <label>Email</label>
     <input type="email" name="new_email" id="mew_email" class="form-control form-white" >
@@ -164,8 +175,8 @@
       </div>
       <div class="modal-body">
           <div class="invitebox">
-            <p>Done! Please check your email box for the visit link for you.</p>
-              <p>You will be redirected to Astronaut home in <span id="countdown">3</span> seconds.</p>
+            <p>Congrats, You’re All Done!</p>
+              <p>You will receive an email with your visit link very shortly. We are launching you back to the Astronaut site in <span id="countdown">3</span> seconds.</p>
           </div></div>
       <!--<div class="modal-footer">
         <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
@@ -180,7 +191,7 @@
 <div class="main-content report-main" style="margin-left:0px;min-height:500px;">
             <div class="page-content" style="margin:0px;padding-top:70px;">
                 <!-- PAGE CONTENT -->
-                <div class="row">
+                <div class="row report-tank">
                     <div class="col-md-3">
                         <div style="position:relative;">
                         <div class="grade">
@@ -188,9 +199,8 @@
                                 <div class="gradecontent">
                                     <div style="height:100%;">
                                     <div class="grademain">
-                                        <p style="font-size: 40px;
-                                            color: rgba(255,255,255,0.9);">@yield('grade')</p>
-                                        <p>Grade</p>
+                                        <div style="font-size: 70px;color: rgba(255,255,255,0.9);">@yield('grade')</div>
+                                        <div style="font-size:17px;">Grade</div>
                                     </div>
                                     </div>
                                 </div>
@@ -221,10 +231,10 @@
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 report-core">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Unnatural Linking - <strong>Poor</strong></h3>
+                                        <h3>Unnatural Linking - <strong>@yield('quad1-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad1')
@@ -232,17 +242,17 @@
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Spam Score - <strong>Good</strong></h3>
+                                        <h3>Spam Score - <strong>@yield('quad2-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad2')
                                     </div>
                             </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 report-core">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Trust Metrics - <strong>Average</strong></h3>
+                                        <h3>Trust Metrics - <strong>@yield('quad3-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad3')
@@ -250,7 +260,7 @@
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Link Popularity and Visibility - <strong>Good</strong></h3>
+                                        <h3>Link Popularity and Visibility - <strong>@yield('quad4-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
                                         @yield('quad4')

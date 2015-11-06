@@ -1,0 +1,31 @@
+.companyviewgrade .col-md-4 div,.companyviewgrade .col-md-2 div{
+    text-align: center;
+}
+
+.companyviewgrade .col-md-4 .circle{
+    border:3px solid #18A689;
+    border-radius: 60px;
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+    display: table;
+}
+
+.companyviewgrade .wrapper{
+    display:table-cell;vertical-align:middle;
+}
+
+.companyviewgrade .normal{
+    height:120px;display:table;margin:0 auto;
+}
+
+.circle .gradein{
+    font-size: 35px;
+    float: none;
+}
+
+.normal .gradein{
+    text-transform: uppercase;
+    font-size:25px;
+    float: none;
+}

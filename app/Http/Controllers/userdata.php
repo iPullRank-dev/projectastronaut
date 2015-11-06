@@ -22,9 +22,21 @@ class userdata extends Controller
     public function index($id)
     {
         //
+        $kickoffdate = new \Datetime(date("Y-m-d"));
+        $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
+        $others = array("dimensions" => "ga:date","filters" => "ga:pagePath=~/google-tag-manager/*");
+        
+        // lazy inefficient way to get this in the format that I want
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        //print_r($gaResponse);
+
+        $finalGA['schema'] = array('date','conversion','sessions');
+        $finalGA['rows'] = $gaResponse['rows'];
+        $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+
         $userdata = DB::select('select * from prospectusers where id='.$id);
         $users = array("response"=>"200","message"=>"No data yet");
-        return view ("contact",["data"=>$userdata]);
+        return view ("contact",["data"=>$userdata,"analytics"=>$finalGA]);
     }
 
     public function useranalytics()

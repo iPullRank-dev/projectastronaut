@@ -26,8 +26,21 @@ class CompanyView extends Controller
     public function index($id)
     {
         
+        $kickoffdate = new \Datetime(date("Y-m-d"));
+        $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
+        $others = array("dimensions" => "ga:date","filters" => "ga:pagePath=~/google-tag-manager/*");
+        
+        // lazy inefficient way to get this in the format that I want
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        //print_r($gaResponse);
+
+        $finalGA['schema'] = array('date','conversion','sessions');
+        $finalGA['rows'] = $gaResponse['rows'];
+        $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+
         $companyDetail = DB::select('select * from prospects where id='.$id);
         $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
+        $companyscore = DB::select('select * from prospectscores where company_id='.$id);
 
         //$companycontacts = DB::table('prospectusers')
         //    ->Join('shorturls', function($join) use ($id) {
@@ -38,7 +51,7 @@ class CompanyView extends Controller
         //    ->get();
 
 
-		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts]);
+		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts,'grade'=>$companyscore,"analytics"=>$finalGA]);
     }
 
     public function export($id){

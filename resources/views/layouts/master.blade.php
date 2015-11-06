@@ -58,15 +58,6 @@
 
         <div class="sidebar-inner">
 
-          <div class="sidebar-top">
-                <form action="#" method="post" class="searchform" id="search-results">
-
-              <input type="text" class="form-control" name="keyword" placeholder="Search here...">
-
-            </form>
-              
-            </div>
-
           <div class="menu-title">
 
             <span>Navigation</span> 

@@ -277,13 +277,13 @@ class Ajax extends Controller
             $find = DB::table('shorturls')->where('url_hash','=',$hashinfo)->first();
             if(strlen($find->uuid) != 0){
                 if($find->uuid == $fprint){
-                    return 1;
+                    return [1,$find->company_id,$find->user_id];
                 };
             }else{
                 DB::table('shorturls')
                     ->where('url_hash','=',$hashinfo)
                     ->update(['uuid' => $fprint]);
-                return 1;
+                return [1,$find->company_id,$find->user_id];
             };    
             
             
@@ -301,7 +301,7 @@ class Ajax extends Controller
             $uesremail = $_POST['email'];
             $find = DB::table('prospectusers')->where('email','=',$uesremail)->first();
             if($find != null){
-                return 1;
+                return [1,$find->company_id,$find->id];
             }else{
                 return 0;
             };
@@ -323,7 +323,7 @@ class Ajax extends Controller
             $user -> url = $url;
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
-            $m->to($user->email, $user->full_name)->subject('Your Unique access to PA');
+            $m->to($user->email, $user->full_name)->subject($user->full_name . ", here is your access to your site's report.");
             });
 
 
@@ -342,16 +342,19 @@ class Ajax extends Controller
             $user = DB::table('prospectusers')->where('id','=',$data[0])->first();
             $url = DB::table('shorturls')->where('user_id','=',$data[0])->first();
             $unhash = base64_decode($data[2]);
-            $position = strpos($unhash,"_");
-            $position2 = strpos($unhash,"=");
-            $invite = substr($unhash, $position+1, $position2-$position-1);
+            $position = strpos($unhash,"=");
+            $invite = (int)substr($unhash, $position+1);
+            $inviterinfo = DB::table('prospectusers')->where('id','=',$invite)->first();
             $url = $url -> url_hash;
             $user -> url = $url;
             $user -> msg = $data[1];
-            $user -> inviter = $invite;
+            $user -> inviter = $inviterinfo ->full_name;
+            $user -> invitermail = $inviterinfo ->email;
+            $user -> sub = $user -> inviter . " sent you top-secret information about your company website!
+";
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
-            $m->to($user->email, $user->full_name)->subject('Your are invited to PA report');
+            $m->to($user->email, $user->full_name)->subject($user->sub);
             });
 
 

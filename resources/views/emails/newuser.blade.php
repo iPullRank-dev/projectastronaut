@@ -3,17 +3,20 @@ Hello, <?php echo $user->full_name ?>:
 </p>
 
 <p>
-Thanks for visit our top secret report.
+Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!
 </p>
 <p>
-Here is your unique access to your report.Be sure to save this url for re-enter the report.
+To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:
 </p>
 <p>
-URL:http://localhost:8888/display-report=<?php echo $user->url ?>
+URL:<a>http://localhost:8888/display-report=<?php echo $user->url ?></a>
 </p>
 <p>
-Thank you.
+It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.
 </p>
 <p>
-The PA team.
+    Sincerely,
+</p>
+<p>
+The iPullRank Team
 </p>

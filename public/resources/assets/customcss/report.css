@@ -4,6 +4,7 @@
     width:100vw;
     background-color: rgba(0,0,0,0.9);
     z-index: 1000;
+    top:0px;
 }
 
 #verifyModal{
@@ -38,6 +39,10 @@
     line-height: 31px;
     margin: 0;
     
+}
+
+.panel-content div{
+    line-height: 25px;
 }
 
 .grade{
@@ -75,7 +80,7 @@
   transform: translateY(-50%);
 }
 
-.grademain p{
+.grademain div{
     margin:0px;
     text-align: center;
 }
@@ -117,6 +122,19 @@
     
 }
 
+    #reportcompany .cdetail h3{
+        margin-bottom: 5px;
+    }
+
+@media screen and (min-width:992px){
+    
+    .report-core .panel{
+        min-height: calc(50vh - 55px) !important;
+    }
+    
+}
+
+
 @media screen and (max-width:1280px){
     .cinfo{
         padding:0px 10px;
@@ -126,7 +144,7 @@
     }
 }
 
-@media (min-width:600px) and (max-width:992px){
+@media (min-width:600px) and (max-width:991px){
     .cinfo{
             padding: 0px;
     /* float: left; */

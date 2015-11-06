@@ -31,8 +31,8 @@ class dashboard extends Controller
         $prospects = DB::select('select * from prospectusers');
 		// $analytcs 
 
-        $kickoffdate = new \DateTime('2015-8-21');
-        $dt = new \DateTime('2015-8-1');
+        $kickoffdate = new \Datetime(date("Y-m-d"));
+        $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
         $others = array("dimensions" => "ga:date");
         
         // lazy inefficient way to get this in the format that I want

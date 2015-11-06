@@ -8,6 +8,7 @@
     <script>
         var companyid = <?php echo json_encode($data[0]->id); ?>;
         var companyname = <?php echo json_encode($data[0]->fc_company_name); ?>;
+        var gadata = <?php echo json_encode($analytics);?>;
     </script>
 
 
@@ -53,12 +54,50 @@
             </div>    
         </div>
         <div class="col-md-8">
-            <div><span style="width: 10px;height: 10px;background-color: rgba(151,187,205,1);display: inline-block;margin: 0 5;"></span># of New Contacts
+            <div><span style="width: 10px;height: 10px;background-color: rgba(49,157,181,1);display: inline-block;margin: 0 5;"></span># of New Contacts
+                <span style="width: 10px;height: 10px;background-color: rgba(24,166,137,1);display: inline-block;margin: 0 5;"></span># of Sessions
+                <span style="width: 10px;height: 10px;background-color: rgba(165,139,211,1);display: inline-block;margin: 0 5;"></span># of Conversions
                 </div>
             <div style="margin-bottom:20px;">
              <canvas id="testChart" width="500" height="250px"></canvas>
             </div>
         </div>      
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                
+                <div class="panel-content companyviewgrade">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="circle">
+                            <div class="wrapper">
+                            <div class="gradein"><?php echo $grade[0]->final_score ?></div>
+                            <div>Final Grade</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="normal"><div class="wrapper">
+                            <div class="gradein"><?php echo $grade[0]->quad1 ?></div>
+                                <div>Unnatural Linking</div></div></div>
+                        </div>
+                        <div class="col-md-2"><div class="normal"><div class="wrapper">
+                            <div class="gradein"><?php echo $grade[0]->quad2 ?></div>
+                            <div>Spam Score</div></div></div>
+                        </div>
+                        <div class="col-md-2"><div class="normal"><div class="wrapper">
+                            <div class="gradein"><?php echo $grade[0]->quad3 ?></div>
+                            <div>Trust Metrics</div></div></div>
+                        </div>
+                        <div class="col-md-2"><div class="normal"><div class="wrapper">
+                            <div class="gradein"><?php echo $grade[0]->quad4 ?></div>
+                            <div>Link Popularity</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">

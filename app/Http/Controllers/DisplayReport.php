@@ -39,7 +39,14 @@ class DisplayReport extends Controller
             //$userid = substr($unhash, $position+1, strlen($unhash)-$position-1);
             $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
             $companyinfo = DB::select('select * from prospects where id='.$realid);
-            return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo,"hash"=>$id]);
+            $copy = DB::select('select * from copytext');
+            foreach ($copy as $value) {
+                $currentquad = $value -> quad;
+                $finder = $reportdata[0]->$currentquad;
+                $finder = strtolower($finder);
+                $copydata[$currentquad] = $value -> $finder;
+            }
+            return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo,"hash"=>$id,"copycontent" => $copydata]);
         }else{
             //this should only be avaliable during development
             $realid = $id;
@@ -49,6 +56,7 @@ class DisplayReport extends Controller
             foreach ($copy as $value) {
                 $currentquad = $value -> quad;
                 $finder = $reportdata[0]->$currentquad;
+                $finder = strtolower($finder);
                 $copydata[$currentquad] = $value -> $finder;
             }
             return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo,"copycontent" => $copydata]);
