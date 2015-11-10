@@ -121,7 +121,7 @@ class Ajax extends Controller
     	{
     		$newdata = $_POST['userdata'];
     		
-    		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5]];
+    		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5],'created_at' => date("Y-m-d H:i:s")];
     		
     		$id = DB::table('prospectusers')->insertGetId($indata);
     		
@@ -173,7 +173,7 @@ class Ajax extends Controller
     	{
     		$updater= $_POST['update'];
     		
-    		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0]];
+    		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0],'updated_at' => date("Y-m-d H:i:s")];
 
     		DB::table('prospectusers')
             ->where('email', $updater[3])

@@ -15,6 +15,8 @@ for(var i = 0; i < n; i++){
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.maintainAspectRatio = false;
     
+console.log(gadata.new);
+    
 var data = {
     labels: gdate,
     datasets: [
@@ -27,7 +29,7 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: gadata.new
         },
         {
             label: "My Second dataset",

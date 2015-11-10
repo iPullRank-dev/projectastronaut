@@ -28,10 +28,10 @@ class CompanyView extends Controller
         
         $kickoffdate = new \Datetime(date("Y-m-d"));
         $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
-        $others = array("dimensions" => "ga:date","filters" => "ga:pagePath=~/google-tag-manager/*");
+        $others = array("dimensions" => "ga:date","filters" => "ga:eventCategory==authcompany;ga:eventLabel==" . $id);
         
         // lazy inefficient way to get this in the format that I want
-        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
         //print_r($gaResponse);
 
         $finalGA['schema'] = array('date','conversion','sessions');
@@ -41,6 +41,21 @@ class CompanyView extends Controller
         $companyDetail = DB::select('select * from prospects where id='.$id);
         $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
         $companyscore = DB::select('select * from prospectscores where company_id='.$id);
+
+        $usernumber = [];
+        $day = new \Datetime(date("Y-m-d",strtotime('-30 days')));
+        for($i = 0; $i<=30;$i++){
+            $usernumber[$i] = 0;
+            foreach ($companycontacts as $value) {
+                $uday = new \Datetime($value -> created_at);
+                if($day->format("y-m-d") == $uday->format("y-m-d")){
+                    $usernumber[$i]+= 1; 
+                }
+            }
+            $day->add(new \DateInterval('P1D'));
+        }
+
+        $finalGA['new'] = $usernumber;
 
         //$companycontacts = DB::table('prospectusers')
         //    ->Join('shorturls', function($join) use ($id) {

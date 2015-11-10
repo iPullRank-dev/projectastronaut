@@ -40,7 +40,9 @@
 </head> 
 <body class="fixed-topbar fixed-sidebar color-default theme-sdtl  sidefix">
     <script>
-  dataLayer = [];
+  dataLayer = [
+
+    ];
     </script>
     <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PQKN3J"

@@ -129,8 +129,10 @@ class ReportSetup extends Controller
                 foreach ($companydata[$i] as $key => $value) {
                     $indata[$key] = $value;
                 };
+                $indata['created_at'] = date("Y-m-d H:i:s");
                 $companyid = DB::table('prospects')->insertGetId($indata);
                 $storescore['company_id'] = $companyid;
+                $storescore['created_at'] = date("Y-m-d H:i:s");
                 DB::table('prospectscores')->insert($storescore);
 
             };};
@@ -148,9 +150,11 @@ class ReportSetup extends Controller
                 $companyid = DB::table('prospects')->where('fc_company_name','=', $contactdata[$i]['company'])->first();
                 $companyid = $companyid -> id;
                 $indata2['company_id'] = $companyid;
+                $indata2['created_at'] = date("Y-m-d H:i:s");
                 $userid = DB::table('prospectusers')->insertGetId($indata2);
                 $urldata['company_id'] = $companyid;
                 $urldata['user_id'] = $userid;
+                $urldata['created_at'] = date("Y-m-d H:i:s");
                 $inurl = $companyid . '_' . $contactdata[$i]['email'] . '=' . $userid;
                 $hased = base64_encode($inurl);
                 $urldata['url_hash'] = $hased;
@@ -180,6 +184,9 @@ class ReportSetup extends Controller
                 $cgrade[$key] = $value;
             };
         };
+
+        $cinfo['updated_at'] = date("Y-m-d H:i:s");
+        $cgrade['updated_at'] = date("Y-m-d H:i:s");
         DB::table('prospects')
             ->where('id', $input['id'])
             ->update($cinfo);

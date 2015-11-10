@@ -19,8 +19,13 @@ function authProcess(result){
                      if(data[0] == 1){
                          console.log('aha! company:' + data[1] + ' user' + data[2]);
                          dataLayer.push({
-                            'companyid': data[1] ,
-                            'userid':data[2]
+                             'event':'authEvent',
+                             'authCompany':'authcompany',
+                             'authCompanyAction':'pass',
+                             'authCompanyid':data[1],
+                             'authUser':'authuser',
+                             'authUserAction':'pass',
+                             'authUserid':data[2]
                             });
                          $('#authcover').fadeOut();
                      }else{
@@ -120,8 +125,13 @@ $("input[name='verify']").on('click', function (e) {
                      if(data[0] == 1){
                          console.log('aha! company:' + data[1] + ' user' + data[2]);
                          dataLayer.push({
-                            'companyid': data[1] ,
-                            'userid':data[2]
+                            'event':'authEvent',
+                             'authCompany':'authcompany',
+                             'authCompanyAction':'pass',
+                             'authCompanyid':data[1],
+                             'authUser':'authuser',
+                             'authUserAction':'pass',
+                             'authUserid':data[2]
                             });
                          $('#authcover').fadeOut();
                          $('#verifyModal').modal('hide');

@@ -24,10 +24,10 @@ class userdata extends Controller
         //
         $kickoffdate = new \Datetime(date("Y-m-d"));
         $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
-        $others = array("dimensions" => "ga:date","filters" => "ga:pagePath=~/google-tag-manager/*");
+        $others = array("dimensions" => "ga:date","filters" => "ga:eventCategory==authuser;ga:eventLabel==" . $id);
         
         // lazy inefficient way to get this in the format that I want
-        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:49193589')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
         //print_r($gaResponse);
 
         $finalGA['schema'] = array('date','conversion','sessions');
