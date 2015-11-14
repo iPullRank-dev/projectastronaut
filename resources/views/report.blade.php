@@ -116,19 +116,19 @@ echo $data[0]->final_score;};
 ?>
 
 @section('quad1-level')
-    <?php echo $level[strtolower($data[0]->quad1)]?>
+    <?php echo (isset($level[strtolower($data[0]->quad1)])?$level[strtolower($data[0]->quad1)]:'Unavaliable')?>
 @endsection
 
 @section('quad2-level')
-    <?php echo $level[strtolower($data[0]->quad2)]?>
+    <?php echo (isset($level[strtolower($data[0]->quad2)])?$level[strtolower($data[0]->quad2)]:'Unavaliable')?>
 @endsection
 
 @section('quad3-level')
-    <?php echo $level[strtolower($data[0]->quad3)]?>
+    <?php echo (isset($level[strtolower($data[0]->quad3)])?$level[strtolower($data[0]->quad3)]:'Unavaliable')?>
 @endsection
 
 @section('quad4-level')
-    <?php echo $level[strtolower($data[0]->quad4)]?>
+    <?php echo (isset($level[strtolower($data[0]->quad4)])?$level[strtolower($data[0]->quad4)]:'Unavaliable')?>
 @endsection
 
 @section('pagejs')

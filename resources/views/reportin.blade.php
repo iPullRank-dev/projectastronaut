@@ -103,6 +103,27 @@ echo $data[0]->final_score;};
 
 @endsection
 
+<?php
+        $level=array("a"=>"Excellent","b"=>"Good","c"=>"Average","d"=>"Poor");
+?>
+
+@section('quad1-level')
+    <?php echo (isset($level[strtolower($data[0]->quad1)])?$level[strtolower($data[0]->quad1)]:'Unavaliable')?>
+@endsection
+
+@section('quad2-level')
+    <?php echo (isset($level[strtolower($data[0]->quad2)])?$level[strtolower($data[0]->quad2)]:'Unavaliable')?>
+@endsection
+
+@section('quad3-level')
+    <?php echo (isset($level[strtolower($data[0]->quad3)])?$level[strtolower($data[0]->quad3)]:'Unavaliable')?>
+@endsection
+
+@section('quad4-level')
+    <?php echo (isset($level[strtolower($data[0]->quad4)])?$level[strtolower($data[0]->quad4)]:'Unavaliable')?>
+@endsection
+
+
 @section('pagejs')
 
     <script src="http://cdn.jsdelivr.net/fingerprintjs2/0.7.0/fingerprint2.min.js"></script>

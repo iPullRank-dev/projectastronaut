@@ -15,7 +15,6 @@ for(var i = 0; i < n; i++){
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.maintainAspectRatio = false;
     
-console.log(gadata.new);
     
 var data = {
     labels: gdate,

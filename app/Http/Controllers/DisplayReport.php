@@ -57,7 +57,11 @@ class DisplayReport extends Controller
                 $currentquad = $value -> quad;
                 $finder = $reportdata[0]->$currentquad;
                 $finder = strtolower($finder);
+                if($finder != 'null' && $finder != null){
                 $copydata[$currentquad] = $value -> $finder;
+                }else{
+                $copydata[$currentquad] = 'No Data'; 
+                };
             }
             return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo,"copycontent" => $copydata]);
         };

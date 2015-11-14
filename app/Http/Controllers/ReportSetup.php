@@ -171,7 +171,18 @@ class ReportSetup extends Controller
         $realid = $id;
         $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
         $companyinfo = DB::select('select * from prospects where id='.$realid);
-        return PDF::loadView("pdf",["data"=>$reportdata,"companyinfo"=>$companyinfo])->stream();
+        $copy = DB::select('select * from copytext');
+            foreach ($copy as $value) {
+                $currentquad = $value -> quad;
+                $finder = $reportdata[0]->$currentquad;
+                $finder = strtolower($finder);
+                if($finder != 'null' && $finder != null){
+                $copydata[$currentquad] = $value -> $finder;
+                }else{
+                $copydata[$currentquad] = 'No Data'; 
+                };
+            }
+        return PDF::loadView("pdf",["data"=>$reportdata,"companyinfo"=>$companyinfo,"copycontent" => $copydata])->stream();
     } 
 
     public function updatecompany(Request $request)
