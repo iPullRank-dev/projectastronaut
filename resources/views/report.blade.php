@@ -2,6 +2,13 @@
 
 @section('pagetitle','{{Company Name}} Report')
 
+@section('customcode')
+
+<?php echo $companyinfo[0]->code_zone ;?>
+
+@endsection
+
+
 @section('passdata')
 
 <script>
