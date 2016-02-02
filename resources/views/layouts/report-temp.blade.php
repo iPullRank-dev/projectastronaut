@@ -8,7 +8,9 @@
 
   <meta name="description" content="Project Astronaut">
     
-  <meta name="csrf_token" content="{{ csrf_token() }}" />     
+  <meta name="csrf_token" content="{{ csrf_token() }}" />  
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <link rel="shortcut icon" href="../resources/assets/images/favicon.png" type="image/png">
 
@@ -36,7 +38,7 @@
         <script type="text/JavaScript" src="js/forms.js"></script> -->
 
     @yield('customcode')
-
+    
 </head> 
 <body class="fixed-topbar fixed-sidebar color-default theme-sdtl  sidefix">
     <script>
