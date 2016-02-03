@@ -86,13 +86,14 @@ Awesome, you're almost ready to invite the rest of your dream team to view the r
 </p><br/>
         <form>
             <label>The full name of the people you want to invire:</label>
-    <input type="text" name="invite_name" id="invite_name" class="form-control form-white" >
+    <input type="text" name="invite_name" id="invite_name" class="form-control form-white" required>
             <label>The title of this person in your company:</label>
     <input type="text" name="invite_title" id="invite_title" class="form-control form-white" >
             <label>The email you want to invite:</label>
     <input type="email" name="invite_email" id="invite_email" class="form-control form-white" required>
             <label>Message:</label>
             <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
+            <div class="alert alert-danger" role="alert"><ul></ul></div>
             <div style="text-align:right;margin-top:20px;">
     <input type="submit" value="Send" name="submitinvite"  class="btn btn-dark">
             </div>
@@ -104,6 +105,28 @@ Awesome, you're almost ready to invite the rest of your dream team to view the r
     </div>
   </div>
 </div>
+      
+      <!-- invite confirm-->
+      
+            <div class="modal fade" id="inviteConfirm" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Invitation</strong>Sent</h4>
+      </div>
+      <div class="modal-body">
+          
+          <div class="confirm-icon"><i class="fa fa-check-circle"></i></div>
+          <div class="confirm-msg">Your invitation is on the way!</div>
+        </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+      
       
       <!--popup verify-->
       
@@ -147,14 +170,14 @@ Awesome, you're almost ready to invite the rest of your dream team to view the r
             <p>You seem to be new to our site but boy, we are glad to see you! We’ve got some exciting content prepared for you but first, we need you to fill out the short form below.</p>
               <form>
             <label>Email</label>
-    <input type="email" name="new_email" id="mew_email" class="form-control form-white" >
+    <input type="email" name="new_email" id="mew_email" class="form-control form-white" required>
                   
                   <label>Full Name</label>
-    <input type="text" name="new_name" id="new_name" class="form-control form-white" >
+    <input type="text" name="new_name" id="new_name" class="form-control form-white" required>
                   
                   <label>Title in the Company</label>
     <input type="text" name="new_title" id="new_title" class="form-control form-white" >
-        
+        <div class="alert alert-danger" role="alert"><ul></ul></div>
             <div style="text-align:right;margin-top:20px;">
     <input type="submit" value="Verify" name="newsubmit"  class="btn btn-dark">
             </div>

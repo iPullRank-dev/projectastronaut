@@ -121,6 +121,10 @@ class Ajax extends Controller
     	{
     		$newdata = $_POST['userdata'];
     		
+            $find = DB::table('prospectusers')->where('email','=',$newdata[3])->first();
+            if($find != null){
+                return 'duplicate';
+            }else{
     		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5],'created_at' => date("Y-m-d H:i:s")];
     		
     		$id = DB::table('prospectusers')->insertGetId($indata);
@@ -132,12 +136,11 @@ class Ajax extends Controller
             $urldata = ['company_id' => $newdata[4], 'user_id' => $id, 'url_hash' => $hased];
 
             DB::table('shorturls') ->insert($urldata);
-    		//DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
-    		
+
 
 
 		return $id;
-		
+            }
 		}else{
 		return 'false call';
 		};

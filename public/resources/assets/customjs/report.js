@@ -86,10 +86,52 @@ function countdowntimer(){
     setInterval(function(){
         $('#countdown').html(i);
         i-=1;
+        var i = i<=0 ? 0: i-1;
     },1000)
 }
 
+//form validation function
 
+function formValidate(form){
+    var checker = true;
+    var alertMessage = '';
+    form.find('input').each(function(){
+        if($(this).prop('required')){
+           if($(this).val().length<=0){
+               $(this).addClass('error-input');
+               $(this).attr('placeholder','This is required');
+               alertMessage+="<li>Required field is missing.</li>";
+               checker = false;
+           }else if($(this).attr('type')=='email'){
+               var email = $(this).val();
+               if(email.indexOf('@') == -1 || email.indexOf('.') == -1){
+                   $(this).addClass('error-input');
+               $(this).attr('placeholder','This is required');
+                   alertMessage+="<li>Please check if the email is in right format.</li>";
+                   console.log('error');
+                   checker = false;
+               }
+           }
+        }
+    });
+    if(alertMessage.length > 0){
+        form.find('.alert').show();
+        form.find('ul').html(alertMessage);
+    }else{
+        form.find('.alert').hide();
+    }
+    return checker;
+}
+
+
+$('input').focusin(function(){
+    if($(this).hasClass('error-input')){
+    $(this).attr('placeholder','');
+    $(this).removeClass('error-input');
+    }
+});
+
+//main code
 
 var isMobile = false; //initiate as false
 // device detection
@@ -154,6 +196,11 @@ $('#newuser').live('click',function(e){
 
 $("input[name='newsubmit']").on('click', function (e) {
     e.preventDefault();
+    var thisForm = $("input[name='newsubmit']").parent().parent('form');
+    console.log(thisForm);
+    if(!formValidate(thisForm)){
+        return;
+    }
     var userdata = [];
     userdata[0] = '';
     userdata[1] = $("input[name='new_name']").val();
@@ -176,12 +223,16 @@ $("input[name='newsubmit']").on('click', function (e) {
                  data: { userdata: userdata} , 
                  success: function(data) {
                     console.log(data);
+                    if(data!="duplicate"){
                      $('#newModal').modal('hide');
                      $('#doneModal').modal('show');
                      sendMail(data);
                      countdowntimer();
                      setTimeout(function(){ window.location = "http://www.ipullrank.com";}, 3000);
-                     }, 
+                     }else{
+                                 thisForm.find('.alert').show();
+                            thisForm.find('ul').html('<li>This email already exiest.</li>');
+                     }}, 
                  error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
                 });
     
@@ -191,6 +242,11 @@ $("input[name='newsubmit']").on('click', function (e) {
 
 $("input[name='submitinvite']").on('click', function (e) {
     e.preventDefault();
+    var thisForm = $("input[name='submitinvite']").parent().parent('form');
+    console.log(thisForm);
+    if(!formValidate(thisForm)){
+        return;
+    }
     var userdata = [];
     userdata[0] = '';
     userdata[1] = $("input[name='invite_name']").val();
@@ -213,10 +269,20 @@ $("input[name='submitinvite']").on('click', function (e) {
         },
                  data: { userdata: userdata} , 
                  success: function(data) {
+                    if(data!="duplicate"){
                     console.log(data);
                      $('#inviteModal').modal('hide');
-                     sendMail2(data,msg);
-                     }, 
+                     $('#inviteConfirm').modal('show');
+                     thisForm.find('.alert').hide();
+                     thisForm.find('input').each(function(){
+                         if($(this).attr('type')!='submit'){
+                         $(this).val('');}
+                     });
+                     //sendMail2(data,msg);
+                     }else{
+                            thisForm.find('.alert').show();
+                            thisForm.find('ul').html('<li>This email already exiest.</li>');
+                     }}, 
                  error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
                 });
     

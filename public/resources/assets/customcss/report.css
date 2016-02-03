@@ -1,3 +1,26 @@
+.error-input{
+    border: 1px solid #ed6b6b !important;
+    color: #ed6b6b !important;
+}
+
+form .alert{
+    display: none;
+    padding: 0px 30px;
+    margin-top: 20px;
+}
+
+
+#inviteConfirm .confirm-icon{
+    text-align: center;
+    font-size: 70px;
+}
+
+#inviteConfirm .confirm-msg{
+    text-align: center;
+    font-size: 20px;
+    margin: 30px 0px;
+}
+
 #authcover{
     position: fixed;
     height: 100vh;
@@ -84,6 +107,7 @@
 .grademain div{
     margin:0px;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .cinfo{
