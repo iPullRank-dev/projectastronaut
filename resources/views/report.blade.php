@@ -15,6 +15,7 @@
         var hash = <?php echo json_encode($hash); ?>;
         var c_name = <?php echo json_encode($companyinfo[0]->fc_company_name);?>;
         var c_id = <?php echo json_encode($companyinfo[0]->id);?>;
+        var c_account = <?php echo json_encode($companyinfo[0]->account_with);?>;
 </script>
 
 @endsection

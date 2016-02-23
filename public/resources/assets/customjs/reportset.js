@@ -140,7 +140,11 @@ $(document).ready(function() {
                     if(data[0].hasOwnProperty(key)){
                         //<input type="text" name="new_title" id="new_title" class="form-control form-white" >
                         if(!excludedata(key,['id','deleted_at','created_at','updated_at','code_zone'])){
-                        cinfo += "<label>" + transreadable(key) + "</label><input type='text' name='" + key + "' id='" + key + "' class='form-control form-white' value='" + data[0][key] + "'>";};
+                        var readonly = '';
+                        if(key == 'account_with'){
+                            readonly = 'readonly';
+                        }
+                        cinfo += "<label>" + transreadable(key) + "</label><input type='text' name='" + key + "' id='" + key + "' class='form-control form-white' value='" + data[0][key] + "'" + readonly + ">";};
                     };
                 };
                 

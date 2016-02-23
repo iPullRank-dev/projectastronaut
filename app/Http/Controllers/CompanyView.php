@@ -41,6 +41,7 @@ class CompanyView extends Controller
         $companyDetail = DB::select('select * from prospects where id='.$id);
         $companycontacts = DB::select('select * from prospectusers where company_id='.$id);
         $companyscore = DB::select('select * from prospectscores where company_id='.$id);
+        $adminusers = DB::select('select * from adminusers');
 
         $usernumber = [];
         $day = new \Datetime(date("Y-m-d",strtotime('-30 days')));
@@ -66,7 +67,7 @@ class CompanyView extends Controller
         //    ->get();
 
 
-		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts,'grade'=>$companyscore,"analytics"=>$finalGA]);
+		return view("companyview",['data'=>$companyDetail,'contacts'=>$companycontacts,'grade'=>$companyscore,"analytics"=>$finalGA,'admin'=>$adminusers]);
     }
 
     public function export($id){

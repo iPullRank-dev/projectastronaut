@@ -304,7 +304,11 @@ class Ajax extends Controller
             $uesremail = $_POST['email'];
             $find = DB::table('prospectusers')->where('email','=',$uesremail)->first();
             if($find != null){
+                if($find->active == 1){
                 return [1,$find->company_id,$find->id];
+                }else{
+                    return 0;
+                }
             }else{
                 return 0;
             };
@@ -317,15 +321,19 @@ class Ajax extends Controller
 
     public function sendmail()
     {
-        if (isset($_POST['userid']))
+        if (isset($_POST['indata']))
         {   
-            $id = $_POST['userid'];
+            $pdata = $_POST['indata'];
+            $id = $pdata[0];
+            $account_owenr = $pdata[1];
             $user = DB::table('prospectusers')->where('id','=',$id)->first();
             $url = DB::table('shorturls')->where('user_id','=',$id)->first();
             $url = $url -> url_hash;
             $user -> url = $url;
+            $user -> sender = $account_owenr;
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
+            $m->from($user->sender, 'Welcome to you report');
             $m->to($user->email, $user->full_name)->subject($user->full_name . ", here is your access to your site's report.");
             });
 
@@ -355,8 +363,10 @@ class Ajax extends Controller
             $user -> invitermail = $inviterinfo ->email;
             $user -> sub = $user -> inviter . " sent you top-secret information about your company website!
 ";
+            $user -> sender = $data[3];
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
+            $m->from($user->sender, 'Welcome to you report');
             $m->to($user->email, $user->full_name)->subject($user->sub);
             });
 
@@ -410,6 +420,69 @@ class Ajax extends Controller
         
         }else{
             return 'false call';
+        };
+    }
+
+        public function activeuser()
+    {
+        if (isset($_POST['uid']))
+        {
+            $user_id= $_POST['uid'];
+            
+            $updateitem = ['active' => 1,'updated_at' => date("Y-m-d H:i:s")];
+
+            DB::table('prospectusers')
+            ->where('id', $user_id)
+            ->update($updateitem);
+
+            return 'activeted!';
+        
+        }else{
+        return 'false call';
+        };
+    }
+
+    public function updatemanager()
+    {
+        if (isset($_POST['indata']))
+        {
+            $pdata= $_POST['indata'];
+
+            $companyid = $pdata[0];
+
+            $manager_account = $pdata[1];
+            
+            $updateitem = ['account_with' => $manager_account,'updated_at' => date("Y-m-d H:i:s")];
+
+            DB::table('prospects')
+            ->where('id', $companyid)
+            ->update($updateitem);
+
+            return 'updated!';
+        
+        }else{
+        return 'false call';
+        };
+    }
+
+    public function activecompanyusers()
+    {
+        if (isset($_POST['indata']))
+        {
+            $pdata= $_POST['indata'];
+
+            $companyid = $pdata;
+
+            $updateitem = ['active' => 1,'updated_at' => date("Y-m-d H:i:s")];
+
+            DB::table('prospectusers')
+            ->where('company_id', $companyid)
+            ->update($updateitem);
+
+            return 'updated!';
+        
+        }else{
+        return 'false call';
         };
     }
    

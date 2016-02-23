@@ -25,6 +25,28 @@
           <div id="urlboxbody"></div>
         </div></div></div></div>
 
+<!--account owner modal-->
+
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Account</strong>Owner</h4>
+      </div>
+      <div class="modal-body">
+          <select id="account-list">
+            <?php
+              foreach($admin as $adminuser){
+                  ?>
+              <option value="<?php echo $adminuser->email?>"><?php echo $adminuser->email?></option>
+              <?php
+              }
+              ?>
+          </select>
+           <button type="button" class="btn btn-dark" id="account-save" data-dismiss="modal" aria-hidden="true">Save</button>
+        </div></div></div></div>
+
 <!--main-->
      <div class="header">
             <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
@@ -64,7 +86,7 @@
         </div>      
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div class="panel">
                 
                 <div class="panel-content companyviewgrade">
@@ -93,6 +115,23 @@
                         <div class="col-md-2"><div class="normal"><div class="wrapper">
                             <div class="gradein"><?php echo $grade[0]->quad4 ?></div>
                             <div>Link Popularity</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-3 account-panel">
+            <div class="panel <?php if($data[0]->account_with <> null){echo 'bg-green';}else{echo 'bg-red';} ?>">
+                <div class="panel-content companyviewgrade">
+                    <div>
+                        <div class="account-owner">
+                            <?php if($data[0]->account_with <> null){ ?>
+                            <p>This account is owned by:</p>
+                            <h4><?php echo $data[0]->account_with; ?></h4>
+                            <?php }else{ ?>
+                            <h4>No one is assigned to this account</h4>
+                            <?php }?>
+                            <button type="button" class="btn btn-dark" id="account_edit" data-toggle="modal" data-target="#accountModal">Edit</button>
                         </div>
                     </div>
                 </div>

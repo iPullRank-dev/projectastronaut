@@ -22,8 +22,8 @@ $(function () {
             jqTds[3].innerHTML = '<input type="text" class="form-control small" value="' + aData[3] + '">';
             jqTds[4].innerHTML = '<div class="text-right"><a class="edit btn btn-sm btn-success" href="">Save</a> <a class="cancel btn btn-sm btn-default" href="">Cancel</a> <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
         }
-        
-        
+
+
         function editRownew(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
@@ -38,37 +38,41 @@ $(function () {
             var jqInputs = $('input', nRow);
             var passdata = [];
             console.log(jqInputs[0].value);
-            for(var i = 0;i <= 3; i++){
+            for (var i = 0; i <= 3; i++) {
                 passdata[i] = jqInputs[i].value;
             };
             passdata[4] = companyid;
-            
-            //ajax call to db
-            
-            
-            var uid = 0;
-             $.ajax({ 
-                 url: "../ajax-updateuser", 
-                 async:false, 
-                 type: "POST", 
-                 beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
 
-            if (token) {
-                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-                 data: { update: passdata} , 
-                 success: function(data) {
-                 console.log(data);
-                     uid = data;
-                    }, 
-                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
-                });
-            
+            //ajax call to db
+
+
+            var uid = 0;
+            $.ajax({
+                url: "../ajax-updateuser",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    update: passdata
+                },
+                success: function (data) {
+                    console.log(data);
+                    uid = data;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
+            });
+
             console.log(jqInputs[0].value);
-            
-            
+
+
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
@@ -76,41 +80,45 @@ $(function () {
             oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
             oTable.fnDraw();
         }
-        
+
         function savenewRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
             var passdata = [];
-            for(var i = 0;i <= 3; i++){
+            for (var i = 0; i <= 3; i++) {
                 passdata[i] = jqInputs[i].value;
             };
             passdata[4] = companyid;
             passdata[5] = companyname;
-            
-            //ajax call to db
-            
-            var uid = 0;
-             $.ajax({ 
-                 url: "../ajax-insertuser", 
-                 async:false, 
-                 type: "POST", 
-                 beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
 
-            if (token) {
-                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-                 data: { userdata: passdata} , 
-                 success: function(data) {
-                 console.log(data)
-                 uid = data;
-                    }, 
-                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
-                });
-            
-            
-            
-            
+            //ajax call to db
+
+            var uid = 0;
+            $.ajax({
+                url: "../ajax-insertuser",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    userdata: passdata
+                },
+                success: function (data) {
+                    console.log(data)
+                    uid = data;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
+            });
+
+
+
+
             console.log(passdata);
             console.log(uid);
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
@@ -120,8 +128,8 @@ $(function () {
             oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
             oTable.fnDraw();
         }
-        
-    
+
+
 
         function cancelEditRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
@@ -133,27 +141,27 @@ $(function () {
             oTable.fnDraw();
         }
 
-        
-        function unpackimg(str){
-        
+
+        function unpackimg(str) {
+
             var start = str.indexOf("src=");
             var end = str.indexOf("height");
-            var pick = str.slice(start+5,end-2);
+            var pick = str.slice(start + 5, end - 2);
             return pick;
-        
+
         }
-        
-        
+
+
         var oTable = $('#table-editable2').dataTable({
             // set the initial value
             "iDisplayLength": 10,
             "oLanguage": {
-                
+
                 "oPaginate": {
                     "sPrevious": "Prev",
                     "sNext": "Next"
                 },
-                "sSearch": "" 
+                "sSearch": ""
             },
             "aoColumnDefs": [{
                     'bSortable': false,
@@ -186,31 +194,35 @@ $(function () {
             var nRow = $(this).parents('tr')[0];
             var aData = oTable.fnGetData(nRow);
             var email = aData[3];
-            
-            
-            
-            $.ajax({ 
-                 url: "../ajax-deleteuser", 
-                 async:false, 
-                 type: "POST", 
-                 beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
 
-            if (token) {
-                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-                 data: { deleteuser: email} , 
-                 success: function(data) {
-                 console.log(data)
-                    }, 
-                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
-                });
-            
-            
+
+
+            $.ajax({
+                url: "../ajax-deleteuser",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    deleteuser: email
+                },
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
+            });
+
+
             nEditing = null;
             oTable.fnDeleteRow(nRow);
-            
+
             // alert("Deleted! Do not forget to do some ajax to sync with backend :)");
         });
 
@@ -235,63 +247,130 @@ $(function () {
                 editRow(oTable, nRow);
                 nEditing = nRow;
             } else if (nEditing == nRow && this.innerHTML == "Save") {
-                 /* This row is being edited and should be saved */
+                /* This row is being edited and should be saved */
                 saveRow(oTable, nEditing);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
-                 /* No row currently being edited */
+                /* No row currently being edited */
                 editRow(oTable, nRow);
                 nEditing = nRow;
             }
         });
-        
+
         $('#table-editable2 a.editn').live('click', function (e) {
             e.preventDefault();
             /* Get the row as a parent of the link that was clicked on */
             var nRow = $(this).parents('tr')[0];
 
             if (nEditing == nRow && this.innerHTML == "Save") {
-                 /* This row is being edited and should be saved */
+                /* This row is being edited and should be saved */
                 savenewRow(oTable, nEditing);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
-                 /* No row currently being edited */
+                /* No row currently being edited */
                 editRow(oTable, nRow);
                 nEditing = nRow;
             }
         });
 
         $('.dataTables_filter input').attr("placeholder", "Search a user...");
-        
+
         $("a[name='userurl']").live('click', function (e) {
             e.preventDefault();
             var id = $(this).attr('value');
             console.log(id);
-            $.ajax({ 
-                 url: "../ajax-userurl", 
-                 async:false, 
-                 type: "POST", 
-                 beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
+            $.ajax({
+                url: "../ajax-userurl",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
 
-            if (token) {
-                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-                 data: { userid: id} , 
-                 success: function(data) {
-                     $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data +"' class='form-control form-white' autofocus/>");
-                     
-                     $('#urlModal').modal('show');
-                    }, 
-                 error: function (jqXHR, textStatus, errorThrown){console.log("Something went wrong " + errorThrown);}, 
-                });
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    userid: id
+                },
+                success: function (data) {
+                    $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data + "' class='form-control form-white' autofocus/>");
+
+                    $('#urlModal').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
             });
+        });
 
     };
 
     editableTable();
+
+});
+
+function activeUsers(companyid){
+            $.ajax({
+                url: "../ajax-activemulti",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    indata:companyid
+                },
+                success: function (data) {
+                   console.log(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
+            });
+}
+
+function sendWelcomeEmail(){
+    
+}
+
+$('#account-save').click(function () {
+    var accountOwener = $('#account-list').val();
+
+    console.log(accountOwener);
+
+    var package = [companyid, accountOwener];
+
+    $.ajax({
+        url: "../ajax-manager",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            indata: package
+        },
+        success: function (data) {
+            activeUsers(companyid);
+            console.log(data);
+            $('.account-panel').html(
+                "<div class='panel bg-green'><div class='panel-content companyviewgrade'><div><div class='account-owner'><p>This account is owned by:</p><h4>" + accountOwener + "</h4><button type='button' class='btn btn-dark' id='account_edit' data-toggle='modal' data-target='#accountModal'>Edit</button></div></div></div></div>"
+            );
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        },
+    });
 
 });

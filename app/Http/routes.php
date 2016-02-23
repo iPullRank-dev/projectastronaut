@@ -46,6 +46,9 @@ Route::get('tests', 'tests@index');
 Route::post('/ajax-loadcode', 'Ajax@loadcode');
 Route::post('/ajax-savecode', 'Ajax@savecode');
 Route::post('/ajax-loadeditor', 'Ajax@editor');
+Route::post('/ajax-active', 'Ajax@activeuser');
+Route::post('/ajax-manager', 'Ajax@updatemanager');
+Route::post('/ajax-activemulti', 'Ajax@activecompanyusers');
 
 Route::post('/ajax-userurl', 'Ajax@userurl');
 

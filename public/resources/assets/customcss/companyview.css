@@ -22,10 +22,26 @@
 .circle .gradein{
     font-size: 35px;
     float: none;
+    text-transform: uppercase;
 }
 
 .normal .gradein{
     text-transform: uppercase;
     font-size:25px;
     float: none;
+}
+
+.account-owner{
+    height: 120px;
+    position: relative;
+}
+
+.account-owner h4{
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.account-owner button{
+        position: absolute;
+    bottom: 0px;
 }
