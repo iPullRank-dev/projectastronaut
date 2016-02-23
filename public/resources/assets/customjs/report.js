@@ -93,16 +93,20 @@ function countdowntimer(){
 //form validation function
 
 function formValidate(form){
+    console.log('running validation');
     var checker = true;
     var alertMessage = '';
     form.find('input').each(function(){
-        if($(this).prop('required')){
+        console.log('find one field');
+        if($(this).prop('required') || $(this).data('required')){
+            console.log('checking if it is required');
            if($(this).val().length<=0){
                $(this).addClass('error-input');
                $(this).attr('placeholder','This is required');
                alertMessage+="<li>Required field is missing.</li>";
                checker = false;
-           }else if($(this).attr('type')=='email'){
+           }else if($(this).attr('type')=='email' || $(this).data('email')){
+               console.log('looks like it is email');
                var email = $(this).val();
                if(email.indexOf('@') == -1 || email.indexOf('.') == -1){
                    $(this).addClass('error-input');
@@ -120,6 +124,7 @@ function formValidate(form){
     }else{
         form.find('.alert').hide();
     }
+    console.log(checker);
     return checker;
 }
 
@@ -197,8 +202,8 @@ $('#newuser').live('click',function(e){
 $("input[name='newsubmit']").on('click', function (e) {
     e.preventDefault();
     var thisForm = $("input[name='newsubmit']").parent().parent('form');
-    console.log(thisForm);
     if(!formValidate(thisForm)){
+        console.log('will quite');
         return;
     }
     var userdata = [];
@@ -243,8 +248,9 @@ $("input[name='newsubmit']").on('click', function (e) {
 $("input[name='submitinvite']").on('click', function (e) {
     e.preventDefault();
     var thisForm = $("input[name='submitinvite']").parent().parent('form');
-    console.log(thisForm);
+        console.log(formValidate(thisForm));
     if(!formValidate(thisForm)){
+        console.log('will quite');
         return;
     }
     var userdata = [];
@@ -273,12 +279,15 @@ $("input[name='submitinvite']").on('click', function (e) {
                     console.log(data);
                      $('#inviteModal').modal('hide');
                      $('#inviteConfirm').modal('show');
+                     setTimeout(function(){
+                         $('#inviteConfirm').modal('hide');
+                     },2000);
                      thisForm.find('.alert').hide();
                      thisForm.find('input').each(function(){
                          if($(this).attr('type')!='submit'){
                          $(this).val('');}
                      });
-                     //sendMail2(data,msg);
+                     sendMail2(data,msg);
                      }else{
                             thisForm.find('.alert').show();
                             thisForm.find('ul').html('<li>This email already exiest.</li>');

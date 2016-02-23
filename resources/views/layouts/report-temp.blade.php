@@ -86,11 +86,11 @@ Awesome, you're almost ready to invite the rest of your dream team to view the r
 </p><br/>
         <form>
             <label>The full name of the people you want to invire:</label>
-    <input type="text" name="invite_name" id="invite_name" class="form-control form-white" required>
+    <input type="text" name="invite_name" id="invite_name" class="form-control form-white" required data-required = "true">
             <label>The title of this person in your company:</label>
     <input type="text" name="invite_title" id="invite_title" class="form-control form-white" >
             <label>The email you want to invite:</label>
-    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" required>
+    <input type="email" name="invite_email" id="invite_email" class="form-control form-white" required data-required = "true" data-email="true">
             <label>Message:</label>
             <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3" ></textarea>
             <div class="alert alert-danger" role="alert"><ul></ul></div>
@@ -170,10 +170,10 @@ Awesome, you're almost ready to invite the rest of your dream team to view the r
             <p>You seem to be new to our site but boy, we are glad to see you! We’ve got some exciting content prepared for you but first, we need you to fill out the short form below.</p>
               <form>
             <label>Email</label>
-    <input type="email" name="new_email" id="mew_email" class="form-control form-white" required>
+    <input type="email" name="new_email" id="mew_email" class="form-control form-white" required data-required = "true" data-email="true">
                   
                   <label>Full Name</label>
-    <input type="text" name="new_name" id="new_name" class="form-control form-white" required>
+    <input type="text" name="new_name" id="new_name" class="form-control form-white" required data-required = "true">
                   
                   <label>Title in the Company</label>
     <input type="text" name="new_title" id="new_title" class="form-control form-white" >
