@@ -9,6 +9,7 @@
         var companyid = <?php echo json_encode($data[0]->id); ?>;
         var companyname = <?php echo json_encode($data[0]->fc_company_name); ?>;
         var gadata = <?php echo json_encode($analytics);?>;
+        var dbowener = <?php echo json_encode($data[0]->account_with)?>;
     </script>
 
 
@@ -160,6 +161,7 @@
                         <th>Name</th>
                         <th>Title</th>
                         <th>Email</th>
+                        <th>Active</th>
                         <th class="text-right">Action</th>
                       </tr>
                     </thead>
@@ -171,6 +173,7 @@
                         echo "<td>" . $item->full_name . "</td>";
                         echo "<td>" . $item->title . "</td>";
                         echo "<td>" . $item->email . "</td>";
+                        echo "<td class='active-indicator'>" . $item->active ."</td>";
                         echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a> <a class='btn btn-sm btn-default' name='userurl' value='" . $item->id . "'><i class='fa fa-link'></i></a> <a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
                         echo "</tr>";
                         };

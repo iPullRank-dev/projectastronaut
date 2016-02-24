@@ -45,3 +45,16 @@
         position: absolute;
     bottom: 0px;
 }
+
+.active-status-1{
+    color:#18A689;
+}
+
+.active-status-0{
+    color: #C14444;
+}
+
+.hide-element{
+    display: none;
+}
+

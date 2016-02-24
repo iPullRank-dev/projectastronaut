@@ -1,11 +1,12 @@
 $(function () {
 
     function editableTable() {
+        
+        var tempSaver = null;
 
         function restoreRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
-
             for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
                 oTable.fnUpdate(aData[i], nRow, i, false);
             }
@@ -16,11 +17,13 @@ $(function () {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
             var pick = unpackimg(aData[0]);
+            tempSaver = aData[3];
             jqTds[0].innerHTML = '<input type="text" class="form-control small" value="' + pick + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control small" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<input type="text" class="form-control small" value="' + aData[2] + '">';
             jqTds[3].innerHTML = '<input type="text" class="form-control small" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<div class="text-right"><a class="edit btn btn-sm btn-success" href="">Save</a> <a class="cancel btn btn-sm btn-default" href="">Cancel</a> <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
+            jqTds[4].innerHTML = '<input type="text" class="form-control small" value="' + aData[4] + '" readonly>';
+            jqTds[5].innerHTML = '<div class="text-right"><a class="edit btn btn-sm btn-success" href="">Save</a> <a class="cancel btn btn-sm btn-default" href="">Cancel</a> <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
         }
 
 
@@ -31,10 +34,11 @@ $(function () {
             jqTds[1].innerHTML = '<input type="text" class="form-control small" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<input type="text" class="form-control small" value="' + aData[2] + '">';
             jqTds[3].innerHTML = '<input type="text" class="form-control small" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<div class="text-right"><a class="editn btn btn-sm btn-success" href="">Save</a>  <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
+            jqTds[4].innerHTML = '<input type="text" class="form-control small" value="' + aData[4] + '" readonly>';
+            jqTds[5].innerHTML = '<div class="text-right"><a class="editn btn btn-sm btn-success" href="">Save</a>  <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
         }
 
-        function saveRow(oTable, nRow) {
+        function saveRow(oTable, nRow,oldEmail) {
             var jqInputs = $('input', nRow);
             var passdata = [];
             console.log(jqInputs[0].value);
@@ -42,7 +46,8 @@ $(function () {
                 passdata[i] = jqInputs[i].value;
             };
             passdata[4] = companyid;
-
+            passdata[5] = oldEmail;
+            console.log(passdata);
             //ajax call to db
 
 
@@ -77,7 +82,8 @@ $(function () {
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
+            oTable.fnUpdate('aa', nRow, 4, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -89,9 +95,9 @@ $(function () {
             };
             passdata[4] = companyid;
             passdata[5] = companyname;
-
+            
             //ajax call to db
-
+            console.log('test');
             var uid = 0;
             $.ajax({
                 url: "../ajax-insertuser",
@@ -115,17 +121,23 @@ $(function () {
                     console.log("Something went wrong " + errorThrown);
                 },
             });
+            
+            //console.log(companyid);
+            //console.log(dbowener);
+            sendWelcomeEmails(companyid, dbowener);
+            activeUsers(companyid);
+
+            
 
 
-
-
-            console.log(passdata);
-            console.log(uid);
+            //console.log(passdata);
+            //console.log(uid);
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 4, false);
+            oTable.fnUpdate('aa', nRow, 4, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -137,7 +149,8 @@ $(function () {
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit btn btn-sm btn-default" href=""><i class="icon-note"></i></a>', nRow, 4, false);
+            oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
+            oTable.fnUpdate('<a class="edit btn btn-sm btn-default" href=""><i class="icon-note"></i></a>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -177,7 +190,7 @@ $(function () {
 
         $('#user_new').click(function (e) {
             e.preventDefault();
-            var aiNew = oTable.fnAddData(['', '', '', '',
+            var aiNew = oTable.fnAddData(['', '', '', '','',
                     '<p class="text-center"><a class="edit btn btn-dark" href=""><i class="fa fa-pencil-square-o"></i>Edit</a> <a class="delete btn btn-danger" href=""><i class="fa fa-times-circle"></i> Remove</a></p>'
             ]);
             console.log(aiNew[0]);
@@ -248,7 +261,8 @@ $(function () {
                 nEditing = nRow;
             } else if (nEditing == nRow && this.innerHTML == "Save") {
                 /* This row is being edited and should be saved */
-                saveRow(oTable, nEditing);
+                console.log(tempSaver);
+                saveRow(oTable, nEditing,tempSaver);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
@@ -265,6 +279,16 @@ $(function () {
 
             if (nEditing == nRow && this.innerHTML == "Save") {
                 /* This row is being edited and should be saved */
+                var validate = $('input', nEditing)[3].value;
+                if(validate.length<=0){
+                    alert('email can not be empty');
+                    return;
+                }else{
+                    if (validate.indexOf('@') == -1 || validate.indexOf('.') == -1) {
+                    alert('email format is wrong');
+                        return;
+                }
+                }
                 savenewRow(oTable, nEditing);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
@@ -312,32 +336,53 @@ $(function () {
 
 });
 
-function activeUsers(companyid){
-            $.ajax({
-                url: "../ajax-activemulti",
-                async: false,
-                type: "POST",
-                beforeSend: function (xhr) {
-                    var token = $('meta[name="csrf_token"]').attr('content');
+function activeUsers(companyid) {
+    $.ajax({
+        url: "../ajax-activemulti",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
 
-                    if (token) {
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    }
-                },
-                data: {
-                    indata:companyid
-                },
-                success: function (data) {
-                   console.log(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
-                },
-            });
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            indata: companyid
+        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        },
+    });
 }
 
-function sendWelcomeEmail(){
-    
+function sendWelcomeEmails(companyid, accountOwner) {
+    var package = [companyid, accountOwner];
+    $.ajax({
+        url: "../ajax-sendmail3",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            indata: package
+        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        },
+    });
 }
 
 $('#account-save').click(function () {
@@ -362,11 +407,13 @@ $('#account-save').click(function () {
             indata: package
         },
         success: function (data) {
+            sendWelcomeEmails(companyid, accountOwener);
             activeUsers(companyid);
             console.log(data);
             $('.account-panel').html(
                 "<div class='panel bg-green'><div class='panel-content companyviewgrade'><div><div class='account-owner'><p>This account is owned by:</p><h4>" + accountOwener + "</h4><button type='button' class='btn btn-dark' id='account_edit' data-toggle='modal' data-target='#accountModal'>Edit</button></div></div></div></div>"
             );
+            dbowener = accountOwener;
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("Something went wrong " + errorThrown);

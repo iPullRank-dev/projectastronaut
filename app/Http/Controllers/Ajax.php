@@ -179,7 +179,7 @@ class Ajax extends Controller
     		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0],'updated_at' => date("Y-m-d H:i:s")];
 
     		DB::table('prospectusers')
-            ->where('email', $updater[3])
+            ->where('email','=',$updater[5])
             ->update($updateitem);
     		
     		$uid = DB::table('prospectusers')
@@ -367,11 +367,38 @@ class Ajax extends Controller
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
             $m->from($user->sender, 'Welcome to you report');
-            $m->to($user->email, $user->full_name)->subject($user->sub);
+            $m->to($user->email, $user->full_name)->subject('Welcome to iPullrank Vector Report');
             });
 
 
-            return $user->url;
+            return $users;
+            
+        }else{
+        return 'false call!!';
+        };
+    }
+
+    public function sendmail3()
+    {
+        if (isset($_POST['indata']))
+        {   
+            $pdata = $_POST['indata'];
+            $companyid = $pdata[0];
+            $sender = $pdata[1];
+
+            $users = DB::table('prospectusers')
+                ->where('company_id','=',$companyid)->where('active','=',0)->get();
+
+            foreach ($users as $user) {
+                $user -> url = DB::table('shorturls')->where('user_id','=',$user->id)->first()-> url_hash;
+                $user -> sender = $sender;
+                Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
+                $m->from($user->sender, 'Welcome to you report');
+                $m->to($user->email, $user->full_name)->subject('test email');
+                });
+            }
+
+            return json_encode($users);
             
         }else{
         return 'false call!!';
