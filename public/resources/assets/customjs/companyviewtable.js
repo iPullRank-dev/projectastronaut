@@ -1,7 +1,7 @@
 $(function () {
 
     function editableTable() {
-        
+
         var tempSaver = null;
 
         function restoreRow(oTable, nRow) {
@@ -38,7 +38,7 @@ $(function () {
             jqTds[5].innerHTML = '<div class="text-right"><a class="editn btn btn-sm btn-success" href="">Save</a>  <a class="delete btn btn-sm btn-danger" href=""><i class="icons-office-52"></i></a></div>';
         }
 
-        function saveRow(oTable, nRow,oldEmail) {
+        function saveRow(oTable, nRow, oldEmail) {
             var jqInputs = $('input', nRow);
             var passdata = [];
             console.log(jqInputs[0].value);
@@ -76,10 +76,10 @@ $(function () {
             });
 
             console.log(jqInputs[0].value);
-            
+
             var fakeActive = 0;
-            if(dbowener!=null){
-            fakeActive = 1;
+            if (dbowener != null) {
+                fakeActive = 1;
             }
 
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
@@ -99,7 +99,7 @@ $(function () {
             };
             passdata[4] = companyid;
             passdata[5] = companyname;
-            
+
             //ajax call to db
             console.log('test');
             var uid = 0;
@@ -125,16 +125,16 @@ $(function () {
                     console.log("Something went wrong " + errorThrown);
                 },
             });
-            
+
             //console.log(companyid);
             //console.log(dbowener);
             var fakeActive = 0;
-            if(dbowener!=null){
-            //sendWelcomeEmails(companyid, dbowener);
-            activeUsers(companyid);
-            fakeActive = 1;
+            if (dbowener != null) {
+                //sendWelcomeEmails(companyid, dbowener);
+                activeUsers(companyid);
+                fakeActive = 1;
             }
-            
+
 
 
             //console.log(passdata);
@@ -146,14 +146,14 @@ $(function () {
             oTable.fnUpdate(fakeActive, nRow, 4, false);
             oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
-    
-                $('#table-editable2').find('tr').each(function(){
-        if(!$('td:nth-child(5)', this).hasClass('active-indicator')){
-            $('td:nth-child(5)', this).addClass('active-indicator');
-        }
-                    activeIndicatorCss();
-    });
-            
+
+            $('#table-editable2').find('tr').each(function () {
+                if (!$('td:nth-child(5)', this).hasClass('active-indicator')) {
+                    $('td:nth-child(5)', this).addClass('active-indicator');
+                }
+                activeIndicatorCss();
+            });
+
         }
 
 
@@ -205,7 +205,7 @@ $(function () {
 
         $('#user_new').click(function (e) {
             e.preventDefault();
-            var aiNew = oTable.fnAddData(['', '', '', '','',
+            var aiNew = oTable.fnAddData(['', '', '', '', '',
                     '<p class="text-center"><a class="edit btn btn-dark" href=""><i class="fa fa-pencil-square-o"></i>Edit</a> <a class="delete btn btn-danger" href=""><i class="fa fa-times-circle"></i> Remove</a></p>'
             ]);
             console.log(aiNew[0]);
@@ -277,7 +277,7 @@ $(function () {
             } else if (nEditing == nRow && this.innerHTML == "Save") {
                 /* This row is being edited and should be saved */
                 console.log(tempSaver);
-                saveRow(oTable, nEditing,tempSaver);
+                saveRow(oTable, nEditing, tempSaver);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
@@ -295,14 +295,14 @@ $(function () {
             if (nEditing == nRow && this.innerHTML == "Save") {
                 /* This row is being edited and should be saved */
                 var validate = $('input', nEditing)[3].value;
-                if(validate.length<=0){
+                if (validate.length <= 0) {
                     alert('email can not be empty');
                     return;
-                }else{
+                } else {
                     if (validate.indexOf('@') == -1 || validate.indexOf('.') == -1) {
-                    alert('email format is wrong');
+                        alert('email format is wrong');
                         return;
-                }
+                    }
                 }
                 savenewRow(oTable, nEditing);
                 nEditing = null;
@@ -353,12 +353,12 @@ $(function () {
 
 activeIndicatorCss();
 
-function activeIndicatorCss(){
-    $('#table-editable2').find('.active-indicator').each(function(){
-        if($(this).html() == 1){
+function activeIndicatorCss() {
+    $('#table-editable2').find('.active-indicator').each(function () {
+        if ($(this).html() == 1) {
             $(this).removeClass('active-ina');
             $(this).addClass('acitve-a');
-        }else{
+        } else {
             $(this).removeClass('acitve-a');
             $(this).addClass('active-ina');
         }
@@ -438,6 +438,12 @@ $('#account-save').click(function () {
         success: function (data) {
             sendWelcomeEmails(companyid, accountOwener);
             activeUsers(companyid);
+         $('#table-editable2').find('.active-indicator').each(function () {
+             if($(this).html() == 0){
+                 $(this).html(1);
+             }
+         });
+            activeIndicatorCss();
             console.log(data);
             $('.account-panel').html(
                 "<div class='panel bg-green'><div class='panel-content companyviewgrade'><div><div class='account-owner'><p>This account is owned by:</p><h4>" + accountOwener + "</h4><button type='button' class='btn btn-dark' id='account_edit' data-toggle='modal' data-target='#accountModal'>Edit</button></div></div></div></div>"

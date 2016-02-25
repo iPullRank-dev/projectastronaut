@@ -384,16 +384,20 @@ class Ajax extends Controller
         {   
             $pdata = $_POST['indata'];
             $companyid = $pdata[0];
-            $sender = $pdata[1];
+            $sender = DB::table('adminusers')
+                ->where('email','=',$pdata[1])->first();
+            $senderemail = $sender -> email;
+            $sendername = $sender -> username;
 
             $users = DB::table('prospectusers')
                 ->where('company_id','=',$companyid)->where('active','=',0)->get();
 
             foreach ($users as $user) {
                 $user -> url = DB::table('shorturls')->where('user_id','=',$user->id)->first()-> url_hash;
-                $user -> sender = $sender;
+                $user -> sendername = $sendername;
+                $user -> senderemail = $senderemail;
                 Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
-                $m->from($user->sender, 'Welcome to you report');
+                $m->from($user->senderemail, $user->sendername);
                 $m->to($user->email, $user->full_name)->subject('test email');
                 });
             }
