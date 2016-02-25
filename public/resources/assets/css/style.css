@@ -6636,7 +6636,7 @@ body:not(.fixed-topbar) .main-content .page-content {
   border-top-right-radius: 0;
   margin-bottom: 10px;
 }
-.account .form-signup #submit-form {
+.account .form-signup #register-button {
   display: block;
   margin: auto;
 }

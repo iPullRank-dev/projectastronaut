@@ -61,7 +61,7 @@
                         @endif
         
                         
-                <form class="form-signup" action="register" 
+                <form class="form-signup" action="/admin/register" 
                 method="post" 
                 name="registration_form" role="form">
                     {!! csrf_field() !!}
@@ -86,7 +86,7 @@
                     </div>
        
 
-                        <input type="submit" id="submit-form"
+                        <input type="submit" id="register-button"
                    value="Register" 
                               class="btn btn-lg btn-dark m-t-20" data-style="expand-left"
                    /> 
