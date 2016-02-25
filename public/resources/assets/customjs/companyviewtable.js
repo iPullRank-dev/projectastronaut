@@ -76,13 +76,17 @@ $(function () {
             });
 
             console.log(jqInputs[0].value);
-
+            
+            var fakeActive = 0;
+            if(dbowener!=null){
+            fakeActive = 1;
+            }
 
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('aa', nRow, 4, false);
+            oTable.fnUpdate(fakeActive, nRow, 4, false);
             oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
         }
@@ -124,9 +128,12 @@ $(function () {
             
             //console.log(companyid);
             //console.log(dbowener);
-            sendWelcomeEmails(companyid, dbowener);
+            var fakeActive = 0;
+            if(dbowener!=null){
+            //sendWelcomeEmails(companyid, dbowener);
             activeUsers(companyid);
-
+            fakeActive = 1;
+            }
             
 
 
@@ -136,9 +143,17 @@ $(function () {
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('aa', nRow, 4, false);
+            oTable.fnUpdate(fakeActive, nRow, 4, false);
             oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
+    
+                $('#table-editable2').find('tr').each(function(){
+        if(!$('td:nth-child(5)', this).hasClass('active-indicator')){
+            $('td:nth-child(5)', this).addClass('active-indicator');
+        }
+                    activeIndicatorCss();
+    });
+            
         }
 
 
@@ -335,6 +350,20 @@ $(function () {
     editableTable();
 
 });
+
+activeIndicatorCss();
+
+function activeIndicatorCss(){
+    $('#table-editable2').find('.active-indicator').each(function(){
+        if($(this).html() == 1){
+            $(this).removeClass('active-ina');
+            $(this).addClass('acitve-a');
+        }else{
+            $(this).removeClass('acitve-a');
+            $(this).addClass('active-ina');
+        }
+    });
+}
 
 function activeUsers(companyid) {
     $.ajax({

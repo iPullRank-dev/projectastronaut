@@ -58,3 +58,22 @@
     display: none;
 }
 
+.active-indicator{
+    font: normal normal normal 14px/1 FontAwesome;
+    color: transparent;
+}
+
+
+.active-indicator:before{
+    content:"\f111";
+    color: #000;
+}
+
+.acitve-a:before{
+    color: #18A689;
+}
+
+.active-ina:before{
+    color: #C75757;
+}
+
