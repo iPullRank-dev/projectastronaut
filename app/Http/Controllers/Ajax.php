@@ -383,26 +383,25 @@ class Ajax extends Controller
         if (isset($_POST['indata']))
         {   
             $pdata = $_POST['indata'];
-            $companyid = $pdata[0];
             $sender = DB::table('adminusers')
-                ->where('email','=',$pdata[1])->first();
+                ->where('email','=',$pdata['accountowner'])->first();
             $senderemail = $sender -> email;
             $sendername = $sender -> username;
 
-            $users = DB::table('prospectusers')
-                ->where('company_id','=',$companyid)->where('active','=',0)->get();
+            $user = DB::table('prospectusers')
+                ->where('id','=',$pdata['contactid'])->first();
 
-            foreach ($users as $user) {
-                $user -> url = DB::table('shorturls')->where('user_id','=',$user->id)->first()-> url_hash;
-                $user -> sendername = $sendername;
-                $user -> senderemail = $senderemail;
-                Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
-                $m->from($user->senderemail, $user->sendername);
-                $m->to($user->email, $user->full_name)->subject('test email');
-                });
-            }
+            $user -> sendername = $sendername;
+            $user -> senderemail = $senderemail;
+            $user -> emailcontent = $pdata['maincontent'];
+            $user -> subjectline = $pdata['subject'];
+                
+            Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
+            $m->from($user->senderemail, $user->sendername);
+            $m->to($user->email, $user->full_name)->subject($user->subjectline);
+            });
 
-            return json_encode($users);
+            return json_encode($user);
             
         }else{
         return 'false call!!';

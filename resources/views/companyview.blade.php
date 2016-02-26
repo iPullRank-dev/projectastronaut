@@ -55,10 +55,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-        <h4 class="modal-title"><strong>Account</strong>Owner</h4>
+        <h4 class="modal-title"><strong>Send</strong>Email</h4>
       </div>
       <div class="modal-body">
+          <div class="alert alert-danger" id="email-send-alert" role="alert">This contact already received access URL.</div>
+          <div>
+          <label >Subject:</label>
+          <input type="text" id="email-subject" class="form-control form-white">
+              <br><br>
+          </div>
           <div id="summernote"></div>
+          <button type="button" class="btn btn-dark" id="email-send" data-dismiss="modal" aria-hidden="true">Send</button>
         </div></div></div></div>
 
 <!--main-->

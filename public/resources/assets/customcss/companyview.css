@@ -77,3 +77,13 @@
     color: #C75757;
 }
 
+#email-send{
+    margin-top: 15px;
+    float: right;
+}
+
+#emailModal .modal-body:after{
+    content:'';
+    display: table;
+    clear: both;
+}

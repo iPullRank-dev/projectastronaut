@@ -87,7 +87,7 @@ $(function () {
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate(fakeActive, nRow, 4, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -141,7 +141,7 @@ $(function () {
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate(fakeActive, nRow, 4, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
 
             $('#table-editable2').find('tr').each(function () {
@@ -372,15 +372,24 @@ $(function () {
             });
             
             var receiver = $(this).parents('tr').children('td').eq(1).html();
+            var activeStatus = $(this).parents('tr').children('td').eq(4).html();
 
-            console.log(receiver);
+            if(activeStatus != 1){
+                $('#email-send-alert').hide();
+            }else{
+                $('#email-send-alert').show();
+            }
 
-            var templateEmail = '<h1>hello' + id + '</h1><a>' + hashedUrl + '</a>';
+            var templateEmail = '<p>Hello, ' +  receiver + '</p>';
+            
+            templateEmail+="<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>The iPullRank Team</p>";
         
             
             $('#summernote').code(templateEmail);
+            $('#email-subject').val('Welcome to your iPullrank Vector Report!');
+            $('#email-subject').attr("contactid",id);
             $('#emailModal').modal('show');
-            console.log($('#summernote').code());
+            //console.log($('#summernote').code());
         });
 
     };
@@ -498,5 +507,35 @@ $(document).ready(function() {
   maxHeight: null,             // set maximum height of editor
   focus: true,   // set focus to editable area after initializing summernote
 });
+    
+});
+
+$('#email-send').click(function(){
+    var email = {};
+    email.subject = $('#email-subject').val();
+    email.maincontent = $('#summernote').code();
+    email.contactid = $('#email-subject').attr("contactid");
+    email.accountowner = dbowener;
+    $.ajax({
+        url: "../ajax-sendmail3",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            indata: email
+        },
+        success: function (data) {
+            //console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        },
+    });
     
 });
