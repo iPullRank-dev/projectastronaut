@@ -1,5 +1,67 @@
 $(function () {
+    
+    var currentEmailUser;
+    
+    function activesingle(data) {
+    $.ajax({
+        url: "../ajax-active",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
 
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            uid: data
+        },
+        success: function (output) {
+            console.log(output);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        }
+    });
+}
+    
+    function activeIndicatorCss() {
+    $('#table-editable2').find('.active-indicator').each(function () {
+        if ($(this).html() == 1) {
+            $(this).removeClass('active-ina');
+            $(this).addClass('acitve-a');
+        } else {
+            $(this).removeClass('acitve-a');
+            $(this).addClass('active-ina');
+        }
+    });
+    }
+    
+    function activeUsers(companyid) {
+    $.ajax({
+        url: "../ajax-activemulti",
+        async: false,
+        type: "POST",
+        beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
+        data: {
+            indata: companyid
+        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Something went wrong " + errorThrown);
+        },
+    });
+}
+    
     function editableTable() {
 
         var tempSaver = null;
@@ -149,7 +211,7 @@ $(function () {
                     $('td:nth-child(5)', this).addClass('active-indicator');
                 }
             });
-    
+
             activeIndicatorCss();
 
         }
@@ -344,124 +406,71 @@ $(function () {
         });
 
         $("a[name='sendmail']").live('click', function (e) {
-            e.preventDefault();
-            var id = $(this).attr('value');
-            
-            var hashedUrl;
-            
-            $.ajax({
-                url: "../ajax-userurl",
-                async: false,
-                type: "POST",
-                beforeSend: function (xhr) {
-                    var token = $('meta[name="csrf_token"]').attr('content');
+                if (dbowener != null) {
+                    e.preventDefault();
+                    var id = $(this).attr('value');
 
-                    if (token) {
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    var hashedUrl;
+
+                    $.ajax({
+                        url: "../ajax-userurl",
+                        async: false,
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            var token = $('meta[name="csrf_token"]').attr('content');
+
+                            if (token) {
+                                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            }
+                        },
+                        data: {
+                            userid: id
+                        },
+                        success: function (data) {
+                            hashedUrl = "http://localhost:8888/display-report=" + data
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Something went wrong " + errorThrown);
+                        },
+                    });
+
+                    var receiver = $(this).parents('tr').children('td').eq(1).html();
+                    var activeStatus = $(this).parents('tr').children('td').eq(4).html();
+                    currentEmailUser = $(this).parents('tr').children('td').eq(4);
+
+                    if (activeStatus != 1) {
+                        $('#email-send-alert').hide();
+                    } else {
+                        $('#email-send-alert').show();
                     }
-                },
-                data: {
-                    userid: id
-                },
-                success: function (data) {
-                    hashedUrl = "http://localhost:8888/display-report=" + data
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
-                },
-            });
-            
-            var receiver = $(this).parents('tr').children('td').eq(1).html();
-            var activeStatus = $(this).parents('tr').children('td').eq(4).html();
 
-            if(activeStatus != 1){
-                $('#email-send-alert').hide();
-            }else{
-                $('#email-send-alert').show();
-            }
+                    var templateEmail = '<p>Hello, ' + receiver + '</p>';
 
-            var templateEmail = '<p>Hello, ' +  receiver + '</p>';
-            
-            templateEmail+="<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>The iPullRank Team</p>";
-        
-            
-            $('#summernote').code(templateEmail);
-            $('#email-subject').val('Welcome to your iPullrank Vector Report!');
-            $('#email-subject').attr("contactid",id);
-            $('#emailModal').modal('show');
-            //console.log($('#summernote').code());
-        });
+                    templateEmail += "<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>The iPullRank Team</p>";
+
+
+                    $('#summernote').code(templateEmail);
+                    $('#email-subject').val('Welcome to your iPullrank Vector Report!');
+                    $('#email-subject').attr("contactid", id);
+                    $('#emailModal').modal('show');
+                    //console.log($('#summernote').code());
+                    } else {
+            alert('Account Manager is needed');
+        }
+                });
 
     };
 
     editableTable();
 
-});
-
-activeIndicatorCss();
-
-function activeIndicatorCss() {
-    $('#table-editable2').find('.active-indicator').each(function () {
-        if ($(this).html() == 1) {
-            $(this).removeClass('active-ina');
-            $(this).addClass('acitve-a');
-        } else {
-            $(this).removeClass('acitve-a');
-            $(this).addClass('active-ina');
-        }
+    $('#summernote').summernote({
+        height: 300, // set editor height
+        minHeight: null, // set minimum height of editor
+        maxHeight: null, // set maximum height of editor
+        focus: true, // set focus to editable area after initializing summernote
     });
-}
 
-function activeUsers(companyid) {
-    $.ajax({
-        url: "../ajax-activemulti",
-        async: false,
-        type: "POST",
-        beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
-
-            if (token) {
-                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-        data: {
-            indata: companyid
-        },
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
-        },
-    });
-}
-
-function sendWelcomeEmails(companyid, accountOwner) {
-    var package = [companyid, accountOwner];
-    $.ajax({
-        url: "../ajax-sendmail3",
-        async: false,
-        type: "POST",
-        beforeSend: function (xhr) {
-            var token = $('meta[name="csrf_token"]').attr('content');
-
-            if (token) {
-                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-            }
-        },
-        data: {
-            indata: package
-        },
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
-        },
-    });
-}
-
-$('#account-save').click(function () {
+    $('#account-save').click(function () {
     var accountOwener = $('#account-list').val();
 
     console.log(accountOwener);
@@ -499,18 +508,12 @@ $('#account-save').click(function () {
 
 });
 
-$(document).ready(function() {
-    
-  $('#summernote').summernote({
-  height: 300,                 // set editor height
-  minHeight: null,             // set minimum height of editor
-  maxHeight: null,             // set maximum height of editor
-  focus: true,   // set focus to editable area after initializing summernote
-});
-    
-});
 
-$('#email-send').click(function(){
+function activeCurrentContact(){
+    currentEmailUser.html(1);
+}
+
+$('#email-send').click(function () {
     var email = {};
     email.subject = $('#email-subject').val();
     email.maincontent = $('#summernote').code();
@@ -531,11 +534,19 @@ $('#email-send').click(function(){
             indata: email
         },
         success: function (data) {
-            //console.log(data);
+            console.log(data);
+            activesingle(data);
+            activeCurrentContact();
+            activeIndicatorCss();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("Something went wrong " + errorThrown);
         },
     });
-    
 });
+
+activeIndicatorCss();
+
+});
+
+

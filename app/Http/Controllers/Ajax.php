@@ -401,7 +401,7 @@ class Ajax extends Controller
             $m->to($user->email, $user->full_name)->subject($user->subjectline);
             });
 
-            return json_encode($user);
+            return $user->id;
             
         }else{
         return 'false call!!';
