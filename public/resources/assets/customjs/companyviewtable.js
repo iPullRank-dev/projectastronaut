@@ -87,7 +87,7 @@ $(function () {
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate(fakeActive, nRow, 4, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -129,11 +129,8 @@ $(function () {
             //console.log(companyid);
             //console.log(dbowener);
             var fakeActive = 0;
-            if (dbowener != null) {
-                //sendWelcomeEmails(companyid, dbowener);
-                activeUsers(companyid);
-                fakeActive = 1;
-            }
+
+
 
 
 
@@ -144,15 +141,16 @@ $(function () {
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate(fakeActive, nRow, 4, false);
-            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
+            oTable.fnUpdate('<div class="text-right"> <a class="btn btn-sm btn-default" href="user-detail=' + uid + '">Performance</a><a class="btn btn-sm btn-default name="sendmail" value="' + uid + '"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-default" name="userurl" value="' + uid + '"><i class="fa fa-link"></i></a> <a class="edit btn btn-sm btn-default" href="javascript:;"><i class="icon-note"></i></a><a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a></div>', nRow, 5, false);
             oTable.fnDraw();
 
             $('#table-editable2').find('tr').each(function () {
                 if (!$('td:nth-child(5)', this).hasClass('active-indicator')) {
                     $('td:nth-child(5)', this).addClass('active-indicator');
                 }
-                activeIndicatorCss();
             });
+    
+            activeIndicatorCss();
 
         }
 
@@ -345,6 +343,46 @@ $(function () {
             });
         });
 
+        $("a[name='sendmail']").live('click', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('value');
+            
+            var hashedUrl;
+            
+            $.ajax({
+                url: "../ajax-userurl",
+                async: false,
+                type: "POST",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    userid: id
+                },
+                success: function (data) {
+                    hashedUrl = "http://localhost:8888/display-report=" + data
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something went wrong " + errorThrown);
+                },
+            });
+            
+            var receiver = $(this).parents('tr').children('td').eq(1).html();
+
+            console.log(receiver);
+
+            var templateEmail = '<h1>hello' + id + '</h1><a>' + hashedUrl + '</a>';
+        
+            
+            $('#summernote').code(templateEmail);
+            $('#emailModal').modal('show');
+            console.log($('#summernote').code());
+        });
+
     };
 
     editableTable();
@@ -436,13 +474,8 @@ $('#account-save').click(function () {
             indata: package
         },
         success: function (data) {
-            sendWelcomeEmails(companyid, accountOwener);
-            activeUsers(companyid);
-         $('#table-editable2').find('.active-indicator').each(function () {
-             if($(this).html() == 0){
-                 $(this).html(1);
-             }
-         });
+            //sendWelcomeEmails(companyid, accountOwener);
+            //activeUsers(companyid);
             activeIndicatorCss();
             console.log(data);
             $('.account-panel').html(
@@ -455,4 +488,15 @@ $('#account-save').click(function () {
         },
     });
 
+});
+
+$(document).ready(function() {
+    
+  $('#summernote').summernote({
+  height: 300,                 // set editor height
+  minHeight: null,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true,   // set focus to editable area after initializing summernote
+});
+    
 });

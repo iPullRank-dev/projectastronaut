@@ -48,6 +48,19 @@
            <button type="button" class="btn btn-dark" id="account-save" data-dismiss="modal" aria-hidden="true">Save</button>
         </div></div></div></div>
 
+<!-- email send modal -->
+
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        <h4 class="modal-title"><strong>Account</strong>Owner</h4>
+      </div>
+      <div class="modal-body">
+          <div id="summernote"></div>
+        </div></div></div></div>
+
 <!--main-->
      <div class="header">
             <h2><?php echo $data[0]->fc_company_name ?><strong> Performance</strong></h2>
@@ -174,7 +187,7 @@
                         echo "<td>" . $item->title . "</td>";
                         echo "<td>" . $item->email . "</td>";
                         echo "<td class='active-indicator'>" . $item->active ."</td>";
-                        echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a> <a class='btn btn-sm btn-default' name='userurl' value='" . $item->id . "'><i class='fa fa-link'></i></a> <a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
+                        echo " <td class='text-right'><a class='btn btn-sm btn-default' href='user-detail=" . $item->id . "'>Performance</a><a class='btn btn-sm btn-default' name='sendmail' value='" . $item->id . "'><i class='fa fa-envelope-o'></i></a><a class='btn btn-sm btn-default' name='userurl' value='" . $item->id . "'><i class='fa fa-link'></i></a><a class='edit btn btn-sm btn-default' href='javascript:;'><i class='icon-note'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";
                         echo "</tr>";
                         };
                         ?> 
@@ -186,6 +199,7 @@
         
         </div>
     </div>
+
 
 @endsection
 

@@ -114,59 +114,5 @@ $(document).ready(function() {
     });
 
 
-    $("a[name='edit']").on('click', function(e) {
-        e.preventDefault();
-        var id = $(this).attr('value');
-        console.log(id);
-        $.ajax({
-            url: "../ajax-loadeditor",
-            async: false,
-            type: "POST",
-            beforeSend: function(xhr) {
-                var token = $('meta[name="csrf_token"]').attr('content');
-
-                if (token) {
-                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                }
-            },
-            data: {
-                companyid: id
-            },
-            success: function(data) {
-                var cinfo = "<input name='id' value='" + data[0]['id'] + "'>";
-                var cgrade = '';
-                
-                for(var key in data[0]){
-                    if(data[0].hasOwnProperty(key)){
-                        //<input type="text" name="new_title" id="new_title" class="form-control form-white" >
-                        if(!excludedata(key,['id','deleted_at','created_at','updated_at','code_zone'])){
-                        var readonly = '';
-                        if(key == 'account_with'){
-                            readonly = 'readonly';
-                        }
-                        cinfo += "<label>" + transreadable(key) + "</label><input type='text' name='" + key + "' id='" + key + "' class='form-control form-white' value='" + data[0][key] + "'" + readonly + ">";};
-                    };
-                };
-                
-                for(var key in data[1]){
-                    if(data[1].hasOwnProperty(key)){
-                        //<input type="text" name="new_title" id="new_title" class="form-control form-white" >
-                        if(!excludedata(key,['id','deleted_at','created_at','updated_at','company_id'])){
-                        cgrade += "<label>" + transreadable(key) + "</label><input type='text' name='" + key + "' id='" + key + "' class='form-control form-white' value='" + data[1][key] + "'>";};
-                    };
-                };
-                
-                $('#tab-1').html(cinfo);
-                $('#tab-2').html(cgrade);
-
-                $('#editmodal').modal('show');
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Something went wrong " + errorThrown);
-            },
-        });
-    });
-
-
 
 });
