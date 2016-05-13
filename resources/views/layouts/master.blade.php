@@ -52,7 +52,7 @@
 
         <div class="logopanel">
 
-          <h1><a href="dashboard">Astronaut</a></h1>
+          <h1><a href="dashboard"><img src="../resources/assets/images/logo/white.png" width="120px" height="40px"></a></h1>
 
         </div>
 

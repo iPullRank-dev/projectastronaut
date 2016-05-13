@@ -15,7 +15,7 @@
               <ol class="breadcrumb">
                 <li><a href="./dashboard">Astronaut</a>
                 </li>
-                <li><?php echo "<a href='company-view=" . $data[0]->company_id . "'>" . $data[0]->company . "</a>"?></li>
+                <li><?php echo "<a href='company-view?id=" . $data[0]->company_id . "'>" . $data[0]->company . "</a>"?></li>
                   <li class="active"><?php echo $data[0]->full_name ?></li>
               </ol>
             </div>

@@ -515,6 +515,86 @@ class Ajax extends Controller
         return 'false call';
         };
     }
+
+    public function webhook(){
+    
+            function stripslashes_deep($value) {
+              $value = is_array($value) ?
+                array_map('stripslashes_deep', $value) :
+                stripslashes($value);
+              return $value;
+            }     
+
+
+            if (get_magic_quotes_gpc()) {
+              $unescaped_post_data = stripslashes_deep($_POST);
+            } else {
+              $unescaped_post_data = $_POST;
+            }
+            $form_data = json_decode($unescaped_post_data['data_json']);
+
+            $email_address = $form_data->email[0];
+            $company_name = $form_data->company_name[0];
+            $contact_name = $form_data->name[0];
+
+            $find = DB::table('prospects')->where('fc_company_name','like',$company_name)->first();
+            if($find != null){
+                // $indata['field'] = $email_address." is good";
+
+
+                $indata = ['email' => $email_address, 'full_name' => $contact_name, 'title' => '', 'company_id' => $find -> id, 'fc_gravatar' => '', 'company' => $find -> fc_company_name,'created_at' => date("Y-m-d H:i:s")];
+            
+                $id = DB::table('prospectusers')->insertGetId($indata);
+            
+                $inurl = $find -> id . '_' . $email_address . '=' . $id;
+
+                $hased = base64_encode($inurl);
+
+                $urldata = ['company_id' => $find -> id, 'user_id' => $id, 'url_hash' => $hased];
+
+                DB::table('shorturls') ->insert($urldata);
+
+
+            }else{
+                $indata['field'] = $email_address." is bad";
+                DB::table('webhook')->insert($indata);
+                                $lead = array();
+                //call to insightly api
+
+                if(strpos($contact_name,' ') === false){
+                        $lead['LAST_NAME'] = $contact_name;
+                }else{
+                    $name_array = explode(' ', $contact_name,2);
+                    $lead['LAST_NAME'] = $name_array[1];
+                    $lead['FIRST_NAME'] = $name_array[0];
+                }
+                // print_r($name_array);
+                // $lead['LAST_NAME'] = $contact_name;
+
+                $lead['EMAIL_ADDRESS'] = $email_address;
+                $lead['ORGANIZATION_NAME'] = $company_name;
+                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead"));
+                $api_data = json_encode($lead);
+                $service_url = 'https://api.insight.ly/v2.1/Leads';
+                $ch = curl_init($service_url); 
+                curl_setopt($ch, 
+                            CURLOPT_HTTPHEADER, 
+                            array('Content-Type: application/json', 
+                            'Authorization: Basic NGViYWYzMmQtODQyNS00MzZkLTkzNTktMTVjMWNkM2ZmNjU0'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, 1);
+
+
+                $server_output = curl_exec ($ch);
+                curl_close ($ch);
+
+                print_r($server_output);
+
+            }
+
+
+    }
    
 
 }

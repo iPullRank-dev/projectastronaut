@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use DB;
+
+use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -18,7 +18,7 @@ class DisplayReport extends Controller
      */
 
 	// show the report
-    public function index($id)
+    public function index(Request $request)
     {
 		//return "Yo does this work?";
 
@@ -30,6 +30,8 @@ class DisplayReport extends Controller
 
 		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
 		//return view("report",$data);
+
+        $id = $request -> query('report');
         $realid = 0;
         if(base64_encode(base64_decode($id, true)) === $id){
             $unhash = base64_decode($id);

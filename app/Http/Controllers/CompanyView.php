@@ -23,20 +23,29 @@ class CompanyView extends Controller
 	}  
     
      
-    public function index($id)
+    public function index(Request $request)
     {
-        
+        $id = $request -> query('id');
         $kickoffdate = new \Datetime(date("Y-m-d"));
         $dt = new \Datetime(date("Y-m-d",strtotime('-30 days')));
         $others = array("dimensions" => "ga:date","filters" => "ga:eventCategory==authcompany;ga:eventLabel==" . $id);
         
         // lazy inefficient way to get this in the format that I want
-        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:sessions",$others)),true);
         //print_r($gaResponse);
 
-        $finalGA['schema'] = array('date','conversion','sessions');
+        $others2 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==inviteSent;ga:eventLabel==" . $id);
+        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others2)),true);
+
+        $others3 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==contactRequestB;ga:eventLabel==" . $id);
+        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others3)),true);
+
+        $finalGA['schema'] = array('date','sessions');
         $finalGA['rows'] = $gaResponse['rows'];
         $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+
+        $finalGA['conversionRows'] = $gaResponse2['rows'];
+        $finalGA['conversionRows2'] = $gaResponse3['rows'];
 
         $companyDetail = DB::select('select * from prospects where id='.$id);
         $companycontacts = DB::select('select * from prospectusers where company_id='.$id);

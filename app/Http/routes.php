@@ -17,10 +17,10 @@
 
 Route::get('aaa', function(){return view('pdf');});
 
-Route::get('/admin/company-view={id}', 'CompanyView@index');
-Route::get('/display-report={id}', 'DisplayReport@index');
+Route::get('/admin/company-view', 'CompanyView@index');
+Route::get('/display-report', 'DisplayReport@index');
 Route::get('/display-report-authed={id}', 'DisplayReport@authed');
-Route::get('/display-report', 'DisplayReport@unidentified');
+// Route::get('/display-report', 'DisplayReport@unidentified');
 
 //Route::get('/admin/', 'Login@index');
 //Route::get('/admin/login', 'Login@index');
@@ -84,5 +84,5 @@ Route::get('admin/logout', 'Auth\AuthController@getLogout');
 Route::get('admin/register', 'Auth\AuthController@getRegister');
 Route::post('admin/register', 'Auth\AuthController@postRegister');
  
-
+Route::post('/webhook','Ajax@webhook');
 

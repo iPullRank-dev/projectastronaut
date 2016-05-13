@@ -99,7 +99,8 @@
         <div class="col-md-8">
             <div><span style="width: 10px;height: 10px;background-color: rgba(49,157,181,1);display: inline-block;margin: 0 5;"></span># of New Contacts
                 <span style="width: 10px;height: 10px;background-color: rgba(24,166,137,1);display: inline-block;margin: 0 5;"></span># of Sessions
-                <span style="width: 10px;height: 10px;background-color: rgba(165,139,211,1);display: inline-block;margin: 0 5;"></span># of Conversions
+                <span style="width: 10px;height: 10px;background-color: rgba(165,139,211,1);display: inline-block;margin: 0 5;"></span># of Invite
+                <span style="width: 10px;height: 10px;background-color: rgba(221,104,104,1);display: inline-block;margin: 0 5;"></span># of Request
                 </div>
             <div style="margin-bottom:20px;">
              <canvas id="testChart" width="500" height="250px"></canvas>

@@ -29,17 +29,17 @@
                       <tr>
                         <th>Company Logo</th>
                         <th>Company Name</th>
-                        <th>Website</th>
+<!--                        <th>Website</th>-->
                         <th>Account Owned By</th>
                       </tr>
                     </thead>
                     <tbody>
                        <?php
                         foreach ($data as $item){
-                            echo "<tr onclick=\"window.document.location='company-view=" . $item->id . "';\">";
+                            echo "<tr onclick=\"window.document.location='company-view?id=" . $item->id . "';\">";
                         echo "<td><div class='clogo'><img src='" . $item->fc_logo_url . "' height='40'></div></td>";
                         echo "<td>" . $item->fc_company_name . "</td>";
-                        echo "<td>" . $item->fc_website . "</td>";
+//                        echo "<td>" . $item->fc_website . "</td>";
                         echo "<td>" . $item->account_with . "</td>";
                         echo "</tr>";
                         };
@@ -59,3 +59,6 @@
 @section('pagejs')
 
 @endsection
+
+
+

@@ -136,3 +136,11 @@
     
     
 }
+
+#disclosure{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

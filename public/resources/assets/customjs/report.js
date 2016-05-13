@@ -30,6 +30,7 @@ function authProcess(result) {
                     'authUserid': data[2]
                 });
                 $('#authcover').fadeOut();
+                contactPop();
             } else {
                 $('#verifyModal').modal('show');
             };
@@ -53,7 +54,7 @@ function sendMail(dataBag) {
             }
         },
         data: {
-            indata:dataBag
+            indata: dataBag
         },
         success: function (data) {
             console.log(data);
@@ -142,6 +143,14 @@ function formValidate(form) {
     return checker;
 }
 
+function contactForm(){
+    $('#contactModal').modal('show');
+    console.log('yeah');
+}
+
+function contactPop(){
+    setTimeout(contactForm,3000);
+}
 
 $('input').focusin(function () {
     if ($(this).hasClass('error-input')) {
@@ -185,7 +194,7 @@ $("input[name='verify']").on('click', function (e) {
         },
         success: function (data) {
 
-            if (data[0] == 1) {
+            if (data[0] == 1 && data[1] == c_id) {
                 console.log('aha! company:' + data[1] + ' user' + data[2]);
                 dataLayer.push({
                     'event': 'authEvent',
@@ -197,6 +206,7 @@ $("input[name='verify']").on('click', function (e) {
                     'authUserid': data[2]
                 });
                 $('#authcover').fadeOut();
+                contactPop();
                 $('#verifyModal').modal('hide');
             } else {
                 $('#verifyalert').html("Sorry, we didn't find your email in our system. Try another email or <a id='newuser'>get access as a new user</a>");
@@ -275,7 +285,7 @@ $("input[name='newsubmit']").on('click', function (e) {
                             console.log("Something went wrong " + errorThrown);
                         }
                     });
-                    var emailData = [data,c_account];
+                    var emailData = [data, c_account];
                     sendMail(emailData);
                 } else {
                     console.log('oh,poor kid, not one cares this account!');
@@ -330,6 +340,10 @@ $("input[name='submitinvite']").on('click', function (e) {
         success: function (data) {
             if (data != "duplicate") {
                 console.log(data);
+                dataLayer.push({
+                    'event': 'inviteEvent',
+                    'authCompanyid': c_id
+                    });
                 $('#inviteModal').modal('hide');
                 $('#inviteConfirm').modal('show');
                 setTimeout(function () {
@@ -341,7 +355,7 @@ $("input[name='submitinvite']").on('click', function (e) {
                         $(this).val('');
                     }
                 });
-                                if (c_account != null) {
+                if (c_account != null) {
                     console.log('it has account manager! email is sent!');
                     $.ajax({
                         url: "../ajax-active",
@@ -379,4 +393,12 @@ $("input[name='submitinvite']").on('click', function (e) {
     });
 
 
+});
+
+$('.insightlyForm').submit(function(e){
+    console.log('form go!');
+                    dataLayer.push({
+                    'event': 'contactTrackB',
+                    'authCompanyid': c_id
+                    });
 });

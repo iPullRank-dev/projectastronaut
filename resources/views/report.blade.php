@@ -1,7 +1,5 @@
 @extends('layouts.report-temp')
 
-@section('pagetitle','{{Company Name}} Report')
-
 @section('customcode')
 
 <?php echo $companyinfo[0]->code_zone ;?>
@@ -20,6 +18,13 @@
 
 @endsection
 
+@section('companyid')
+
+<?php
+    echo $companyinfo[0]->id;
+?>
+
+@endsection
 
 @section('grade')
 
@@ -27,6 +32,18 @@
 
 if(isset($data)){
 echo $data[0]->final_score;};
+
+?>
+
+
+@endsection
+
+@section('rank')
+
+<?php 
+
+if(isset($data)){
+echo $data[0]->rank;};
 
 ?>
 

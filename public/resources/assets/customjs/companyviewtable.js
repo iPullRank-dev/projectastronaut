@@ -395,7 +395,7 @@ $(function () {
                     userid: id
                 },
                 success: function (data) {
-                    $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='http://localhost:8888/display-report=" + data + "' class='form-control form-white' autofocus/>");
+                    $('#urlboxbody').html("<input type='text' name='" + id + "' placeholder='Type your code here' value ='" + window.location.hostname + "/display-report?report=" + data + "' class='form-control form-white' autofocus/>");
 
                     $('#urlModal').modal('show');
                 },
@@ -427,7 +427,7 @@ $(function () {
                             userid: id
                         },
                         success: function (data) {
-                            hashedUrl = "http://localhost:8888/display-report=" + data
+                            hashedUrl = window.location.hostname + "/display-report?report=" + data;
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Something went wrong " + errorThrown);
@@ -446,7 +446,7 @@ $(function () {
 
                     var templateEmail = '<p>Hello, ' + receiver + '</p>';
 
-                    templateEmail += "<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>The iPullRank Team</p>";
+                    templateEmail += "<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='http://" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>The iPullRank Team</p>";
 
 
                     $('#summernote').code(templateEmail);

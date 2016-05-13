@@ -104,6 +104,12 @@ form .alert{
     -webkit-transform: translateY(-50%);
 }
 
+.grademain .rank{
+        margin: 10px 20px 0px 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 10px;
+}
+
 .grademain div{
     margin:0px;
     text-align: center;
@@ -130,6 +136,10 @@ form .alert{
     display: none;
 }
 
+
+    .cdetail p{
+        word-wrap: break-word;
+    }
 .main-content .page-content .panel-content{
 
     padding-bottom:20px;
@@ -213,6 +223,7 @@ form .alert{
         padding-left: 20px;
     }
     
+    
     .cdetail h3:first-child{
         margin-top: 0px;
     }
@@ -242,4 +253,18 @@ form .alert{
     }
     
     
+}
+
+
+#disclosure{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#disclosure p{
+    text-align: center;
+    color: rgba(0,0,0,0.5);
 }
