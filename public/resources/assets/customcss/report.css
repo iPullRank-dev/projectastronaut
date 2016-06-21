@@ -268,3 +268,12 @@ form .alert{
     text-align: center;
     color: rgba(0,0,0,0.5);
 }
+
+.popover{
+    border: none;
+    border-radius: 2px;
+}
+
+.popover.bottom>.arrow{
+    border-bottom: none;
+}

@@ -39,7 +39,8 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div><span style="width: 10px;height: 10px;background-color: rgba(151,187,205,1);display: inline-block;margin: 0 5;"></span>Conversions
+            <div> <span style="width: 10px;height: 10px;background-color: rgba(165,139,211,1);display: inline-block;margin: 0 5;"></span># of Invite
+                <span style="width: 10px;height: 10px;background-color: rgba(221,104,104,1);display: inline-block;margin: 0 5;"></span># of Request
                 </div>
             <div style="margin-bottom:20px;">
              <canvas id="contactChart1" width="500" height="250px"></canvas>

@@ -85,4 +85,5 @@ Route::get('admin/register', 'Auth\AuthController@getRegister');
 Route::post('admin/register', 'Auth\AuthController@postRegister');
  
 Route::post('/webhook','Ajax@webhook');
+Route::get('/rankApi','Ajax@ranklist');
 

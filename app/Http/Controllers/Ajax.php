@@ -119,12 +119,15 @@ class Ajax extends Controller
     {
     	if (isset($_POST['userdata']))
     	{
+            // all variable names in here are confusing
     		$newdata = $_POST['userdata'];
     		
             $find = DB::table('prospectusers')->where('email','=',$newdata[3])->first();
-            if($find != null){
+            if($find != null)
+            {
                 return 'duplicate';
-            }else{
+            }
+            else{
     		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5],'created_at' => date("Y-m-d H:i:s")];
     		
     		$id = DB::table('prospectusers')->insertGetId($indata);
@@ -165,7 +168,10 @@ class Ajax extends Controller
     		
 		return "success!";
 		
-		}else{
+		}
+       
+        else
+        {
 		return 'false call';
 		};
     }
@@ -179,12 +185,12 @@ class Ajax extends Controller
     		$updateitem = ['email' => $updater[3], 'full_name' => $updater[1], 'title' => $updater[2], 'fc_gravatar' => $updater[0],'updated_at' => date("Y-m-d H:i:s")];
 
     		DB::table('prospectusers')
-            ->where('email','=',$updater[5])
-            ->update($updateitem);
+                ->where('email','=',$updater[5])
+                ->update($updateitem);
     		
     		$uid = DB::table('prospectusers')
-            ->where('email', '=', $updater[3])
-            ->get();
+                ->where('email', '=', $updater[3])
+                ->get();
             
             $output = $uid[0] -> id;
     		
@@ -193,13 +199,15 @@ class Ajax extends Controller
             $hased = base64_encode($inurl);
 
             DB::table('shorturls')
-            ->where('user_id', '=', $output)
-            ->update(['url_hash' => $hased]);
+                ->where('user_id', '=', $output)
+                ->update(['url_hash' => $hased]);
 
 		    return $output;
 		
-		}else{
-		return 'false call';
+		}
+
+        else{
+		  return 'false call';
 		};
     }
     
@@ -209,9 +217,9 @@ class Ajax extends Controller
     	{	
     		$companyid = $_POST['codeid'];
     		$code = DB::table('prospects')
-            ->where('id', '=', $companyid)
-            ->select('code_zone')
-            ->get();
+                ->where('id', '=', $companyid)
+                ->select('code_zone')
+                ->get();
     		
     		$output = $code[0] -> code_zone;
     		
@@ -229,8 +237,8 @@ class Ajax extends Controller
 			$savecode = $_POST['scode'];
     		
     		DB::table('prospects')
-            ->where('id', '=', $savecode[0])
-            ->update(['code_zone' => $savecode[1]]);
+                ->where('id', '=', $savecode[0])
+                ->update(['code_zone' => $savecode[1]]);
     		
     		return 'success';
     		
@@ -246,9 +254,9 @@ class Ajax extends Controller
             $user = $_POST['userid'];
             
             $hashurl = DB::table('shorturls')
-            ->where('user_id', '=', $user)
-            ->select('url_hash')
-            ->get();
+                ->where('user_id', '=', $user)
+                ->select('url_hash')
+                ->get();
 
             $output = $hashurl[0]-> url_hash;
             
@@ -277,12 +285,18 @@ class Ajax extends Controller
             $packdata = $_POST['fingerprint'];
             $hashinfo = $packdata[1];
             $fprint = $packdata[0];
-            $find = DB::table('shorturls')->where('url_hash','=',$hashinfo)->first();
+
+            $find = DB::table('shorturls')
+                ->where('url_hash','=',$hashinfo)
+                ->first();
+
             if(strlen($find->uuid) != 0){
                 if($find->uuid == $fprint){
                     return [1,$find->company_id,$find->user_id];
                 };
-            }else{
+            }
+            else{
+
                 DB::table('shorturls')
                     ->where('url_hash','=',$hashinfo)
                     ->update(['uuid' => $fprint]);
@@ -292,10 +306,12 @@ class Ajax extends Controller
             
             
             
-        }else{
-        return 'false call!!';
+        }
+        else{
+            return 'false call!!';
         };
     }
+// public function reportAuthEmail()
 
     public function reportauthemail()
     {
@@ -304,18 +320,22 @@ class Ajax extends Controller
             $uesremail = $_POST['email'];
             $find = DB::table('prospectusers')->where('email','=',$uesremail)->first();
             if($find != null){
-                if($find->active == 1){
-                return [1,$find->company_id,$find->id];
-                }else{
+                if($find->active == 1)
+                {
+                    return [1,$find->company_id,$find->id];
+                }
+                else{
                     return 0;
                 }
-            }else{
+            }
+            else{
                 return 0;
             };
             
             
-        }else{
-        return 'false call!!';
+        }
+        else{
+            return 'false call!!';
         };
     }
 
@@ -323,25 +343,30 @@ class Ajax extends Controller
     {
         if (isset($_POST['indata']))
         {   
+            // watch spelling on var names
+
             $pdata = $_POST['indata'];
             $id = $pdata[0];
             $account_owenr = $pdata[1];
+            
             $user = DB::table('prospectusers')->where('id','=',$id)->first();
             $url = DB::table('shorturls')->where('user_id','=',$id)->first();
+            
             $url = $url -> url_hash;
             $user -> url = $url;
             $user -> sender = $account_owenr;
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
-            $m->from($user->sender, 'Welcome to you report');
-            $m->to($user->email, $user->full_name)->subject($user->full_name . ", here is your access to your site's report.");
+                $m->from($user->sender, 'Welcome to you report');
+                $m->to($user->email, $user->full_name)->subject($user->full_name . ", here is your access to your site's report.");
             });
 
 
             return $user->url;
             
-        }else{
-        return 'false call!!';
+        }
+        else{
+            return 'false call!!';
         };
     }
 
@@ -350,12 +375,16 @@ class Ajax extends Controller
         if (isset($_POST['getdata']))
         {   
             $data = $_POST['getdata'];
+           
             $user = DB::table('prospectusers')->where('id','=',$data[0])->first();
             $url = DB::table('shorturls')->where('user_id','=',$data[0])->first();
+           
             $unhash = base64_decode($data[2]);
             $position = strpos($unhash,"=");
             $invite = (int)substr($unhash, $position+1);
+           
             $inviterinfo = DB::table('prospectusers')->where('id','=',$invite)->first();
+           
             $url = $url -> url_hash;
             $user -> url = $url;
             $user -> msg = $data[1];
@@ -366,15 +395,16 @@ class Ajax extends Controller
             $user -> sender = $data[3];
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
-            $m->from($user->sender, 'Welcome to you report');
-            $m->to($user->email, $user->full_name)->subject('Welcome to iPullrank Vector Report');
+                $m->from($user->sender, 'Welcome to you report');
+                $m->to($user->email, $user->full_name)->subject('Welcome to iPullrank Vector Report');
             });
 
 
             return $users;
             
-        }else{
-        return 'false call!!';
+        }
+        else{
+            return 'false call!!';
         };
     }
 
@@ -397,14 +427,15 @@ class Ajax extends Controller
             $user -> subjectline = $pdata['subject'];
                 
             Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
-            $m->from($user->senderemail, $user->sendername);
-            $m->to($user->email, $user->full_name)->subject($user->subjectline);
+                $m->from($user->senderemail, $user->sendername);
+                $m->to($user->email, $user->full_name)->subject($user->subjectline);
             });
 
             return $user->id;
             
-        }else{
-        return 'false call!!';
+        }
+        else{
+            return 'false call!!';
         };
     }
 
@@ -448,7 +479,8 @@ class Ajax extends Controller
             $passdata = [$info,$grade];
         return $passdata;
         
-        }else{
+        }
+        else{
             return 'false call';
         };
     }
@@ -462,8 +494,8 @@ class Ajax extends Controller
             $updateitem = ['active' => 1,'updated_at' => date("Y-m-d H:i:s")];
 
             DB::table('prospectusers')
-            ->where('id', $user_id)
-            ->update($updateitem);
+                ->where('id', $user_id)
+                ->update($updateitem);
 
             return 'activeted!';
         
@@ -485,8 +517,8 @@ class Ajax extends Controller
             $updateitem = ['account_with' => $manager_account,'updated_at' => date("Y-m-d H:i:s")];
 
             DB::table('prospects')
-            ->where('id', $companyid)
-            ->update($updateitem);
+                ->where('id', $companyid)
+                ->update($updateitem);
 
             return 'updated!';
         
@@ -518,6 +550,10 @@ class Ajax extends Controller
 
     public function webhook(){
     
+            // remove this from within the function
+
+            // how you'd use it if it was part of the object $variable = $this->stripslahses_deep($value);
+
             function stripslashes_deep($value) {
               $value = is_array($value) ?
                 array_map('stripslashes_deep', $value) :
@@ -533,6 +569,7 @@ class Ajax extends Controller
             }
             $form_data = json_decode($unescaped_post_data['data_json']);
 
+            // no need to set these as variables. Just use them from the $form_data var
             $email_address = $form_data->email[0];
             $company_name = $form_data->company_name[0];
             $contact_name = $form_data->name[0];
@@ -548,6 +585,7 @@ class Ajax extends Controller
             
                 $inurl = $find -> id . '_' . $email_address . '=' . $id;
 
+                // spelling - "hashed"
                 $hased = base64_encode($inurl);
 
                 $urldata = ['company_id' => $find -> id, 'user_id' => $id, 'url_hash' => $hased];
@@ -555,27 +593,48 @@ class Ajax extends Controller
                 DB::table('shorturls') ->insert($urldata);
 
 
-            }else{
+            }
+            else
+            {
                 $indata['field'] = $email_address." is bad";
                 DB::table('webhook')->insert($indata);
-                                $lead = array();
+                
+                $lead = array();
                 //call to insightly api
 
                 if(strpos($contact_name,' ') === false){
                         $lead['LAST_NAME'] = $contact_name;
-                }else{
+                }
+
+                // this won't work on a long name like Laura Almeida de Viera
+                // instead look for the first space and split what's before and what's after
+                // strpos on the space
+                // and the substr before and after the space
+                else{
                     $name_array = explode(' ', $contact_name,2);
                     $lead['LAST_NAME'] = $name_array[1];
                     $lead['FIRST_NAME'] = $name_array[0];
                 }
+
+
                 // print_r($name_array);
                 // $lead['LAST_NAME'] = $contact_name;
 
-                $lead['EMAIL_ADDRESS'] = $email_address;
+                // changed this array assignment to be one statement
+
+                $lead[] = Array('EMAIL_ADDRESS' => $email_address, 
+                                'ORGANIZATION_NAME' => $company_name,
+                                'TAGS' => array(array("TAG_NAME" => 'Unbounce lead')));
+
+                /*$lead['EMAIL_ADDRESS'] = $email_address;
                 $lead['ORGANIZATION_NAME'] = $company_name;
-                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead"));
+                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead")); */
+
                 $api_data = json_encode($lead);
-                $service_url = 'https://api.insight.ly/v2.1/Leads';
+
+                $service_url = 'http://localhost/rankApi';
+
+                // make curl command its own function just in case you need to do something like this again in another place
                 $ch = curl_init($service_url); 
                 curl_setopt($ch, 
                             CURLOPT_HTTPHEADER, 
@@ -592,6 +651,20 @@ class Ajax extends Controller
                 print_r($server_output);
 
             }
+
+
+    }
+
+    public function ranklist(){
+
+        $api = $_SERVER['HTTP_API_KEY'];
+
+        if ($api == 'aXB1bGxyYW5r'){
+            $ranklist = DB::select('select * from rank');
+            return json_encode($ranklist);
+        }else{
+            return 'wrong api key';
+        }
 
 
     }

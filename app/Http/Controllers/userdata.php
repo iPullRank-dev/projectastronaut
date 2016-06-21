@@ -30,9 +30,23 @@ class userdata extends Controller
         $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
         //print_r($gaResponse);
 
+
+        //contactRequest conversion
+        $others2 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==contactRequestB;ga:eventAction==" . $id);
+        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others2)),true);
+
+
+        //inviteRequest conversion
+        $others3 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==inviteSent;ga:eventAction==" . $id);
+        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others3)),true);
+
+
         $finalGA['schema'] = array('date','conversion','sessions');
         $finalGA['rows'] = $gaResponse['rows'];
         $finalGA['totals'] = $gaResponse['totalsForAllResults'];
+
+        $finalGA['contact'] = $gaResponse2['rows'];
+        $finalGA['invite'] = $gaResponse3['rows'];
 
         $userdata = DB::select('select * from prospectusers where id='.$id);
         $users = array("response"=>"200","message"=>"No data yet");

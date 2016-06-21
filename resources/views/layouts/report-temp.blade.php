@@ -101,18 +101,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="invitebox">
-                            <p>Spread The Word.
-                                <br/> Awesome, you're almost ready to invite the rest of your dream team to view the report. Fill out the short form below and we'll deliver it lightning speed!
-                            </p>
+                            <p>Awesome, you’re almost ready to invite a friend to view the report. Fill out the short form below and we’ll deliver it at lightning speed!</p>
                             <br/>
                             <form>
-                                <label>The full name of the people you want to invire:</label>
+                                <label>Name of the person you’d like to invite:</label>
                                 <input type="text" name="invite_name" id="invite_name" class="form-control form-white" required data-required="true">
-                                <label>The title of this person in your company:</label>
+                                <label>This person’s company title:</label>
                                 <input type="text" name="invite_title" id="invite_title" class="form-control form-white">
-                                <label>The email you want to invite:</label>
+                                <label>Her/His email address:</label>
                                 <input type="email" name="invite_email" id="invite_email" class="form-control form-white" required data-required="true" data-email="true">
-                                <label>Message:</label>
+                                <label>Message (optional):</label>
                                 <textarea type="text" name="invite_msg" id="invite_msg" class="form-control form-white" rows="3"></textarea>
                                 <div class="alert alert-danger" role="alert">
                                     <ul></ul>
@@ -163,9 +161,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="invitebox">
-                            <p>Whoops, We Don’t Recognize Your Device Or Browser! </p>
+                            <p>Whoops! We don’t recognize your device. </p>
                             <form>
-                                <label>Please Enter Your Email for Validation</label>
+                                <label>Please enter your email for access.</label>
                                 <input type="email" name="verify_email" id="verify_email" class="form-control form-white">
                                 <p id="verifyalert"></p>
                                 <div style="text-align:right;margin-top:20px;">
@@ -192,7 +190,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="invitebox">
-                            <p>You seem to be new to our site but boy, we are glad to see you! We’ve got some exciting content prepared for you but first, we need you to fill out the short form below.</p>
+                            <p>You seem to be new to our site, but boy, are we glad to see you! We’ve got some exciting content prepared for you, but first, we just need some quick info to customize your report.</p>
                             <form>
                                 <label>Email</label>
                                 <input type="email" name="new_email" id="mew_email" class="form-control form-white" required data-required="true" data-email="true">
@@ -200,12 +198,13 @@
                                 <label>Full Name</label>
                                 <input type="text" name="new_name" id="new_name" class="form-control form-white" required data-required="true">
 
-                                <label>Title in the Company</label>
+                                <label>Company Title</label>
                                 <input type="text" name="new_title" id="new_title" class="form-control form-white">
                                 <div class="alert alert-danger" role="alert">
                                     <ul></ul>
                                 </div>
                                 <div style="text-align:right;margin-top:20px;">
+                                    <input type="submit" value="Back" name="newback" class="btn btn-dark">
                                     <input type="submit" value="Verify" name="newsubmit" class="btn btn-dark">
                                 </div>
                             </form>
@@ -301,7 +300,7 @@
                                                 <div style="font-size: 70px;color: rgba(255,255,255,0.9);">@yield('grade')</div>
                                                 <div style="font-size:17px;">Grade</div>
                                                 <div class="rank">
-                                                    <a href="#">Overall Rank: @yield('rank')</a>
+                                                    <span style="color:rgba(0,0,0,0.3)">Overall Rank: @yield('rank')<a id="therank" href="#" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="To view the full ranking list of all the reports in our database, click <a href='#'>here</a>"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -374,7 +373,7 @@
 
                 </div>
                 <div id="disclosure">
-                    <p>2016 all rights recevied by iPullRank.</p>
+                    <p>Copyright 2016 © by iPullRank. All Rights Reserved.</p>
                     <a href="http://ipullrank.com/privacy-policy/">Privacy Policy</a>
 <!--
                     <span> | </span>
