@@ -12,7 +12,24 @@ class CreateCopyTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('copytext', function (Blueprint $table) {
+                
+            $table->engine = 'InnoDB';
+            
+            // Primary Auto Incrementing Index
+            $table->increments('id');
+            
+            $table->string('quad')->nullable();
+
+            $table->mediumText('a')->nullable();
+
+            $table->mediumText('b')->nullable();
+
+            $table->mediumText('c')->nullable();
+
+            $table->mediumText('d')->nullable();
+
+        });
     }
 
     /**
@@ -22,6 +39,7 @@ class CreateCopyTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('copytext');
     }
 }
+

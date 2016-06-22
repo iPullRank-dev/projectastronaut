@@ -12,7 +12,16 @@ class CreateWebhookTable extends Migration
      */
     public function up()
     {
-        //
+                Schema::create('webhook', function (Blueprint $table) {
+                
+            $table->engine = 'InnoDB';
+            
+            // Primary Auto Incrementing Index
+            $table->increments('id');
+            
+            $table->longText('field')->nullable();
+
+        });
     }
 
     /**
@@ -22,6 +31,6 @@ class CreateWebhookTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('webhook');
     }
 }

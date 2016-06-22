@@ -596,7 +596,7 @@ class Ajax extends Controller
             }
             else
             {
-                $indata['field'] = $email_address." is bad";
+                $indata['field'] = $email_address;
                 DB::table('webhook')->insert($indata);
                 
                 $lead = array();

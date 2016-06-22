@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailAndTokenToAdminusers extends Migration
+class UpdateProspectusersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class AddEmailAndTokenToAdminusers extends Migration
      */
     public function up()
     {
-        Schema::table('adminusers', function (Blueprint $table) {
+        Schema::table('prospectusers', function (Blueprint $table) {
             //
-            $table->string('email')->unique();
+            $table->tinyInteger('active')->nullable();
         });
     }
 
@@ -25,9 +25,9 @@ class AddEmailAndTokenToAdminusers extends Migration
      */
     public function down()
     {
-        Schema::table('adminusers', function (Blueprint $table) {
+        Schema::table('prospectusers', function (Blueprint $table) {
             //
-            $table->dropColumn(['email']);
+            $table->dropColumn(['active']);
         });
     }
 }
