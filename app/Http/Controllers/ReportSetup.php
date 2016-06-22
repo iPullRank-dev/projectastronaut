@@ -66,6 +66,7 @@ class ReportSetup extends Controller
         DB::table('prospectscores')->truncate();
         DB::table('prospectusers')->truncate();
         DB::table('shorturls')->truncate();
+        DB::table('rank')->truncate();
         };
 
 
@@ -126,14 +127,21 @@ class ReportSetup extends Controller
                 $keyrecorder = array_search("final_score", array_keys($companydata[$i]));
                 $storescore = array_splice($companydata[$i], $keyrecorder);
 
-                foreach ($companydata[$i] as $key => $value) {
-                    $indata[$key] = $value;
-                };
+                // foreach ($companydata[$i] as $key => $value) {
+                //     $indata[$key] = $value;
+                // };
+
+                $keyrecorder = array_search("industry_ranking", array_keys($storescore));
+                $ranklist = array_splice($storescore, $keyrecorder);
+
                 $indata['created_at'] = date("Y-m-d H:i:s");
-                $companyid = DB::table('prospects')->insertGetId($indata);
+                $companyid = DB::table('prospects')->insertGetId($companydata[$i]);
                 $storescore['company_id'] = $companyid;
                 $storescore['created_at'] = date("Y-m-d H:i:s");
+                $ranklist['company'] = $companydata[$i]['fc_company_name'];
+                $ranklist['vector_ranking'] = $storescore['rank'];
                 DB::table('prospectscores')->insert($storescore);
+                DB::table('rank')->insert($ranklist);
 
             };};
             //prospectusers&shorturls
