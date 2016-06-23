@@ -26,23 +26,23 @@ class CreateProspectusersTable extends Migration
             $table->string('full_name');
 			
 			// job title
-			$table->string('title');
+			$table->string('title')->nullable();
 			
 			// user entered company name; will be used for manual association with company in prospects table
-			$table->string('company');
+			$table->string('company')->nullable();
 			
 			// foreign key to prospects table for displaying prospect users associated with a prospect company
 			$table->integer('company_id')->index();
 			
 			// full contact API fields
-			$table->string('fc_location_general');
-			$table->string('fc_gravatar');
+			$table->string('fc_location_general')->nullable();
+			$table->string('fc_gravatar')->nullable();
 			
 			// check if twitter is present under social, if so insert 1, else insert 0
-			$table->boolean('fc_has_twitter');
+			$table->boolean('fc_has_twitter')->nullable();
 			
 			// check if facebook is present under social, if so insert 1, else insert 0
-			$table->boolean('fc_has_facebook');
+			$table->boolean('fc_has_facebook')->nullable();
 			
 			// soft delete flag, automagically managed
 			$table->softDeletes();

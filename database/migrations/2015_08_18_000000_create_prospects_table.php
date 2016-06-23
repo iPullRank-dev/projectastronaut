@@ -21,18 +21,18 @@ class CreateProspectsTable extends Migration
 			$table->increments('id');
 			
 			// full contact api data, pull using URL from data spreadsheet & insert
-			$table->string('fc_company_name');
-			$table->string('fc_logo_url');
-			$table->string('fc_website');
-			$table->integer('fc_approx_employees');
-			$table->string('fc_founded');
-			$table->string('fc_overview');
-			$table->string('fc_address_line1');
-			$table->string('fc_address_line2');
-			$table->string('fc_address_locality');
-			$table->string('fc_address_region_name');
-			$table->string('fc_address_postal_code');
-			$table->string('fc_address_country_name');
+			$table->string('fc_company_name')->nullable();
+			$table->string('fc_logo_url')->nullable();
+			$table->string('fc_website')->nullable();
+			$table->integer('fc_approx_employees')->nullable();
+			$table->string('fc_founded')->nullable();
+			$table->string('fc_overview')->nullable();
+			$table->string('fc_address_line1')->nullable();
+			$table->string('fc_address_line2')->nullable();
+			$table->string('fc_address_locality')->nullable();
+			$table->string('fc_address_region_name')->nullable();
+			$table->string('fc_address_postal_code')->nullable();
+			$table->string('fc_address_country_name')->nullable();
 			
 			// raw JS, HTML, etc for retargeting this specific company
 			$table->longText('retargeting_script');
