@@ -269,21 +269,27 @@ TABLE
                         '9971-5-0210-0',
                         new TableCell("A Tale of \nTwo Cities", array('colspan' => 2)),
                     ),
+                    new TableSeparator(),
+                    array(
+                        new TableCell('Cupiditate dicta atque porro, tempora exercitationem modi animi nulla nemo vel nihil!', array('colspan' => 3)),
+                    ),
                 ),
                 'default',
 <<<TABLE
-+----------------+---------------+-----------------+
-| ISBN           | Title         | Author          |
-+----------------+---------------+-----------------+
-| 99921-58-10-7  | Divine Comedy | Dante Alighieri |
-+----------------+---------------+-----------------+
-| Divine Comedy(Dante Alighieri)                   |
-+----------------+---------------+-----------------+
-| Arduino: A Quick-Start Guide   | Mark Schmidt    |
-+----------------+---------------+-----------------+
-| 9971-5-0210-0  | A Tale of                       |
-|                | Two Cities                      |
-+----------------+---------------+-----------------+
++-------------------------------+-------------------------------+-----------------------------+
+| ISBN                          | Title                         | Author                      |
++-------------------------------+-------------------------------+-----------------------------+
+| 99921-58-10-7                 | Divine Comedy                 | Dante Alighieri             |
++-------------------------------+-------------------------------+-----------------------------+
+| Divine Comedy(Dante Alighieri)                                                              |
++-------------------------------+-------------------------------+-----------------------------+
+| Arduino: A Quick-Start Guide                                  | Mark Schmidt                |
++-------------------------------+-------------------------------+-----------------------------+
+| 9971-5-0210-0                 | A Tale of                                                   |
+|                               | Two Cities                                                  |
++-------------------------------+-------------------------------+-----------------------------+
+| Cupiditate dicta atque porro, tempora exercitationem modi animi nulla nemo vel nihil!       |
++-------------------------------+-------------------------------+-----------------------------+
 
 TABLE
             ),
@@ -336,16 +342,16 @@ TABLE
                 ),
                 'default',
 <<<TABLE
-+------------------+--------+-----------------+
-| ISBN             | Title  | Author          |
-+------------------+--------+-----------------+
-| 9971-5-0210-0             | Dante Alighieri |
-|                           | Charles Dickens |
-+------------------+--------+-----------------+
-| Dante Alighieri  | 9971-5-0210-0            |
-| J. R. R. Tolkien |                          |
-| J. R. R          |                          |
-+------------------+--------+-----------------+
++------------------+---------+-----------------+
+| ISBN             | Title   | Author          |
++------------------+---------+-----------------+
+| 9971-5-0210-0              | Dante Alighieri |
+|                            | Charles Dickens |
++------------------+---------+-----------------+
+| Dante Alighieri  | 9971-5-0210-0             |
+| J. R. R. Tolkien |                           |
+| J. R. R          |                           |
++------------------+---------+-----------------+
 
 TABLE
             ),
@@ -461,15 +467,32 @@ TABLE
 
 TABLE
             ),
+            'Row with multiple cells' => array(
+                array(),
+                array(
+                    array(
+                        new TableCell('1', array('colspan' => 3)),
+                        new TableCell('2', array('colspan' => 2)),
+                        new TableCell('3', array('colspan' => 2)),
+                        new TableCell('4', array('colspan' => 2)),
+                    ),
+        ),
+                'default',
+<<<TABLE
++---+--+--+---+--+---+--+---+--+
+| 1       | 2    | 3    | 4    |
++---+--+--+---+--+---+--+---+--+
+
+TABLE
+            ),
         );
     }
 
+    /**
+     * @requires extension mbstring
+     */
     public function testRenderMultiByte()
     {
-        if (!function_exists('mb_strlen')) {
-            $this->markTestSkipped('The "mbstring" extension is not available');
-        }
-
         $table = new Table($output = $this->getOutputStream());
         $table
             ->setHeaders(array('■■'))

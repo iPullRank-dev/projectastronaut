@@ -3,9 +3,6 @@
 
 @section('pagetitle','Reportset')
 
-
-@endsection
-
 @section('content')
 
 <!--upload modal-->

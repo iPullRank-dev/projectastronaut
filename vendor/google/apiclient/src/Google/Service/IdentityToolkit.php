@@ -43,6 +43,7 @@ class Google_Service_IdentityToolkit extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
+    $this->rootUrl = 'https://www.googleapis.com/';
     $this->servicePath = 'identitytoolkit/v3/relyingparty/';
     $this->version = 'v3';
     $this->serviceName = 'identitytoolkit';
@@ -729,6 +730,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRe
   );
   public $captchaChallenge;
   public $captchaResponse;
+  public $disableUser;
   public $displayName;
   public $email;
   public $emailVerified;
@@ -738,6 +740,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRe
   public $password;
   public $provider;
   public $upgradeToFederatedLogin;
+  public $validSince;
 
 
   public function setCaptchaChallenge($captchaChallenge)
@@ -755,6 +758,14 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRe
   public function getCaptchaResponse()
   {
     return $this->captchaResponse;
+  }
+  public function setDisableUser($disableUser)
+  {
+    $this->disableUser = $disableUser;
+  }
+  public function getDisableUser()
+  {
+    return $this->disableUser;
   }
   public function setDisplayName($displayName)
   {
@@ -827,6 +838,14 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRe
   public function getUpgradeToFederatedLogin()
   {
     return $this->upgradeToFederatedLogin;
+  }
+  public function setValidSince($validSince)
+  {
+    $this->validSince = $validSince;
+  }
+  public function getValidSince()
+  {
+    return $this->validSince;
   }
 }
 
@@ -1106,6 +1125,7 @@ class Google_Service_IdentityToolkit_SetAccountInfoResponse extends Google_Colle
   public $email;
   public $idToken;
   public $kind;
+  public $newEmail;
   protected $providerUserInfoType = 'Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo';
   protected $providerUserInfoDataType = 'array';
 
@@ -1141,6 +1161,14 @@ class Google_Service_IdentityToolkit_SetAccountInfoResponse extends Google_Colle
   public function getKind()
   {
     return $this->kind;
+  }
+  public function setNewEmail($newEmail)
+  {
+    $this->newEmail = $newEmail;
+  }
+  public function getNewEmail()
+  {
+    return $this->newEmail;
   }
   public function setProviderUserInfo($providerUserInfo)
   {
@@ -1246,6 +1274,7 @@ class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
   protected $collection_key = 'providerUserInfo';
   protected $internal_gapi_mappings = array(
   );
+  public $disabled;
   public $displayName;
   public $email;
   public $emailVerified;
@@ -1256,9 +1285,18 @@ class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
   protected $providerUserInfoType = 'Google_Service_IdentityToolkit_UserInfoProviderUserInfo';
   protected $providerUserInfoDataType = 'array';
   public $salt;
+  public $validSince;
   public $version;
 
 
+  public function setDisabled($disabled)
+  {
+    $this->disabled = $disabled;
+  }
+  public function getDisabled()
+  {
+    return $this->disabled;
+  }
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
@@ -1330,6 +1368,14 @@ class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
   public function getSalt()
   {
     return $this->salt;
+  }
+  public function setValidSince($validSince)
+  {
+    $this->validSince = $validSince;
+  }
+  public function getValidSince()
+  {
+    return $this->validSince;
   }
   public function setVersion($version)
   {
@@ -1409,6 +1455,7 @@ class Google_Service_IdentityToolkit_VerifyAssertionResponse extends Google_Coll
   public $lastName;
   public $localId;
   public $needConfirmation;
+  public $needEmail;
   public $nickName;
   public $oauthAccessToken;
   public $oauthAuthorizationCode;
@@ -1574,6 +1621,14 @@ class Google_Service_IdentityToolkit_VerifyAssertionResponse extends Google_Coll
   {
     return $this->needConfirmation;
   }
+  public function setNeedEmail($needEmail)
+  {
+    $this->needEmail = $needEmail;
+  }
+  public function getNeedEmail()
+  {
+    return $this->needEmail;
+  }
   public function setNickName($nickName)
   {
     $this->nickName = $nickName;
@@ -1673,6 +1728,9 @@ class Google_Service_IdentityToolkit_VerifyPasswordResponse extends Google_Model
   public $idToken;
   public $kind;
   public $localId;
+  public $oauthAccessToken;
+  public $oauthAuthorizationCode;
+  public $oauthExpireIn;
   public $photoUrl;
   public $registered;
 
@@ -1716,6 +1774,30 @@ class Google_Service_IdentityToolkit_VerifyPasswordResponse extends Google_Model
   public function getLocalId()
   {
     return $this->localId;
+  }
+  public function setOauthAccessToken($oauthAccessToken)
+  {
+    $this->oauthAccessToken = $oauthAccessToken;
+  }
+  public function getOauthAccessToken()
+  {
+    return $this->oauthAccessToken;
+  }
+  public function setOauthAuthorizationCode($oauthAuthorizationCode)
+  {
+    $this->oauthAuthorizationCode = $oauthAuthorizationCode;
+  }
+  public function getOauthAuthorizationCode()
+  {
+    return $this->oauthAuthorizationCode;
+  }
+  public function setOauthExpireIn($oauthExpireIn)
+  {
+    $this->oauthExpireIn = $oauthExpireIn;
+  }
+  public function getOauthExpireIn()
+  {
+    return $this->oauthExpireIn;
   }
   public function setPhotoUrl($photoUrl)
   {

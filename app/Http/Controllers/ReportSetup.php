@@ -38,7 +38,7 @@ class ReportSetup extends Controller
     	if(count($test)>0){	
         $record = DB::table('prospects')
             ->Join('prospectscores', 'prospects.id', '=', 'prospectscores.company_id')
-            ->select('prospects.id','prospects.fc_company_name','prospects.fc_website','prospectscores.final_score')
+            ->select('prospects.id','prospects.fc_company_name','prospects.fc_website','prospectscores.final_grade')
             ->get();
         $n = count($record);
         for ($i=0;$i<$n;$i++) {
@@ -124,7 +124,7 @@ class ReportSetup extends Controller
                 //$storescore['quad4'] = $companydata[$i]['quad4'];
                 //unset($companydata[$i]['final_score']);
 
-                $keyrecorder = array_search("final_score", array_keys($companydata[$i]));
+                $keyrecorder = array_search("final_grade", array_keys($companydata[$i]));
                 $storescore = array_splice($companydata[$i], $keyrecorder);
 
                 // foreach ($companydata[$i] as $key => $value) {

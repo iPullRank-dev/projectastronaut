@@ -1,8 +1,9 @@
-<?php namespace Spatie\LaravelAnalytics;
+<?php
 
-use Illuminate\Support\ServiceProvider;
+namespace Spatie\LaravelAnalytics;
+
 use Google_Client;
-use Config;
+use Illuminate\Support\ServiceProvider;
 
 class LaravelAnalyticsServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-analytics.php' =>  config_path('laravel-analytics.php'),
+            __DIR__.'/config/laravel-analytics.php' => config_path('laravel-analytics.php'),
         ]);
     }
 
@@ -21,14 +22,16 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('laravelAnalytics', function ($app) {
+        $this->app->bind('Spatie\LaravelAnalytics\LaravelAnalytics', function ($app) {
 
             $googleApiHelper = $this->getGoogleApiHelperClient();
 
-            $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'));
+            $laravelAnalytics = new LaravelAnalytics($googleApiHelper, config('laravel-analytics.siteId'));
 
             return $laravelAnalytics;
         });
+
+        $this->app->alias('Spatie\LaravelAnalytics\LaravelAnalytics', 'laravelAnalytics');
     }
 
     /**
@@ -45,8 +48,8 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
         $client = $this->getGoogleClient();
 
         $googleApiHelper = (new GoogleApiHelper($client, app()->make('Illuminate\Contracts\Cache\Repository')))
-            ->setCacheLifeTimeInMinutes(Config::get('laravel-analytics.cacheLifetime'))
-            ->setRealTimeCacheLifeTimeInMinutes(Config::get('laravel-analytics.realTimeCacheLifetimeInSeconds'));
+            ->setCacheLifeTimeInMinutes(config('laravel-analytics.cacheLifetime'))
+            ->setRealTimeCacheLifeTimeInMinutes(config('laravel-analytics.realTimeCacheLifetimeInSeconds'));
 
         return $googleApiHelper;
     }
@@ -58,13 +61,13 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     protected function guardAgainstMissingP12()
     {
-        if (!\File::exists(Config::get('laravel-analytics.certificatePath'))) {
-            throw new \Exception("Can't find the .p12 certificate in: ".Config::get('laravel-analytics.certificatePath'));
+        if (!$this->app['files']->exists(config('laravel-analytics.certificatePath'))) {
+            throw new \Exception("Can't find the .p12 certificate in: ".config('laravel-analytics.certificatePath'));
         }
     }
 
     /**
-     * Get a configured GoogleClient
+     * Get a configured GoogleClient.
      *
      * @return Google_Client
      */
@@ -72,20 +75,20 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     {
         $client = new Google_Client(
             [
-                'oauth2_client_id' => Config::get('laravel-analytics.clientId'),
+                'oauth2_client_id' => config('laravel-analytics.clientId'),
                 'use_objects' => true,
             ]
         );
-        
+
         $client->setClassConfig('Google_Cache_File', 'directory', storage_path('app/laravel-analytics-cache'));
 
         $client->setAccessType('offline');
 
         $client->setAssertionCredentials(
             new \Google_Auth_AssertionCredentials(
-                Config::get('laravel-analytics.serviceEmail'),
+                config('laravel-analytics.serviceEmail'),
                 ['https://www.googleapis.com/auth/analytics.readonly'],
-                file_get_contents(Config::get('laravel-analytics.certificatePath'))
+                file_get_contents(config('laravel-analytics.certificatePath'))
             )
         );
 

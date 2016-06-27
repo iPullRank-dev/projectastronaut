@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Classes\FormatIdentifier;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  *
@@ -539,7 +540,9 @@ class LaravelExcelWriter {
         $path = Config::get('excel.export.pdf.drivers.' . $driver . '.path');
 
         // Disable autoloading for dompdf
-        define("DOMPDF_ENABLE_AUTOLOAD", false);
+        if(! defined("DOMPDF_ENABLE_AUTOLOAD")){
+            define("DOMPDF_ENABLE_AUTOLOAD", false);
+        }
 
         // Set the pdf renderer
         if (!\PHPExcel_Settings::setPdfRenderer($driver, $path))
@@ -578,8 +581,13 @@ class LaravelExcelWriter {
         $this->storagePath = rtrim($path, '/');
 
         // Make sure the storage path exists
-        if (!$this->filesystem->isWritable($this->storagePath))
+        if (!$this->filesystem->exists($this->storagePath)) {
             $this->filesystem->makeDirectory($this->storagePath, 0777, true);
+        }
+
+        if (!$this->filesystem->isWritable($this->storagePath)) {
+            throw new LaravelExcelException("Permission denied to the storage path");
+        }
     }
 
     /**

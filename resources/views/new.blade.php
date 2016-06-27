@@ -3,9 +3,6 @@
 
 @section('pagetitle','New Company')
 
-
-@endsection
-
 @section('content')
 
 <!--upload modal-->

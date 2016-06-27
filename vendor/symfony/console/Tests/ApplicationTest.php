@@ -551,12 +551,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception4.txt', $tester->getDisplay(true), '->renderException() wraps messages when they are bigger than the terminal');
     }
 
+    /**
+     * @requires extension mbstring
+     */
     public function testRenderExceptionWithDoubleWidthCharacters()
     {
-        if (!function_exists('mb_strwidth')) {
-            $this->markTestSkipped('The "mb_strwidth" function is not available');
-        }
-
         $application = $this->getMock('Symfony\Component\Console\Application', array('getTerminalWidth'));
         $application->setAutoExit(false);
         $application->expects($this->any())
@@ -733,6 +732,33 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \LogicException
+     * @expectedExceptionMessage An option with shortcut "e" already exists.
+     */
+    public function testAddingOptionWithDuplicateShortcut()
+    {
+        $dispatcher = new EventDispatcher();
+        $application = new Application();
+        $application->setAutoExit(false);
+        $application->setCatchExceptions(false);
+        $application->setDispatcher($dispatcher);
+
+        $application->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'Environment'));
+
+        $application
+            ->register('foo')
+            ->setAliases(array('f'))
+            ->setDefinition(array(new InputOption('survey', 'e', InputOption::VALUE_REQUIRED, 'My option with a shortcut.')))
+            ->setCode(function (InputInterface $input, OutputInterface $output) {})
+        ;
+
+        $input = new ArrayInput(array('command' => 'foo'));
+        $output = new NullOutput();
+
+        $application->run($input, $output);
+    }
+
+    /**
+     * @expectedException \LogicException
      * @dataProvider getAddingAlreadySetDefinitionElementData
      */
     public function testAddingAlreadySetDefinitionElementData($def)
@@ -884,7 +910,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $tester = new ApplicationTester($application);
         $tester->run(array('command' => 'foo'));
-        $this->assertEquals('before.foo.after.', $tester->getDisplay());
+        $this->assertEquals('before.foo.after.'.PHP_EOL, $tester->getDisplay());
     }
 
     /**
@@ -920,7 +946,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $tester = new ApplicationTester($application);
         $tester->run(array('command' => 'foo'));
-        $this->assertContains('before.foo.after.caught.', $tester->getDisplay());
+        $this->assertContains('before.foo.caught.after.', $tester->getDisplay());
     }
 
     public function testRunWithDispatcherSkippingCommand()
@@ -965,14 +991,14 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             }
         });
         $dispatcher->addListener('console.terminate', function (ConsoleTerminateEvent $event) use ($skipCommand) {
-            $event->getOutput()->write('after.');
+            $event->getOutput()->writeln('after.');
 
             if (!$skipCommand) {
                 $event->setExitCode(113);
             }
         });
         $dispatcher->addListener('console.exception', function (ConsoleExceptionEvent $event) {
-            $event->getOutput()->writeln('caught.');
+            $event->getOutput()->write('caught.');
 
             $event->setException(new \LogicException('caught.', $event->getExitCode(), $event->getException()));
         });
@@ -1002,12 +1028,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('interact called'.PHP_EOL.'called'.PHP_EOL, $tester->getDisplay(), 'Application runs the default set command if different from \'list\' command');
     }
 
+    /**
+     * @requires function posix_isatty
+     */
     public function testCanCheckIfTerminalIsInteractive()
     {
-        if (!function_exists('posix_isatty')) {
-            $this->markTestSkipped('posix_isatty function is required');
-        }
-
         $application = new CustomDefaultCommandApplication();
         $application->setAutoExit(false);
 

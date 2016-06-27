@@ -2,8 +2,6 @@
 
 @section('pagetitle','Dashboard')
 
-@endsection
-
 @section('content')
     <script type="text/javascript">
         var gadata = <?php echo json_encode($analytics);?>;

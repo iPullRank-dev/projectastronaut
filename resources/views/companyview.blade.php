@@ -2,8 +2,6 @@
 
 @section('pagetitle','Company')
 
-@endsection
-
 @section('content')
     <script>
         var companyid = <?php echo json_encode($data[0]->id); ?>;
@@ -116,26 +114,26 @@
                         <div class="col-md-4">
                             <div class="circle">
                             <div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->final_score ?></div>
+                            <div class="gradein"><?php echo $grade[0]->final_grade ?></div>
                             <div>Final Grade</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="normal"><div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->quad1 ?></div>
+                            <div class="gradein"><?php echo $grade[0]->unnatural_link;?></div>
                                 <div>Unnatural Linking</div></div></div>
                         </div>
                         <div class="col-md-2"><div class="normal"><div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->quad2 ?></div>
+                            <div class="gradein"><?php echo $grade[0]->spam_score;?></div>
                             <div>Spam Score</div></div></div>
                         </div>
                         <div class="col-md-2"><div class="normal"><div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->quad3 ?></div>
+                            <div class="gradein"><?php echo $grade[0]->trust_metrics;?></div>
                             <div>Trust Metrics</div></div></div>
                         </div>
                         <div class="col-md-2"><div class="normal"><div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->quad4 ?></div>
+                            <div class="gradein"><?php echo $grade[0]->link_popularity;?></div>
                             <div>Link Popularity</div></div></div>
                         </div>
                     </div>

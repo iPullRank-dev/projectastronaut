@@ -1,4 +1,6 @@
-<?php namespace Spatie\LaravelAnalytics;
+<?php
+
+namespace Spatie\LaravelAnalytics;
 
 use Carbon\Carbon;
 use DateTime;
@@ -27,10 +29,10 @@ class LaravelAnalytics
     }
 
     /**
-     * Set the siteId
+     * Set the siteId.
      *
      * @param string $siteId
-
+     *
      * @return $this
      */
     public function setSiteId($siteId)
@@ -38,6 +40,16 @@ class LaravelAnalytics
         $this->siteId = $siteId;
 
         return $this;
+    }
+
+    /**
+     * Get the siteId
+     *
+     * @return string $siteId
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
     }
 
     /**
@@ -227,23 +239,23 @@ class LaravelAnalytics
     }
 
     /**
-     * Get the number of active users currently on the site
+     * Get the number of active users currently on the site.
      *
-     * @param array  $others
-     * 
+     * @param array $others
+     *
      * @return int
      */
     public function getActiveUsers($others = array())
     {
         $answer = $this->performRealTimeQuery('rt:activeUsers', $others);
-    
+
         if (is_null($answer->rows)) {
             return 0;
         }
-    	
+
         return $answer->rows[0][0];
     }
-    
+
     /**
      * Get the most visited pages for the given period.
      *
@@ -302,8 +314,8 @@ class LaravelAnalytics
     /**
      * Call the real time query method on the authenticated client.
      *
-     * @param string   $metrics
-     * @param array    $others
+     * @param string $metrics
+     * @param array  $others
      *
      * @return mixed
      */
@@ -311,7 +323,7 @@ class LaravelAnalytics
     {
         return $this->client->performRealTimeQuery($this->siteId, $metrics, $others);
     }
-    
+
     /**
      * Return true if this site is configured to use Google Analytics.
      *
@@ -321,8 +333,6 @@ class LaravelAnalytics
     {
         return $this->siteId != '';
     }
-    
-
 
     /**
      * Returns an array with the current date and the date minus the number of days specified.
@@ -331,7 +341,7 @@ class LaravelAnalytics
      *
      * @return array
      */
-    private function calculateNumberOfDays($numberOfDays)
+    protected function calculateNumberOfDays($numberOfDays)
     {
         $endDate = Carbon::today();
         $startDate = Carbon::today()->subDays($numberOfDays);

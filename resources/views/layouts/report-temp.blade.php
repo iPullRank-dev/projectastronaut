@@ -335,36 +335,36 @@
                             <div class="col-md-6 report-core">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Unnatural Linking - <strong>@yield('quad1-level')</strong></h3>
+                                        <h3>Unnatural Linking - <strong>@yield('unnatural_link-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
-                                        @yield('quad1')
+                                        @yield('unnatural_link')
                                     </div>
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Spam Score - <strong>@yield('quad2-level')</strong></h3>
+                                        <h3>Spam Score - <strong>@yield('spam_score-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
-                                        @yield('quad2')
+                                        @yield('spam_score')
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 report-core">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Trust Metrics - <strong>@yield('quad3-level')</strong></h3>
+                                        <h3>Trust Metrics - <strong>@yield('trust_metrics-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
-                                        @yield('quad3')
+                                        @yield('trust_metrics')
                                     </div>
                                 </div>
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h3>Link Popularity and Visibility - <strong>@yield('quad4-level')</strong></h3>
+                                        <h3>Link Popularity and Visibility - <strong>@yield('link_popularity-level')</strong></h3>
                                     </div>
                                     <div class="panel-content">
-                                        @yield('quad4')
+                                        @yield('link_popularity')
                                     </div>
                                 </div>
                             </div>

@@ -31,7 +31,7 @@
 <?php 
 
 if(isset($data)){
-echo $data[0]->final_score;};
+echo $data[0]->final_grade;};
 
 ?>
 
@@ -112,27 +112,27 @@ echo $data[0]->rank;};
 
 @endsection
 
-@section('quad1')
+@section('unnatural_link')
 
-<div><?php echo $copycontent['quad1'] ?></div>
-
-@endsection
-
-@section('quad2')
-
-<div><?php echo $copycontent['quad2'] ?></div>
+<div><?php echo $copycontent['unnatural_link'] ?></div>
 
 @endsection
 
-@section('quad3')
+@section('spam_score')
 
-<div><?php echo $copycontent['quad3'] ?></div>
+<div><?php echo $copycontent['spam_score'] ?></div>
 
 @endsection
 
-@section('quad4')
+@section('trust_metrics')
 
-<div><?php echo $copycontent['quad4'] ?></div>
+<div><?php echo $copycontent['trust_metrics'] ?></div>
+
+@endsection
+
+@section('link_popularity')
+
+<div><?php echo $copycontent['link_popularity'] ?></div>
 
 @endsection
 
@@ -140,20 +140,20 @@ echo $data[0]->rank;};
         $level=array("a"=>"Excellent","b"=>"Good","c"=>"Average","d"=>"Poor");
 ?>
 
-@section('quad1-level')
-    <?php echo (isset($level[strtolower($data[0]->quad1)])?$level[strtolower($data[0]->quad1)]:'Unavaliable')?>
+@section('unnatural_link-level')
+    <?php echo (isset($level[strtolower($data[0]->unnatural_link)])?$level[strtolower($data[0]->unnatural_link)]:'Unavaliable')?>
 @endsection
 
-@section('quad2-level')
-    <?php echo (isset($level[strtolower($data[0]->quad2)])?$level[strtolower($data[0]->quad2)]:'Unavaliable')?>
+@section('spam_score-level')
+    <?php echo (isset($level[strtolower($data[0]->spam_score)])?$level[strtolower($data[0]->spam_score)]:'Unavaliable')?>
 @endsection
 
-@section('quad3-level')
-    <?php echo (isset($level[strtolower($data[0]->quad3)])?$level[strtolower($data[0]->quad3)]:'Unavaliable')?>
+@section('trust_metrics-level')
+    <?php echo (isset($level[strtolower($data[0]->trust_metrics)])?$level[strtolower($data[0]->trust_metrics)]:'Unavaliable')?>
 @endsection
 
-@section('quad4-level')
-    <?php echo (isset($level[strtolower($data[0]->quad4)])?$level[strtolower($data[0]->quad4)]:'Unavaliable')?>
+@section('link_popularity-level')
+    <?php echo (isset($level[strtolower($data[0]->link_popularity)])?$level[strtolower($data[0]->link_popularity)]:'Unavaliable')?>
 @endsection
 
 @section('pagejs')

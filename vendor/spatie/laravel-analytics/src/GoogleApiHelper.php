@@ -1,4 +1,6 @@
-<?php namespace Spatie\LaravelAnalytics;
+<?php
+
+namespace Spatie\LaravelAnalytics;
 
 use Carbon\Carbon;
 use Exception;
@@ -63,7 +65,7 @@ class GoogleApiHelper
 
         return $googleAnswer;
     }
-    
+
     /**
      * Query the Google Analytics Real Time Reporting Service with given parameters.
      *
@@ -81,11 +83,12 @@ class GoogleApiHelper
             return $this->cache->get($realTimeCacheName);
         }
 
-        $googleAnswer =  $this->service->data_realtime->get($id, $metrics, $others);
+        $googleAnswer = $this->service->data_realtime->get($id, $metrics, $others);
 
         if ($this->useRealTimeCache()) {
             $this->cache->put($realTimeCacheName, $googleAnswer, Carbon::now()->addSeconds($this->realTimeCacheLifeTimeInSeconds));
         }
+
         return $googleAnswer;
     }
 
@@ -106,7 +109,7 @@ class GoogleApiHelper
             return $siteIds[$url];
         }
 
-        throw new Exception("Site ".$url." is not present in your Analytics account.");
+        throw new Exception('Site '.$url.' is not present in your Analytics account.');
     }
 
     /**
@@ -118,11 +121,11 @@ class GoogleApiHelper
     {
         static $siteIds = null;
 
-        if (! is_null($siteIds)) {
+        if (!is_null($siteIds)) {
             return $siteIds;
         }
 
-        foreach ($this->service->management_profiles->listManagementProfiles("~all", "~all") as $site) {
+        foreach ($this->service->management_profiles->listManagementProfiles('~all', '~all') as $site) {
             $siteIds[$site['websiteUrl']] = 'ga:'.$site['id'];
         }
 
@@ -154,7 +157,8 @@ class GoogleApiHelper
     /**
      * Set the cache time.
      *
-     * @param  int  $cacheLifeTimeInMinutes
+     * @param int $cacheLifeTimeInMinutes
+     *
      * @return self
      */
     public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
@@ -189,7 +193,8 @@ class GoogleApiHelper
     /**
      * Set the cache time.
      *
-     * @param  int  $realTimeCacheLifeTimeInSeconds
+     * @param int $realTimeCacheLifeTimeInSeconds
+     *
      * @return self
      */
     public function setRealTimeCacheLifeTimeInMinutes($realTimeCacheLifeTimeInSeconds)

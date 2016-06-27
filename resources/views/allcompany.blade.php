@@ -2,8 +2,6 @@
 
 @section('pagetitle','All Companies')
 
-@endsection
-
 @section('content')
 
  <div class="header">

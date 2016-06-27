@@ -2,6 +2,28 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.4.1 - 2015-05-12
+
+- fixes a bug introduced in 1.4.0 where the check whether a p12 certificate is present was broken 
+
+## 1.4.0 - 2015-05-11
+
+**This version does not work, please upgrade to 1.4.0**
+
+- removing the use of facades
+
+## 1.3.1
+- make `calculateNumberOfDays`-function protected
+
+## 1.3.0
+- Added method getSiteId() 
+
+## 1.2.3
+- Fix PHP 5.4 compatibility
+
+## 1.2.2
+- An injected `Spatie\LaravelAnalytics\LaravelAnalytics`-object will now be properly configured
+
 ## 1.2.1
 - Removed a var_dump-call that was not supposed to be there
 

@@ -1,10 +1,10 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
 {
-
     protected $client;
     protected $laravelAnalytics;
     protected $siteId;
@@ -18,16 +18,17 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getVisitorsAndPageViews()
+     * Test method getVisitorsAndPageViews().
      */
     public function testGetVisitorsAndPageViews()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:visits,ga:pageviews", ['dimensions' => 'ga:date'])
+            ->with($this->siteId, $startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:date'])
             ->andReturn((object) ['rows' => [['20140101', 2, 3]]]);
 
         $googleResult = $this->laravelAnalytics->getVisitorsAndPageViews();
@@ -42,16 +43,17 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopKeywords()
+     * Test method getTopKeywords().
      */
     public function testGetTopKeywords()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:sessions", ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => 30, 'filters' => 'ga:keyword!=(not set);ga:keyword!=(not provided)'])
+            ->with($this->siteId, $startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => 30, 'filters' => 'ga:keyword!=(not set);ga:keyword!=(not provided)'])
             ->andReturn((object) ['rows' => [['first', 'second']]]);
 
         $googleResult = $this->laravelAnalytics->getTopKeyWords();
@@ -60,16 +62,17 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetTopReferrers()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:pageviews", ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => 20])
+            ->with($this->siteId, $startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => 20])
             ->andReturn((object) ['rows' => [['foundUrl', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getTopReferrers();
@@ -78,16 +81,17 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetTopBrowsers()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:sessions", ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions'])
+            ->with($this->siteId, $startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions'])
             ->andReturn((object) ['rows' => [['Google Chrome', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getTopBrowsers();
@@ -96,16 +100,17 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetMostVisitedPages()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:pageviews", ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => 20])
+            ->with($this->siteId, $startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => 20])
             ->andReturn((object) ['rows' => [['visited url', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getMostVisitedPages();
@@ -114,7 +119,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getSiteIdByUrl()
+     * Test method getSiteIdByUrl().
      */
     public function testGetSiteIdByUrl()
     {
@@ -129,12 +134,14 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method performQuery()
+     * Test method performQuery().
      */
     public function testPerformQuery()
     {
-        $startDate = (new DateTime())->modify('-1 year');
-        $endDate = new DateTime();
+        $startDate = Carbon::now()->subDays('365');
+
+        $endDate = Carbon::now();
+
         $metrics = 'ga:somedummymetric';
         $others = ['first', 'second'];
 
@@ -161,9 +168,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
         $disabledAnalytics = new \Spatie\LaravelAnalytics\LaravelAnalytics($this->client);
         $this->assertFalse($disabledAnalytics->isEnabled());
     }
-    
+
     /**
-     * Test method performRealTimeQuery()
+     * Test method performRealTimeQuery().
      */
     public function testPerformRealTimeQuery()
     {
@@ -183,14 +190,14 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getActiveUsers()
+     * Test method getActiveUsers().
      */
     public function testGetActiveUsers()
     {
-	$others = ['first', 'second'];
-	$metrics = 'rt:activeUsers';
+        $others = ['first', 'second'];
+        $metrics = 'rt:activeUsers';
 
-	$this->client
+        $this->client
             ->shouldReceive('performRealTimeQuery')
             ->with($this->siteId, $metrics, $others)
             ->andReturn((object) ['rows' => [[0, '500']]]);

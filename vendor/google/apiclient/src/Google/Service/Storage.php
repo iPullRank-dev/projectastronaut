@@ -33,6 +33,9 @@ class Google_Service_Storage extends Google_Service
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
+  /** View your data across Google Cloud Platform services. */
+  const CLOUD_PLATFORM_READ_ONLY =
+      "https://www.googleapis.com/auth/cloud-platform.read-only";
   /** Manage your data and permissions in Google Cloud Storage. */
   const DEVSTORAGE_FULL_CONTROL =
       "https://www.googleapis.com/auth/devstorage.full_control";
@@ -59,6 +62,7 @@ class Google_Service_Storage extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
+    $this->rootUrl = 'https://www.googleapis.com/';
     $this->servicePath = 'storage/v1/';
     $this->version = 'v1';
     $this->serviceName = 'storage';
@@ -1452,7 +1456,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * object. (objectAccessControls.delete)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $entity The entity holding the permission. Can be user-userId,
    * user-emailAddress, group-groupId, group-emailAddress, allUsers, or
    * allAuthenticatedUsers.
@@ -1473,7 +1478,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * (objectAccessControls.get)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $entity The entity holding the permission. Can be user-userId,
    * user-emailAddress, group-groupId, group-emailAddress, allUsers, or
    * allAuthenticatedUsers.
@@ -1495,7 +1501,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * (objectAccessControls.insert)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param Google_ObjectAccessControl $postBody
    * @param array $optParams Optional parameters.
    *
@@ -1515,7 +1522,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * (objectAccessControls.listObjectAccessControls)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string generation If present, selects a specific revision of this
@@ -1534,7 +1542,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * semantics. (objectAccessControls.patch)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $entity The entity holding the permission. Can be user-userId,
    * user-emailAddress, group-groupId, group-emailAddress, allUsers, or
    * allAuthenticatedUsers.
@@ -1556,7 +1565,8 @@ class Google_Service_Storage_ObjectAccessControls_Resource extends Google_Servic
    * Updates an ACL entry on the specified object. (objectAccessControls.update)
    *
    * @param string $bucket Name of a bucket.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $entity The entity holding the permission. Can be user-userId,
    * user-emailAddress, group-groupId, group-emailAddress, allUsers, or
    * allAuthenticatedUsers.
@@ -1592,7 +1602,9 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    *
    * @param string $destinationBucket Name of the bucket in which to store the new
    * object.
-   * @param string $destinationObject Name of the new object.
+   * @param string $destinationObject Name of the new object. For information
+   * about how to URL encode object names to be path safe, see Encoding URI Path
+   * Parts.
    * @param Google_ComposeRequest $postBody
    * @param array $optParams Optional parameters.
    *
@@ -1612,14 +1624,17 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
   }
 
   /**
-   * Copies an object to a specified location. Optionally overrides metadata.
-   * (objects.copy)
+   * Copies a source object to a destination object. Optionally overrides
+   * metadata. (objects.copy)
    *
    * @param string $sourceBucket Name of the bucket in which to find the source
    * object.
-   * @param string $sourceObject Name of the source object.
+   * @param string $sourceObject Name of the source object. For information about
+   * how to URL encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $destinationBucket Name of the bucket in which to store the new
-   * object. Overrides the provided object metadata's bucket value, if any.
+   * object. Overrides the provided object metadata's bucket value, if any.For
+   * information about how to URL encode object names to be path safe, see
+   * Encoding URI Path Parts.
    * @param string $destinationObject Name of the new object. Required when the
    * object metadata is not otherwise provided. Overrides the object metadata's
    * name value, if any.
@@ -1669,7 +1684,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * (objects.delete)
    *
    * @param string $bucket Name of the bucket in which the object resides.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string ifGenerationNotMatch Makes the operation conditional on
@@ -1694,7 +1710,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * Retrieves an object or its metadata. (objects.get)
    *
    * @param string $bucket Name of the bucket in which the object resides.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string ifGenerationNotMatch Makes the operation conditional on
@@ -1745,7 +1762,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * whether the object's current metageneration does not match the given value.
    * @opt_param string name Name of the object. Required when the object metadata
    * is not otherwise provided. Overrides the object metadata's name value, if
-   * any.
+   * any. For information about how to URL encode object names to be path safe,
+   * see Encoding URI Path Parts.
    * @return Google_Service_Storage_StorageObject
    */
   public function insert($bucket, Google_Service_Storage_StorageObject $postBody, $optParams = array())
@@ -1790,7 +1808,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * (objects.patch)
    *
    * @param string $bucket Name of the bucket in which the object resides.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param Google_StorageObject $postBody
    * @param array $optParams Optional parameters.
    *
@@ -1822,12 +1841,14 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    *
    * @param string $sourceBucket Name of the bucket in which to find the source
    * object.
-   * @param string $sourceObject Name of the source object.
+   * @param string $sourceObject Name of the source object. For information about
+   * how to URL encode object names to be path safe, see Encoding URI Path Parts.
    * @param string $destinationBucket Name of the bucket in which to store the new
    * object. Overrides the provided object metadata's bucket value, if any.
    * @param string $destinationObject Name of the new object. Required when the
    * object metadata is not otherwise provided. Overrides the object metadata's
-   * name value, if any.
+   * name value, if any. For information about how to URL encode object names to
+   * be path safe, see Encoding URI Path Parts.
    * @param Google_StorageObject $postBody
    * @param array $optParams Optional parameters.
    *
@@ -1836,8 +1857,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * @opt_param string ifGenerationNotMatch Makes the operation conditional on
    * whether the destination object's current generation does not match the given
    * value.
-   * @opt_param string rewriteToken Include this field (from the previous Rewrite
-   * response) on each Rewrite request after the first one, until the Rewrite
+   * @opt_param string rewriteToken Include this field (from the previous rewrite
+   * response) on each rewrite request after the first one, until the rewrite
    * response 'done' flag is true. Calls that provide a rewriteToken can omit all
    * other request fields, but if included those fields must match the values
    * provided in the first rewrite request.
@@ -1854,12 +1875,12 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * @opt_param string ifSourceGenerationMatch Makes the operation conditional on
    * whether the source object's generation matches the given value.
    * @opt_param string maxBytesRewrittenPerCall The maximum number of bytes that
-   * will be rewritten per Rewrite request. Most callers shouldn't need to specify
+   * will be rewritten per rewrite request. Most callers shouldn't need to specify
    * this parameter - it is primarily in place to support testing. If specified
    * the value must be an integral multiple of 1 MiB (1048576). Also, this only
    * applies to requests where the source and destination span locations and/or
-   * storage classes. Finally, this value must not change across Rewrite calls
-   * else you'll get an error that the rewrite token is invalid.
+   * storage classes. Finally, this value must not change across rewrite calls
+   * else you'll get an error that the rewriteToken is invalid.
    * @opt_param string ifSourceMetagenerationMatch Makes the operation conditional
    * on whether the source object's current metageneration matches the given
    * value.
@@ -1884,7 +1905,8 @@ class Google_Service_Storage_Objects_Resource extends Google_Service_Resource
    * Updates an object's metadata. (objects.update)
    *
    * @param string $bucket Name of the bucket in which the object resides.
-   * @param string $object Name of the object.
+   * @param string $object Name of the object. For information about how to URL
+   * encode object names to be path safe, see Encoding URI Path Parts.
    * @param Google_StorageObject $postBody
    * @param array $optParams Optional parameters.
    *
@@ -1972,6 +1994,7 @@ class Google_Service_Storage_Bucket extends Google_Collection
   public $selfLink;
   public $storageClass;
   public $timeCreated;
+  public $updated;
   protected $versioningType = 'Google_Service_Storage_BucketVersioning';
   protected $versioningDataType = '';
   protected $websiteType = 'Google_Service_Storage_BucketWebsite';
@@ -2105,6 +2128,14 @@ class Google_Service_Storage_Bucket extends Google_Collection
   public function getTimeCreated()
   {
     return $this->timeCreated;
+  }
+  public function setUpdated($updated)
+  {
+    $this->updated = $updated;
+  }
+  public function getUpdated()
+  {
+    return $this->updated;
   }
   public function setVersioning(Google_Service_Storage_BucketVersioning $versioning)
   {
@@ -3081,6 +3112,7 @@ class Google_Service_Storage_StorageObject extends Google_Collection
   public $selfLink;
   public $size;
   public $storageClass;
+  public $timeCreated;
   public $timeDeleted;
   public $updated;
 
@@ -3260,6 +3292,14 @@ class Google_Service_Storage_StorageObject extends Google_Collection
   public function getStorageClass()
   {
     return $this->storageClass;
+  }
+  public function setTimeCreated($timeCreated)
+  {
+    $this->timeCreated = $timeCreated;
+  }
+  public function getTimeCreated()
+  {
+    return $this->timeCreated;
   }
   public function setTimeDeleted($timeDeleted)
   {

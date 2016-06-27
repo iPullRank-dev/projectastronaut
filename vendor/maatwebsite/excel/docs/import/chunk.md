@@ -38,5 +38,12 @@ Injected ExcelFile example:
         $import->chunk(250, function($results)
         {
             // do stuff
-        })
+            // or return true if you want to stop importing.
+        });
     }
+
+## Queued chunks
+
+We automatically queue every chunk for you, if you have enabled the queue driver in your config. 
+
+If you want to by-pass the behaviour, you can pass `false` as third param of `chunk($size, $callback, $shouldQueue)`.

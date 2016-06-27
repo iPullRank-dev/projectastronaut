@@ -82,7 +82,7 @@ body,html{
         <tr>
             <td class="left">
                 <div>
-                    <div style="font-size:70px;color:#319db5;"><?php echo $data[0]->final_score;?></div>
+                    <div style="font-size:70px;color:#319db5;"><?php echo $data[0]->final_grade;?></div>
                     <div style="font-size:12px;">Grade</div>
                 </div>
             </td>
@@ -102,22 +102,22 @@ body,html{
     
 <div id="main">
     <div class="quad">
-        <div class="title">UNNATURAL LINKING - <?php echo (isset($level[strtolower($data[0]->quad1)])?$level[strtolower($data[0]->quad1)]:'Unavaliable')?></div>
+        <div class="title">UNNATURAL LINKING - <?php echo (isset($level[strtolower($data[0]->unnatural_link)])?$level[strtolower($data[0]->unnatural_link)]:'Unavaliable')?></div>
         <div class="content">
-            <?php echo $copycontent['quad1'] ?>
+            <?php echo $copycontent['unnatural_link'] ?>
         </div>
     </div>
     <div class="quad">
-        <div class="title">SPAM SCORE - <?php echo (isset($level[strtolower($data[0]->quad2)])?$level[strtolower($data[0]->quad2)]:'Unavaliable')?></div>
-        <div class="content"><?php echo $copycontent['quad2'] ?></div>
+        <div class="title">SPAM SCORE - <?php echo (isset($level[strtolower($data[0]->spam_score)])?$level[strtolower($data[0]->spam_score)]:'Unavaliable')?></div>
+        <div class="content"><?php echo $copycontent['spam_score'] ?></div>
     </div>
     <div class="quad">
-        <div class="title">TRUST METRICS - <?php echo (isset($level[strtolower($data[0]->quad3)])?$level[strtolower($data[0]->quad3)]:'Unavaliable')?></div>
-        <div class="content"><?php echo $copycontent['quad3'] ?></div>
+        <div class="title">TRUST METRICS - <?php echo (isset($level[strtolower($data[0]->trust_metrics)])?$level[strtolower($data[0]->trust_metrics)]:'Unavaliable')?></div>
+        <div class="content"><?php echo $copycontent['trust_metrics'] ?></div>
     </div>
     <div class="quad">
-        <div class="title">LINK POPULARITY AND VISIBILITY - <?php echo (isset($level[strtolower($data[0]->quad4)])?$level[strtolower($data[0]->quad4)]:'Unavaliable')?></div>
-        <div class="content"><?php echo $copycontent['quad4'] ?>
+        <div class="title">LINK POPULARITY AND VISIBILITY - <?php echo (isset($level[strtolower($data[0]->link_popularity)])?$level[strtolower($data[0]->link_popularity)]:'Unavaliable')?></div>
+        <div class="content"><?php echo $copycontent['link_popularity'] ?>
 </div>
     </div>
 </div>

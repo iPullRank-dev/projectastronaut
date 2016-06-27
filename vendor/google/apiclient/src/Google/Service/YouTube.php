@@ -80,6 +80,7 @@ class Google_Service_YouTube extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
+    $this->rootUrl = 'https://www.googleapis.com/';
     $this->servicePath = 'youtube/v3/';
     $this->version = 'v3';
     $this->serviceName = 'youtube';
@@ -165,7 +166,7 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'debugProjectIdOverride' => array(
+                'onBehalfOfContentOwner' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -191,7 +192,7 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'debugProjectIdOverride' => array(
+                'onBehalfOfContentOwner' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -209,7 +210,7 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'debugProjectIdOverride' => array(
+                'onBehalfOfContentOwner' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -236,11 +237,11 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'debugProjectIdOverride' => array(
+                'id' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'id' => array(
+                'onBehalfOfContentOwner' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -258,7 +259,7 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'debugProjectIdOverride' => array(
+                'onBehalfOfContentOwner' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -465,10 +466,6 @@ class Google_Service_YouTube extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'shareOnGooglePlus' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
             ),'list' => array(
               'path' => 'commentThreads',
@@ -499,6 +496,10 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
+                'id' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -511,7 +512,7 @@ class Google_Service_YouTube extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'id' => array(
+                'order' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -717,6 +718,33 @@ class Google_Service_YouTube extends Google_Service
           'methods' => array(
             'bind' => array(
               'path' => 'liveBroadcasts/bind',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'id' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'part' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'onBehalfOfContentOwnerChannel' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'onBehalfOfContentOwner' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'streamId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'bind_direct' => array(
+              'path' => 'liveBroadcasts/bind/direct',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'id' => array(
@@ -1603,10 +1631,6 @@ class Google_Service_YouTube extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
             ),'reportAbuse' => array(
               'path' => 'videos/reportAbuse',
@@ -1702,9 +1726,6 @@ class Google_Service_YouTube_Activities_Resource extends Google_Service_Resource
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are snippet and
-   * contentDetails.
    * @param Google_Activity $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_YouTube_Activity
@@ -1725,15 +1746,13 @@ class Google_Service_YouTube_Activities_Resource extends Google_Service_Resource
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more activity resource properties that the API response will include.
-   * The part names that you can include in the parameter value are id, snippet,
-   * and contentDetails.
    *
    * If the parameter identifies a property that contains child properties, the
-   * child properties will be included in the response. For example, in a activity
-   * resource, the snippet property contains other properties that identify the
-   * type of activity, a display title for the activity, and so forth. If you set
-   * part=snippet, the API response will also contain all of those nested
-   * properties.
+   * child properties will be included in the response. For example, in an
+   * activity resource, the snippet property contains other properties that
+   * identify the type of activity, a display title for the activity, and so
+   * forth. If you set part=snippet, the API response will also contain all of
+   * those nested properties.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string regionCode The regionCode parameter instructs the API to
@@ -1798,8 +1817,18 @@ class Google_Service_YouTube_Captions_Resource extends Google_Service_Resource
    *
    * @opt_param string onBehalfOf ID of the Google+ Page for the channel that the
    * request is be on behalf of
-   * @opt_param string debugProjectIdOverride The debugProjectIdOverride parameter
-   * should be used for mimicking a request for a certain project ID
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    */
   public function delete($id, $optParams = array())
   {
@@ -1829,8 +1858,18 @@ class Google_Service_YouTube_Captions_Resource extends Google_Service_Resource
    * value is an ISO 639-1 two-letter language code that identifies the desired
    * caption language. The translation is generated by using machine translation,
    * such as Google Translate.
-   * @opt_param string debugProjectIdOverride The debugProjectIdOverride parameter
-   * should be used for mimicking a request for a certain project ID
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    */
   public function download($id, $optParams = array())
   {
@@ -1849,8 +1888,18 @@ class Google_Service_YouTube_Captions_Resource extends Google_Service_Resource
    *
    * @opt_param string onBehalfOf ID of the Google+ Page for the channel that the
    * request is be on behalf of
-   * @opt_param string debugProjectIdOverride The debugProjectIdOverride parameter
-   * should be used for mimicking a request for a certain project ID.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    * @opt_param bool sync The sync parameter indicates whether YouTube should
    * automatically synchronize the caption file with the audio track of the video.
    * If you set the value to true, YouTube will disregard any time codes that are
@@ -1883,11 +1932,21 @@ class Google_Service_YouTube_Captions_Resource extends Google_Service_Resource
    *
    * @opt_param string onBehalfOf ID of the Google+ Page for the channel that the
    * request is on behalf of.
-   * @opt_param string debugProjectIdOverride The debugProjectIdOverride parameter
-   * should be used for mimicking a request for a certain project ID.
    * @opt_param string id The id parameter specifies a comma-separated list of IDs
    * that identify the caption resources that should be retrieved. Each ID must
    * identify a caption track associated with the specified video.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    * @return Google_Service_YouTube_CaptionListResponse
    */
   public function listCaptions($part, $videoId, $optParams = array())
@@ -1912,8 +1971,18 @@ class Google_Service_YouTube_Captions_Resource extends Google_Service_Resource
    *
    * @opt_param string onBehalfOf ID of the Google+ Page for the channel that the
    * request is be on behalf of
-   * @opt_param string debugProjectIdOverride The debugProjectIdOverride parameter
-   * should be used for mimicking a request for a certain project ID.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    * @opt_param bool sync Note: The API server only processes the parameter value
    * if the request contains an updated caption file.
    *
@@ -2173,8 +2242,6 @@ class Google_Service_YouTube_Channels_Resource extends Google_Service_Resource
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more channel resource properties that the API response will include.
-   * The part names that you can include in the parameter value are id, snippet,
-   * contentDetails, statistics, topicDetails, and invideoPromotion.
    *
    * If the parameter identifies a property that contains child properties, the
    * child properties will be included in the response. For example, in a channel
@@ -2183,19 +2250,25 @@ class Google_Service_YouTube_Channels_Resource extends Google_Service_Resource
    * will also contain all of those nested properties.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool managedByMe Set this parameter's value to true to instruct
-   * the API to only return channels managed by the content owner that the
-   * onBehalfOfContentOwner parameter specifies. The user must be authenticated as
-   * a CMS account linked to the specified content owner and
-   * onBehalfOfContentOwner must be provided.
-   * @opt_param string onBehalfOfContentOwner The onBehalfOfContentOwner parameter
-   * indicates that the authenticated user is acting on behalf of the content
-   * owner specified in the parameter value. This parameter is intended for
-   * YouTube content partners that own and manage many different YouTube channels.
-   * It allows content owners to authenticate once and get access to all their
-   * video and channel data, without having to provide authentication credentials
-   * for each individual channel. The actual CMS account that the user
-   * authenticates with needs to be linked to the specified YouTube content owner.
+   * @opt_param bool managedByMe Note: This parameter is intended exclusively for
+   * YouTube content partners.
+   *
+   * Set this parameter's value to true to instruct the API to only return
+   * channels managed by the content owner that the onBehalfOfContentOwner
+   * parameter specifies. The user must be authenticated as a CMS account linked
+   * to the specified content owner and onBehalfOfContentOwner must be provided.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The CMS account that
+   * the user authenticates with must be linked to the specified YouTube content
+   * owner.
    * @opt_param string forUsername The forUsername parameter specifies a YouTube
    * username, thereby requesting the channel associated with that username.
    * @opt_param bool mine Set this parameter's value to true to instruct the API
@@ -2209,8 +2282,9 @@ class Google_Service_YouTube_Channels_Resource extends Google_Service_Resource
    * page in the result set that should be returned. In an API response, the
    * nextPageToken and prevPageToken properties identify other pages that could be
    * retrieved.
-   * @opt_param bool mySubscribers Set this parameter's value to true to retrieve
-   * a list of channels that subscribed to the authenticated user's channel.
+   * @opt_param bool mySubscribers Use the subscriptions.list method and its
+   * mySubscribers parameter to retrieve a list of subscribers to the
+   * authenticated user's channel.
    * @opt_param string hl The hl parameter should be used for filter out the
    * properties that are not in the given language. Used for the brandingSettings
    * part.
@@ -2227,17 +2301,20 @@ class Google_Service_YouTube_Channels_Resource extends Google_Service_Resource
   }
 
   /**
-   * Updates a channel's metadata. (channels.update)
+   * Updates a channel's metadata. Note that this method currently only supports
+   * updates to the channel resource's brandingSettings and invideoPromotion
+   * objects and their child properties. (channels.update)
    *
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
    *
-   * The part names that you can include in the parameter value are id and
-   * invideoPromotion.
+   * The API currently only allows the parameter value to be set to either
+   * brandingSettings or invideoPromotion. (You cannot update both of those parts
+   * with a single request.)
    *
-   * Note that this method will override the existing values for all of the
-   * mutable properties that are contained in any parts that the parameter value
+   * Note that this method overrides the existing values for all of the mutable
+   * properties that are contained in any parts that the parameter value
    * specifies.
    * @param Google_Channel $postBody
    * @param array $optParams Optional parameters.
@@ -2272,19 +2349,14 @@ class Google_Service_YouTube_CommentThreads_Resource extends Google_Service_Reso
 {
 
   /**
-   * Creates a new comment thread and top level comment. (commentThreads.insert)
+   * Creates a new top-level comment. To add a reply to an existing comment, use
+   * the comments.insert method instead. (commentThreads.insert)
    *
-   * @param string $part The part parameter serves two purposes in this operation.
-   * It identifies the properties that the write operation will set as well as the
-   * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are id and
-   * snippet. However only snippet contains properties that can be set.
+   * @param string $part The part parameter identifies the properties that the API
+   * response will include. Set the parameter value to snippet. The snippet part
+   * has a quota cost of 2 units.
    * @param Google_CommentThread $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool shareOnGooglePlus The shareOnGooglePlus determines whether
-   * this thread should also be posted on Google+.
    * @return Google_Service_YouTube_CommentThread
    */
   public function insert($part, Google_Service_YouTube_CommentThread $postBody, $optParams = array())
@@ -2298,31 +2370,33 @@ class Google_Service_YouTube_CommentThreads_Resource extends Google_Service_Reso
    * Returns a list of comment threads that match the API request parameters.
    * (commentThreads.listCommentThreads)
    *
-   * @param string $part The part parameter specifies the commentThread resource
-   * parts that the API response will include. Supported values are id, snippet
-   * and replies.
+   * @param string $part The part parameter specifies a comma-separated list of
+   * one or more commentThread resource properties that the API response will
+   * include.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchTerms The searchTerms parameter instructs the API to
-   * limit the returned comments to those which contain the specified search
-   * terms.
+   * limit the API response to only contain comments that contain the specified
+   * search terms.
    *
    * Note: This parameter is not supported for use in conjunction with the id
    * parameter.
    * @opt_param string allThreadsRelatedToChannelId The
-   * allThreadsRelatedToChannelId parameter instructs the API to return the
-   * comment threads of all videos of the channel and the channel comments as
-   * well.
+   * allThreadsRelatedToChannelId parameter instructs the API to return all
+   * comment threads associated with the specified channel. The response can
+   * include comments about the channel or about the channel's videos.
    * @opt_param string channelId The channelId parameter instructs the API to
-   * return the comment threads for all the channel comments (not including
-   * comments left on videos).
+   * return comment threads containing comments about the specified channel. (The
+   * response will not include comments left on videos that the channel uploaded.)
    * @opt_param string videoId The videoId parameter instructs the API to return
-   * the comment threads for the video specified by the video id.
+   * comment threads associated with the specified video ID.
    * @opt_param string maxResults The maxResults parameter specifies the maximum
    * number of items that should be returned in the result set.
    *
    * Note: This parameter is not supported for use in conjunction with the id
    * parameter.
+   * @opt_param string id The id parameter specifies a comma-separated list of
+   * comment thread IDs for the resources that should be retrieved.
    * @opt_param string pageToken The pageToken parameter identifies a specific
    * page in the result set that should be returned. In an API response, the
    * nextPageToken property identifies the next page of the result that can be
@@ -2338,8 +2412,11 @@ class Google_Service_YouTube_CommentThreads_Resource extends Google_Service_Reso
    * @opt_param string textFormat Set this parameter's value to html or plainText
    * to instruct the API to return the comments left by users in html formatted or
    * in plain text.
-   * @opt_param string id The id parameter specifies a comma-separated list of
-   * comment thread IDs for the resources that should be retrieved.
+   * @opt_param string order The order parameter specifies the order in which the
+   * API response should list comment threads. Valid values are: - time - Comment
+   * threads are ordered by time. This is the default behavior. - relevance -
+   * Comment threads are ordered by relevance.Note: This parameter is not
+   * supported for use in conjunction with the id parameter.
    * @return Google_Service_YouTube_CommentThreadListResponse
    */
   public function listCommentThreads($part, $optParams = array())
@@ -2350,14 +2427,12 @@ class Google_Service_YouTube_CommentThreads_Resource extends Google_Service_Reso
   }
 
   /**
-   * Modifies an existing comment. (commentThreads.update)
+   * Modifies the top-level comment in a comment thread. (commentThreads.update)
    *
-   * @param string $part The part parameter serves two purposes in this operation.
-   * It identifies the properties that the write operation will set as well as the
-   * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are id, snippet
-   * and replies. However only snippet contains properties that can be updated.
+   * @param string $part The part parameter specifies a comma-separated list of
+   * commentThread resource properties that the API response will include. You
+   * must at least include the snippet part in the parameter value since that part
+   * contains all of the properties that the API request can update.
    * @param Google_CommentThread $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_YouTube_CommentThread
@@ -2385,7 +2460,7 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
    * Deletes a comment. (comments.delete)
    *
    * @param string $id The id parameter specifies the comment ID for the resource
-   * that should be deleted.
+   * that is being deleted.
    * @param array $optParams Optional parameters.
    */
   public function delete($id, $optParams = array())
@@ -2396,18 +2471,12 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
   }
 
   /**
-   * Creates a new comment.
+   * Creates a reply to an existing comment. Note: To create a top-level comment,
+   * use the commentThreads.insert method. (comments.insert)
    *
-   * Note: to create a top level comment it is also necessary to create a comment
-   * thread. Both are accomplished through the commentThreads resource.
-   * (comments.insert)
-   *
-   * @param string $part The part parameter serves two purposes in this operation.
-   * It identifies the properties that the write operation will set as well as the
-   * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are id and
-   * snippet. However only snippet contains properties that can be set.
+   * @param string $part The part parameter identifies the properties that the API
+   * response will include. Set the parameter value to snippet. The snippet part
+   * has a quota cost of 2 units.
    * @param Google_Comment $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_YouTube_Comment
@@ -2423,8 +2492,8 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
    * Returns a list of comments that match the API request parameters.
    * (comments.listComments)
    *
-   * @param string $part The part parameter specifies the comment resource parts
-   * that the API response will include. Supported values are id and snippet.
+   * @param string $part The part parameter specifies a comma-separated list of
+   * one or more comment resource properties that the API response will include.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string maxResults The maxResults parameter specifies the maximum
@@ -2442,13 +2511,13 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
    * @opt_param string parentId The parentId parameter specifies the ID of the
    * comment for which replies should be retrieved.
    *
-   * Note: Currently YouTube features only one level of replies (ie replies to top
-   * level comments). However replies to replies may be supported in the future.
-   * @opt_param string textFormat Set this parameter's value to html or plainText
-   * to instruct the API to return the comments left by users formatted as HTML or
-   * as plain text.
+   * Note: YouTube currently supports replies only for top-level comments.
+   * However, replies to replies may be supported in the future.
+   * @opt_param string textFormat This parameter indicates whether the API should
+   * return comments formatted as HTML or as plain text.
    * @opt_param string id The id parameter specifies a comma-separated list of
-   * comment IDs for the resources that should be retrieved.
+   * comment IDs for the resources that are being retrieved. In a comment
+   * resource, the id property specifies the comment's ID.
    * @return Google_Service_YouTube_CommentListResponse
    */
   public function listComments($part, $optParams = array())
@@ -2459,10 +2528,11 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
   }
 
   /**
-   * Expresses the caller's opinion that a comment is spam. (comments.markAsSpam)
+   * Expresses the caller's opinion that one or more comments should be flagged as
+   * spam. (comments.markAsSpam)
    *
    * @param string $id The id parameter specifies a comma-separated list of IDs of
-   * comments which should get flagged as spam.
+   * comments that the caller believes should be classified as spam.
    * @param array $optParams Optional parameters.
    */
   public function markAsSpam($id, $optParams = array())
@@ -2473,21 +2543,22 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
   }
 
   /**
-   * Sets the moderation status of one or more comments.
+   * Sets the moderation status of one or more comments. The API request must be
+   * authorized by the owner of the channel or video associated with the comments.
    * (comments.setModerationStatus)
    *
-   * @param string $id The id parameter specifies a comma-separated list of IDs of
-   * comments whose moderation status should be updated.
-   * @param string $moderationStatus Determines the new moderation status of the
+   * @param string $id The id parameter specifies a comma-separated list of IDs
+   * that identify the comments for which you are updating the moderation status.
+   * @param string $moderationStatus Identifies the new moderation status of the
    * specified comments.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool banAuthor The banAuthor paramter, if set to true, adds the
-   * author of the comment to the ban list. This means all future comments of the
-   * author will autmomatically be rejected.
+   * @opt_param bool banAuthor The banAuthor parameter lets you indicate that you
+   * want to automatically reject any additional comments written by the comment's
+   * author. Set the parameter value to true to ban the author.
    *
-   * Note: This parameter is only valid in combination with moderationStatus
-   * 'rejected'.
+   * Note: This parameter is only valid if the moderationStatus parameter is also
+   * set to rejected.
    */
   public function setModerationStatus($id, $moderationStatus, $optParams = array())
   {
@@ -2497,14 +2568,12 @@ class Google_Service_YouTube_Comments_Resource extends Google_Service_Resource
   }
 
   /**
-   * Modifies an existing comment. (comments.update)
+   * Modifies a comment. (comments.update)
    *
-   * @param string $part The part parameter serves two purposes in this operation.
-   * It identifies the properties that the write operation will set as well as the
-   * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are id and
-   * snippet. However only snippet contains properties that can be updated.
+   * @param string $part The part parameter identifies the properties that the API
+   * response will include. You must at least include the snippet part in the
+   * parameter value since that part contains all of the properties that the API
+   * request can update.
    * @param Google_Comment $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_YouTube_Comment
@@ -2532,16 +2601,9 @@ class Google_Service_YouTube_GuideCategories_Resource extends Google_Service_Res
    * Returns a list of categories that can be associated with YouTube channels.
    * (guideCategories.listGuideCategories)
    *
-   * @param string $part The part parameter specifies a comma-separated list of
-   * one or more guideCategory resource properties that the API response will
-   * include. The part names that you can include in the parameter value are id
-   * and snippet.
-   *
-   * If the parameter identifies a property that contains child properties, the
-   * child properties will be included in the response. For example, in a
-   * guideCategory resource, the snippet property contains other properties, such
-   * as the category's title. If you set part=snippet, the API response will also
-   * contain all of those nested properties.
+   * @param string $part The part parameter specifies the guideCategory resource
+   * properties that the API response will include. Set the parameter value to
+   * snippet.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string regionCode The regionCode parameter instructs the API to
@@ -2575,12 +2637,12 @@ class Google_Service_YouTube_I18nLanguages_Resource extends Google_Service_Resou
 {
 
   /**
-   * Returns a list of supported languages. (i18nLanguages.listI18nLanguages)
+   * Returns a list of application languages that the YouTube website supports.
+   * (i18nLanguages.listI18nLanguages)
    *
-   * @param string $part The part parameter specifies a comma-separated list of
-   * one or more i18nLanguage resource properties that the API response will
-   * include. The part names that you can include in the parameter value are id
-   * and snippet.
+   * @param string $part The part parameter specifies the i18nLanguage resource
+   * properties that the API response will include. Set the parameter value to
+   * snippet.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string hl The hl parameter specifies the language that should be
@@ -2607,12 +2669,12 @@ class Google_Service_YouTube_I18nRegions_Resource extends Google_Service_Resourc
 {
 
   /**
-   * Returns a list of supported regions. (i18nRegions.listI18nRegions)
+   * Returns a list of content regions that the YouTube website supports.
+   * (i18nRegions.listI18nRegions)
    *
-   * @param string $part The part parameter specifies a comma-separated list of
-   * one or more i18nRegion resource properties that the API response will
-   * include. The part names that you can include in the parameter value are id
-   * and snippet.
+   * @param string $part The part parameter specifies the i18nRegion resource
+   * properties that the API response will include. Set the parameter value to
+   * snippet.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string hl The hl parameter specifies the language that should be
@@ -2640,7 +2702,8 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
 
   /**
    * Binds a YouTube broadcast to a stream or removes an existing binding between
-   * a broadcast and a stream. A broadcast can only be bound to one video stream.
+   * a broadcast and a stream. A broadcast can only be bound to one video stream,
+   * though a video stream may be bound to more than one broadcast.
    * (liveBroadcasts.bind)
    *
    * @param string $id The id parameter specifies the unique ID of the broadcast
@@ -2693,6 +2756,64 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
     $params = array('id' => $id, 'part' => $part);
     $params = array_merge($params, $optParams);
     return $this->call('bind', array($params), "Google_Service_YouTube_LiveBroadcast");
+  }
+
+  /**
+   * Binds a YouTube broadcast to a stream or removes an existing binding between
+   * a broadcast and a stream. A broadcast can only be bound to one video stream,
+   * though a video stream may be bound to more than one broadcast.
+   * (liveBroadcasts.bind_direct)
+   *
+   * @param string $id The id parameter specifies the unique ID of the broadcast
+   * that is being bound to a video stream.
+   * @param string $part The part parameter specifies a comma-separated list of
+   * one or more liveBroadcast resource properties that the API response will
+   * include. The part names that you can include in the parameter value are id,
+   * snippet, contentDetails, and status.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string onBehalfOfContentOwnerChannel This parameter can only be
+   * used in a properly authorized request. Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID
+   * of the channel to which a video is being added. This parameter is required
+   * when a request specifies a value for the onBehalfOfContentOwner parameter,
+   * and it can only be used in conjunction with that parameter. In addition, the
+   * request must be authorized using a CMS account that is linked to the content
+   * owner that the onBehalfOfContentOwner parameter specifies. Finally, the
+   * channel that the onBehalfOfContentOwnerChannel parameter value specifies must
+   * be linked to the content owner that the onBehalfOfContentOwner parameter
+   * specifies.
+   *
+   * This parameter is intended for YouTube content partners that own and manage
+   * many different YouTube channels. It allows content owners to authenticate
+   * once and perform actions on behalf of the channel specified in the parameter
+   * value, without having to provide authentication credentials for each separate
+   * channel.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The CMS account that
+   * the user authenticates with must be linked to the specified YouTube content
+   * owner.
+   * @opt_param string streamId The streamId parameter specifies the unique ID of
+   * the video stream that is being bound to a broadcast. If this parameter is
+   * omitted, the API will remove any existing binding between the broadcast and a
+   * video stream.
+   * @return Google_Service_YouTube_LiveBroadcast
+   */
+  public function bind_direct($id, $part, $optParams = array())
+  {
+    $params = array('id' => $id, 'part' => $part);
+    $params = array_merge($params, $optParams);
+    return $this->call('bind_direct', array($params), "Google_Service_YouTube_LiveBroadcast");
   }
 
   /**
@@ -3207,8 +3328,7 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
    * only return streams owned by the authenticated user. Set the parameter value
    * to true to only retrieve your own streams.
    * @opt_param string maxResults The maxResults parameter specifies the maximum
-   * number of items that should be returned in the result set. Acceptable values
-   * are 0 to 50, inclusive. The default value is 5.
+   * number of items that should be returned in the result set.
    * @opt_param string pageToken The pageToken parameter identifies a specific
    * page in the result set that should be returned. In an API response, the
    * nextPageToken and prevPageToken properties identify other pages that could be
@@ -3317,9 +3437,6 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are snippet,
-   * contentDetails, and status.
    * @param Google_PlaylistItem $postBody
    * @param array $optParams Optional parameters.
    *
@@ -3352,8 +3469,7 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more playlistItem resource properties that the API response will
-   * include. The part names that you can include in the parameter value are id,
-   * snippet, contentDetails, and status.
+   * include.
    *
    * If the parameter identifies a property that contains child properties, the
    * child properties will be included in the response. For example, in a
@@ -3406,9 +3522,6 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are snippet,
-   * contentDetails, and status.
    *
    * Note that this method will override the existing values for all of the
    * mutable properties that are contained in any parts that the parameter value
@@ -3477,9 +3590,6 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are snippet and
-   * status.
    * @param Google_Playlist $postBody
    * @param array $optParams Optional parameters.
    *
@@ -3531,8 +3641,6 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more playlist resource properties that the API response will include.
-   * The part names that you can include in the parameter value are id, snippet,
-   * status, and contentDetails.
    *
    * If the parameter identifies a property that contains child properties, the
    * child properties will be included in the response. For example, in a playlist
@@ -3605,17 +3713,12 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
    *
-   * The part names that you can include in the parameter value are snippet and
-   * status.
-   *
-   * Note that this method will override the existing values for all of the
-   * mutable properties that are contained in any parts that the parameter value
-   * specifies. For example, a playlist's privacy setting is contained in the
-   * status part. As such, if your request is updating a private playlist, and the
-   * request's part parameter value includes the status part, the playlist's
-   * privacy setting will be updated to whatever value the request body specifies.
-   * If the request body does not specify a value, the existing privacy setting
-   * will be removed and the playlist will revert to the default privacy setting.
+   * Note that this method will override the existing values for mutable
+   * properties that are contained in any parts that the request body specifies.
+   * For example, a playlist's description is contained in the snippet part, which
+   * must be included in the request body. If the request does not specify a value
+   * for the snippet.description property, the playlist's existing description
+   * will be deleted.
    * @param Google_Playlist $postBody
    * @param array $optParams Optional parameters.
    *
@@ -3660,18 +3763,12 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more search resource properties that the API response will include.
-   * The part names that you can include in the parameter value are id and
-   * snippet.
-   *
-   * If the parameter identifies a property that contains child properties, the
-   * child properties will be included in the response. For example, in a search
-   * result, the snippet property contains other properties that identify the
-   * result's title, description, and so forth. If you set part=snippet, the API
-   * response will also contain all of those nested properties.
+   * Set the parameter value to snippet.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string eventType The eventType parameter restricts a search to
-   * broadcast events.
+   * broadcast events. If you specify a value for this parameter, you must also
+   * set the type parameter's value to video.
    * @opt_param string channelId The channelId parameter indicates that the API
    * response should only contain resources created by the channel
    * @opt_param bool forDeveloper The forDeveloper parameter restricts the search
@@ -3681,12 +3778,15 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * through the developer's own app or website but not to videos uploaded through
    * other apps or sites.
    * @opt_param string videoSyndicated The videoSyndicated parameter lets you to
-   * restrict a search to only videos that can be played outside youtube.com.
+   * restrict a search to only videos that can be played outside youtube.com. If
+   * you specify a value for this parameter, you must also set the type
+   * parameter's value to video.
    * @opt_param string channelType The channelType parameter lets you restrict a
    * search to a particular type of channel.
    * @opt_param string videoCaption The videoCaption parameter indicates whether
    * the API should filter video search results based on whether they have
-   * captions.
+   * captions. If you specify a value for this parameter, you must also set the
+   * type parameter's value to video.
    * @opt_param string publishedAfter The publishedAfter parameter indicates that
    * the API response should only contain resources created after the specified
    * time. The value is an RFC 3339 formatted date-time value
@@ -3717,20 +3817,30 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * @opt_param string regionCode The regionCode parameter instructs the API to
    * return search results for the specified country. The parameter value is an
    * ISO 3166-1 alpha-2 country code.
-   * @opt_param string location The location parameter restricts a search to
-   * videos that have a geographical location specified in their metadata. The
-   * value is a string that specifies geographic latitude/longitude coordinates
-   * e.g. (37.42307,-122.08427)
-   * @opt_param string locationRadius The locationRadius, in conjunction with the
-   * location parameter, defines a geographic area. If the geographic coordinates
-   * associated with a video fall within that area, then the video may be included
-   * in search results. This parameter value must be a floating point number
-   * followed by a measurement unit. Valid measurement units are m, km, ft, and
-   * mi. For example, valid parameter values include 1500m, 5km, 10000ft, and
-   * 0.75mi. The API does not support locationRadius parameter values larger than
-   * 1000 kilometers.
+   * @opt_param string location The location parameter, in conjunction with the
+   * locationRadius parameter, defines a circular geographic area and also
+   * restricts a search to videos that specify, in their metadata, a geographic
+   * location that falls within that area. The parameter value is a string that
+   * specifies latitude/longitude coordinates e.g. (37.42307,-122.08427).
+   *
+   * - The location parameter value identifies the point at the center of the
+   * area. - The locationRadius parameter specifies the maximum distance that the
+   * location associated with a video can be from that point for the video to
+   * still be included in the search results.The API returns an error if your
+   * request specifies a value for the location parameter but does not also
+   * specify a value for the locationRadius parameter.
+   * @opt_param string locationRadius The locationRadius parameter, in conjunction
+   * with the location parameter, defines a circular geographic area.
+   *
+   * The parameter value must be a floating point number followed by a measurement
+   * unit. Valid measurement units are m, km, ft, and mi. For example, valid
+   * parameter values include 1500m, 5km, 10000ft, and 0.75mi. The API does not
+   * support locationRadius parameter values larger than 1000 kilometers.
+   *
+   * Note: See the definition of the location parameter for more information.
    * @opt_param string videoType The videoType parameter lets you restrict a
-   * search to a particular type of videos.
+   * search to a particular type of videos. If you specify a value for this
+   * parameter, you must also set the type parameter's value to video.
    * @opt_param string type The type parameter restricts a search query to only
    * retrieve a particular type of resource. The value is a comma-separated list
    * of resource types.
@@ -3742,11 +3852,13 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * specified time. The value is an RFC 3339 formatted date-time value
    * (1970-01-01T00:00:00Z).
    * @opt_param string videoDimension The videoDimension parameter lets you
-   * restrict a search to only retrieve 2D or 3D videos.
+   * restrict a search to only retrieve 2D or 3D videos. If you specify a value
+   * for this parameter, you must also set the type parameter's value to video.
    * @opt_param string videoLicense The videoLicense parameter filters search
    * results to only include videos with a particular license. YouTube lets video
    * uploaders choose to attach either the Creative Commons license or the
-   * standard YouTube license to each of their videos.
+   * standard YouTube license to each of their videos. If you specify a value for
+   * this parameter, you must also set the type parameter's value to video.
    * @opt_param string maxResults The maxResults parameter specifies the maximum
    * number of items that should be returned in the result set.
    * @opt_param string relatedToVideoId The relatedToVideoId parameter retrieves a
@@ -3756,9 +3868,12 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * @opt_param string videoDefinition The videoDefinition parameter lets you
    * restrict a search to only include either high definition (HD) or standard
    * definition (SD) videos. HD videos are available for playback in at least
-   * 720p, though higher resolutions, like 1080p, might also be available.
+   * 720p, though higher resolutions, like 1080p, might also be available. If you
+   * specify a value for this parameter, you must also set the type parameter's
+   * value to video.
    * @opt_param string videoDuration The videoDuration parameter filters video
-   * search results based on their duration.
+   * search results based on their duration. If you specify a value for this
+   * parameter, you must also set the type parameter's value to video.
    * @opt_param string relevanceLanguage The relevanceLanguage parameter instructs
    * the API to return search results that are most relevant to the specified
    * language. The parameter value is typically an ISO 639-1 two-letter language
@@ -3769,12 +3884,24 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * retrieve videos owned by the authenticated user. If you set this parameter to
    * true, then the type parameter's value must also be set to video.
    * @opt_param string q The q parameter specifies the query term to search for.
+   *
+   * Your request can also use the Boolean NOT (-) and OR (|) operators to exclude
+   * videos or to find videos that are associated with one of several search
+   * terms. For example, to search for videos matching either "boating" or
+   * "sailing", set the q parameter value to boating|sailing. Similarly, to search
+   * for videos matching either "boating" or "sailing" but not "fishing", set the
+   * q parameter value to boating|sailing -fishing. Note that the pipe character
+   * must be URL-escaped when it is sent in your API request. The URL-escaped
+   * value for the pipe character is %7C.
    * @opt_param string safeSearch The safeSearch parameter indicates whether the
    * search results should include restricted content as well as standard content.
    * @opt_param string videoEmbeddable The videoEmbeddable parameter lets you to
-   * restrict a search to only videos that can be embedded into a webpage.
+   * restrict a search to only videos that can be embedded into a webpage. If you
+   * specify a value for this parameter, you must also set the type parameter's
+   * value to video.
    * @opt_param string videoCategoryId The videoCategoryId parameter filters video
-   * search results based on their category.
+   * search results based on their category. If you specify a value for this
+   * parameter, you must also set the type parameter's value to video.
    * @opt_param string order The order parameter specifies the method that will be
    * used to order resources in the API response.
    * @return Google_Service_YouTube_SearchListResponse
@@ -3820,9 +3947,6 @@ class Google_Service_YouTube_Subscriptions_Resource extends Google_Service_Resou
    * @param string $part The part parameter serves two purposes in this operation.
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
-   *
-   * The part names that you can include in the parameter value are snippet and
-   * contentDetails.
    * @param Google_Subscription $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_YouTube_Subscription
@@ -3840,8 +3964,7 @@ class Google_Service_YouTube_Subscriptions_Resource extends Google_Service_Resou
    *
    * @param string $part The part parameter specifies a comma-separated list of
    * one or more subscription resource properties that the API response will
-   * include. The part names that you can include in the parameter value are id,
-   * snippet, and contentDetails.
+   * include.
    *
    * If the parameter identifies a property that contains child properties, the
    * child properties will be included in the response. For example, in a
@@ -3930,14 +4053,18 @@ class Google_Service_YouTube_Thumbnails_Resource extends Google_Service_Resource
    * which the custom video thumbnail is being provided.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwner The onBehalfOfContentOwner parameter
-   * indicates that the authenticated user is acting on behalf of the content
-   * owner specified in the parameter value. This parameter is intended for
-   * YouTube content partners that own and manage many different YouTube channels.
-   * It allows content owners to authenticate once and get access to all their
-   * video and channel data, without having to provide authentication credentials
-   * for each individual channel. The actual CMS account that the user
-   * authenticates with needs to be linked to the specified YouTube content owner.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The actual CMS
+   * account that the user authenticates with must be linked to the specified
+   * YouTube content owner.
    * @return Google_Service_YouTube_ThumbnailSetResponse
    */
   public function set($videoId, $optParams = array())
@@ -3996,7 +4123,7 @@ class Google_Service_YouTube_VideoCategories_Resource extends Google_Service_Res
    * (videoCategories.listVideoCategories)
    *
    * @param string $part The part parameter specifies the videoCategory resource
-   * parts that the API response will include. Supported values are id and
+   * properties that the API response will include. Set the parameter value to
    * snippet.
    * @param array $optParams Optional parameters.
    *
@@ -4094,15 +4221,11 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
    *
-   * The part names that you can include in the parameter value are snippet,
-   * contentDetails, fileDetails, liveStreamingDetails, localizations, player,
-   * processingDetails, recordingDetails, statistics, status, suggestions, and
-   * topicDetails. However, not all of those parts contain properties that can be
-   * set when setting or updating a video's metadata. For example, the statistics
-   * object encapsulates statistics that YouTube calculates for a video and does
-   * not contain values that you can set or modify. If the parameter value
-   * specifies a part that does not contain mutable values, that part will still
-   * be included in the API response.
+   * Note that not all parts contain properties that can be set when inserting or
+   * updating a video. For example, the statistics object encapsulates statistics
+   * that YouTube calculates for a video and does not contain values that you can
+   * set or modify. If the parameter value specifies a part that does not contain
+   * mutable values, that part will still be included in the API response.
    * @param Google_Video $postBody
    * @param array $optParams Optional parameters.
    *
@@ -4140,8 +4263,12 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * value, without having to provide authentication credentials for each separate
    * channel.
    * @opt_param bool notifySubscribers The notifySubscribers parameter indicates
-   * whether YouTube should send notification to subscribers about the inserted
-   * video.
+   * whether YouTube should send a notification about the new video to users who
+   * subscribe to the video's channel. A parameter value of True indicates that
+   * subscribers will be notified of newly uploaded videos. However, a channel
+   * owner who is uploading many videos might prefer to set the value to False to
+   * avoid sending a notification about each new video to the channel's
+   * subscribers.
    * @opt_param bool autoLevels The autoLevels parameter indicates whether YouTube
    * should automatically enhance the video's lighting and color.
    * @return Google_Service_YouTube_Video
@@ -4158,11 +4285,7 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * (videos.listVideos)
    *
    * @param string $part The part parameter specifies a comma-separated list of
-   * one or more video resource properties that the API response will include. The
-   * part names that you can include in the parameter value are id, snippet,
-   * contentDetails, fileDetails, liveStreamingDetails, localizations, player,
-   * processingDetails, recordingDetails, statistics, status, suggestions, and
-   * topicDetails.
+   * one or more video resource properties that the API response will include.
    *
    * If the parameter identifies a property that contains child properties, the
    * child properties will be included in the response. For example, in a video
@@ -4208,13 +4331,15 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * Note: This parameter is supported for use in conjunction with the myRating
    * parameter, but it is not supported for use in conjunction with the id
    * parameter.
-   * @opt_param string hl The hl parameter instructs the API to return a localized
-   * version of the video details. If localized text is nor available for the
-   * requested language, the localizations object in the API response will contain
-   * the requested information in the default language instead. The parameter
-   * value is a BCP-47 language code. Your application can determine whether the
-   * requested localization was returned by checking the value of the
-   * snippet.localized.language property in the API response.
+   * @opt_param string hl The hl parameter instructs the API to retrieve localized
+   * resource metadata for a specific application language that the YouTube
+   * website supports. The parameter value must be a language code included in the
+   * list returned by the i18nLanguages.list method.
+   *
+   * If localized resource details are available in that language, the resource's
+   * snippet.localized object will contain the localized values. However, if
+   * localized details are not available, the snippet.localized object will
+   * contain resource details in the resource's default language.
    * @opt_param string myRating Set this parameter's value to like or dislike to
    * instruct the API to only return videos liked or disliked by the authenticated
    * user.
@@ -4238,19 +4363,6 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * video that is being rated or having its rating removed.
    * @param string $rating Specifies the rating to record.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
-   * exclusively for YouTube content partners.
-   *
-   * The onBehalfOfContentOwner parameter indicates that the request's
-   * authorization credentials identify a YouTube CMS user who is acting on behalf
-   * of the content owner specified in the parameter value. This parameter is
-   * intended for YouTube content partners that own and manage many different
-   * YouTube channels. It allows content owners to authenticate once and get
-   * access to all their video and channel data, without having to provide
-   * authentication credentials for each individual channel. The CMS account that
-   * the user authenticates with must be linked to the specified YouTube content
-   * owner.
    */
   public function rate($id, $rating, $optParams = array())
   {
@@ -4292,11 +4404,6 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * It identifies the properties that the write operation will set as well as the
    * properties that the API response will include.
    *
-   * The part names that you can include in the parameter value are snippet,
-   * contentDetails, fileDetails, liveStreamingDetails, localizations, player,
-   * processingDetails, recordingDetails, statistics, status, suggestions, and
-   * topicDetails.
-   *
    * Note that this method will override the existing values for all of the
    * mutable properties that are contained in any parts that the parameter value
    * specifies. For example, a video's privacy setting is contained in the status
@@ -4306,12 +4413,12 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
    * body does not specify a value, the existing privacy setting will be removed
    * and the video will revert to the default privacy setting.
    *
-   * In addition, not all of those parts contain properties that can be set when
-   * setting or updating a video's metadata. For example, the statistics object
-   * encapsulates statistics that YouTube calculates for a video and does not
-   * contain values that you can set or modify. If the parameter value specifies a
-   * part that does not contain mutable values, that part will still be included
-   * in the API response.
+   * In addition, not all parts contain properties that can be set when inserting
+   * or updating a video. For example, the statistics object encapsulates
+   * statistics that YouTube calculates for a video and does not contain values
+   * that you can set or modify. If the parameter value specifies a part that does
+   * not contain mutable values, that part will still be included in the API
+   * response.
    * @param Google_Video $postBody
    * @param array $optParams Optional parameters.
    *
@@ -4352,19 +4459,23 @@ class Google_Service_YouTube_Watermarks_Resource extends Google_Service_Resource
    * Uploads a watermark image to YouTube and sets it for a channel.
    * (watermarks.set)
    *
-   * @param string $channelId The channelId parameter specifies a YouTube channel
-   * ID for which the watermark is being provided.
+   * @param string $channelId The channelId parameter specifies the YouTube
+   * channel ID for which the watermark is being provided.
    * @param Google_InvideoBranding $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwner The onBehalfOfContentOwner parameter
-   * indicates that the authenticated user is acting on behalf of the content
-   * owner specified in the parameter value. This parameter is intended for
-   * YouTube content partners that own and manage many different YouTube channels.
-   * It allows content owners to authenticate once and get access to all their
-   * video and channel data, without having to provide authentication credentials
-   * for each individual channel. The actual CMS account that the user
-   * authenticates with needs to be linked to the specified YouTube content owner.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The CMS account that
+   * the user authenticates with must be linked to the specified YouTube content
+   * owner.
    */
   public function set($channelId, Google_Service_YouTube_InvideoBranding $postBody, $optParams = array())
   {
@@ -4374,20 +4485,24 @@ class Google_Service_YouTube_Watermarks_Resource extends Google_Service_Resource
   }
 
   /**
-   * Deletes a watermark. (watermarks.unsetWatermarks)
+   * Deletes a channel's watermark image. (watermarks.unsetWatermarks)
    *
-   * @param string $channelId The channelId parameter specifies a YouTube channel
-   * ID for which the watermark is being unset.
+   * @param string $channelId The channelId parameter specifies the YouTube
+   * channel ID for which the watermark is being unset.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwner The onBehalfOfContentOwner parameter
-   * indicates that the authenticated user is acting on behalf of the content
-   * owner specified in the parameter value. This parameter is intended for
-   * YouTube content partners that own and manage many different YouTube channels.
-   * It allows content owners to authenticate once and get access to all their
-   * video and channel data, without having to provide authentication credentials
-   * for each individual channel. The actual CMS account that the user
-   * authenticates with needs to be linked to the specified YouTube content owner.
+   * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
+   * exclusively for YouTube content partners.
+   *
+   * The onBehalfOfContentOwner parameter indicates that the request's
+   * authorization credentials identify a YouTube CMS user who is acting on behalf
+   * of the content owner specified in the parameter value. This parameter is
+   * intended for YouTube content partners that own and manage many different
+   * YouTube channels. It allows content owners to authenticate once and get
+   * access to all their video and channel data, without having to provide
+   * authentication credentials for each individual channel. The CMS account that
+   * the user authenticates with must be linked to the specified YouTube content
+   * owner.
    */
   public function unsetWatermarks($channelId, $optParams = array())
   {
@@ -7073,6 +7188,7 @@ class Google_Service_YouTube_ContentRating extends Google_Collection
   public $chvrsRating;
   public $cicfRating;
   public $cnaRating;
+  public $cncRating;
   public $csaRating;
   public $cscfRating;
   public $czfilmRating;
@@ -7243,6 +7359,14 @@ class Google_Service_YouTube_ContentRating extends Google_Collection
   public function getCnaRating()
   {
     return $this->cnaRating;
+  }
+  public function setCncRating($cncRating)
+  {
+    $this->cncRating = $cncRating;
+  }
+  public function getCncRating()
+  {
+    return $this->cncRating;
   }
   public function setCsaRating($csaRating)
   {
@@ -8527,8 +8651,12 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   public $kind;
   protected $snippetType = 'Google_Service_YouTube_LiveBroadcastSnippet';
   protected $snippetDataType = '';
+  protected $statisticsType = 'Google_Service_YouTube_LiveBroadcastStatistics';
+  protected $statisticsDataType = '';
   protected $statusType = 'Google_Service_YouTube_LiveBroadcastStatus';
   protected $statusDataType = '';
+  protected $topicDetailsType = 'Google_Service_YouTube_LiveBroadcastTopicDetails';
+  protected $topicDetailsDataType = '';
 
 
   public function setContentDetails(Google_Service_YouTube_LiveBroadcastContentDetails $contentDetails)
@@ -8571,6 +8699,14 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->snippet;
   }
+  public function setStatistics(Google_Service_YouTube_LiveBroadcastStatistics $statistics)
+  {
+    $this->statistics = $statistics;
+  }
+  public function getStatistics()
+  {
+    return $this->statistics;
+  }
   public function setStatus(Google_Service_YouTube_LiveBroadcastStatus $status)
   {
     $this->status = $status;
@@ -8578,6 +8714,14 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   public function getStatus()
   {
     return $this->status;
+  }
+  public function setTopicDetails(Google_Service_YouTube_LiveBroadcastTopicDetails $topicDetails)
+  {
+    $this->topicDetails = $topicDetails;
+  }
+  public function getTopicDetails()
+  {
+    return $this->topicDetails;
   }
 }
 
@@ -8590,6 +8734,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   public $enableContentEncryption;
   public $enableDvr;
   public $enableEmbed;
+  public $enableLowLatency;
   protected $monitorStreamType = 'Google_Service_YouTube_MonitorStreamInfo';
   protected $monitorStreamDataType = '';
   public $recordFromStart;
@@ -8635,6 +8780,14 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   public function getEnableEmbed()
   {
     return $this->enableEmbed;
+  }
+  public function setEnableLowLatency($enableLowLatency)
+  {
+    $this->enableLowLatency = $enableLowLatency;
+  }
+  public function getEnableLowLatency()
+  {
+    return $this->enableLowLatency;
   }
   public function setMonitorStream(Google_Service_YouTube_MonitorStreamInfo $monitorStream)
   {
@@ -8763,6 +8916,8 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   public $actualStartTime;
   public $channelId;
   public $description;
+  public $isDefaultBroadcast;
+  public $liveChatId;
   public $publishedAt;
   public $scheduledEndTime;
   public $scheduledStartTime;
@@ -8802,6 +8957,22 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   public function getDescription()
   {
     return $this->description;
+  }
+  public function setIsDefaultBroadcast($isDefaultBroadcast)
+  {
+    $this->isDefaultBroadcast = $isDefaultBroadcast;
+  }
+  public function getIsDefaultBroadcast()
+  {
+    return $this->isDefaultBroadcast;
+  }
+  public function setLiveChatId($liveChatId)
+  {
+    $this->liveChatId = $liveChatId;
+  }
+  public function getLiveChatId()
+  {
+    return $this->liveChatId;
   }
   public function setPublishedAt($publishedAt)
   {
@@ -8845,25 +9016,42 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   }
 }
 
+class Google_Service_YouTube_LiveBroadcastStatistics extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $concurrentViewers;
+  public $totalChatCount;
+
+
+  public function setConcurrentViewers($concurrentViewers)
+  {
+    $this->concurrentViewers = $concurrentViewers;
+  }
+  public function getConcurrentViewers()
+  {
+    return $this->concurrentViewers;
+  }
+  public function setTotalChatCount($totalChatCount)
+  {
+    $this->totalChatCount = $totalChatCount;
+  }
+  public function getTotalChatCount()
+  {
+    return $this->totalChatCount;
+  }
+}
+
 class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  public $isDefaultBroadcast;
   public $lifeCycleStatus;
   public $liveBroadcastPriority;
   public $privacyStatus;
   public $recordingStatus;
 
 
-  public function setIsDefaultBroadcast($isDefaultBroadcast)
-  {
-    $this->isDefaultBroadcast = $isDefaultBroadcast;
-  }
-  public function getIsDefaultBroadcast()
-  {
-    return $this->isDefaultBroadcast;
-  }
   public function setLifeCycleStatus($lifeCycleStatus)
   {
     $this->lifeCycleStatus = $lifeCycleStatus;
@@ -8895,6 +9083,87 @@ class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
   public function getRecordingStatus()
   {
     return $this->recordingStatus;
+  }
+}
+
+class Google_Service_YouTube_LiveBroadcastTopic extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $snippetType = 'Google_Service_YouTube_LiveBroadcastTopicSnippet';
+  protected $snippetDataType = '';
+  public $type;
+  public $unmatched;
+
+
+  public function setSnippet(Google_Service_YouTube_LiveBroadcastTopicSnippet $snippet)
+  {
+    $this->snippet = $snippet;
+  }
+  public function getSnippet()
+  {
+    return $this->snippet;
+  }
+  public function setType($type)
+  {
+    $this->type = $type;
+  }
+  public function getType()
+  {
+    return $this->type;
+  }
+  public function setUnmatched($unmatched)
+  {
+    $this->unmatched = $unmatched;
+  }
+  public function getUnmatched()
+  {
+    return $this->unmatched;
+  }
+}
+
+class Google_Service_YouTube_LiveBroadcastTopicDetails extends Google_Collection
+{
+  protected $collection_key = 'topics';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $topicsType = 'Google_Service_YouTube_LiveBroadcastTopic';
+  protected $topicsDataType = 'array';
+
+
+  public function setTopics($topics)
+  {
+    $this->topics = $topics;
+  }
+  public function getTopics()
+  {
+    return $this->topics;
+  }
+}
+
+class Google_Service_YouTube_LiveBroadcastTopicSnippet extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $name;
+  public $releaseDate;
+
+
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setReleaseDate($releaseDate)
+  {
+    $this->releaseDate = $releaseDate;
+  }
+  public function getReleaseDate()
+  {
+    return $this->releaseDate;
   }
 }
 
@@ -8973,6 +9242,50 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   }
 }
 
+class Google_Service_YouTube_LiveStreamConfigurationIssue extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $description;
+  public $reason;
+  public $severity;
+  public $type;
+
+
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  public function setReason($reason)
+  {
+    $this->reason = $reason;
+  }
+  public function getReason()
+  {
+    return $this->reason;
+  }
+  public function setSeverity($severity)
+  {
+    $this->severity = $severity;
+  }
+  public function getSeverity()
+  {
+    return $this->severity;
+  }
+  public function setType($type)
+  {
+    $this->type = $type;
+  }
+  public function getType()
+  {
+    return $this->type;
+  }
+}
+
 class Google_Service_YouTube_LiveStreamContentDetails extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -8996,6 +9309,43 @@ class Google_Service_YouTube_LiveStreamContentDetails extends Google_Model
   public function getIsReusable()
   {
     return $this->isReusable;
+  }
+}
+
+class Google_Service_YouTube_LiveStreamHealthStatus extends Google_Collection
+{
+  protected $collection_key = 'configurationIssues';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $configurationIssuesType = 'Google_Service_YouTube_LiveStreamConfigurationIssue';
+  protected $configurationIssuesDataType = 'array';
+  public $lastUpdateTimeSeconds;
+  public $status;
+
+
+  public function setConfigurationIssues($configurationIssues)
+  {
+    $this->configurationIssues = $configurationIssues;
+  }
+  public function getConfigurationIssues()
+  {
+    return $this->configurationIssues;
+  }
+  public function setLastUpdateTimeSeconds($lastUpdateTimeSeconds)
+  {
+    $this->lastUpdateTimeSeconds = $lastUpdateTimeSeconds;
+  }
+  public function getLastUpdateTimeSeconds()
+  {
+    return $this->lastUpdateTimeSeconds;
+  }
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+  public function getStatus()
+  {
+    return $this->status;
   }
 }
 
@@ -9098,6 +9448,7 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   );
   public $channelId;
   public $description;
+  public $isDefaultStream;
   public $publishedAt;
   public $title;
 
@@ -9117,6 +9468,14 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   public function getDescription()
   {
     return $this->description;
+  }
+  public function setIsDefaultStream($isDefaultStream)
+  {
+    $this->isDefaultStream = $isDefaultStream;
+  }
+  public function getIsDefaultStream()
+  {
+    return $this->isDefaultStream;
   }
   public function setPublishedAt($publishedAt)
   {
@@ -9140,17 +9499,18 @@ class Google_Service_YouTube_LiveStreamStatus extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  public $isDefaultStream;
+  protected $healthStatusType = 'Google_Service_YouTube_LiveStreamHealthStatus';
+  protected $healthStatusDataType = '';
   public $streamStatus;
 
 
-  public function setIsDefaultStream($isDefaultStream)
+  public function setHealthStatus(Google_Service_YouTube_LiveStreamHealthStatus $healthStatus)
   {
-    $this->isDefaultStream = $isDefaultStream;
+    $this->healthStatus = $healthStatus;
   }
-  public function getIsDefaultStream()
+  public function getHealthStatus()
   {
-    return $this->isDefaultStream;
+    return $this->healthStatus;
   }
   public function setStreamStatus($streamStatus)
   {
@@ -11075,23 +11435,6 @@ class Google_Service_YouTube_VideoAbuseReportReason extends Google_Model
   }
 }
 
-class Google_Service_YouTube_VideoAbuseReportReasonId extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $value;
-
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-  public function getValue()
-  {
-    return $this->value;
-  }
-}
-
 class Google_Service_YouTube_VideoAbuseReportReasonListResponse extends Google_Collection
 {
   protected $collection_key = 'items';
@@ -11179,12 +11522,11 @@ class Google_Service_YouTube_VideoAbuseReportSecondaryReason extends Google_Mode
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $idType = 'Google_Service_YouTube_VideoAbuseReportReasonId';
-  protected $idDataType = '';
+  public $id;
   public $label;
 
 
-  public function setId(Google_Service_YouTube_VideoAbuseReportReasonId $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
@@ -12261,6 +12603,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   public $categoryId;
   public $channelId;
   public $channelTitle;
+  public $defaultAudioLanguage;
   public $defaultLanguage;
   public $description;
   public $liveBroadcastContent;
@@ -12296,6 +12639,14 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   public function getChannelTitle()
   {
     return $this->channelTitle;
+  }
+  public function setDefaultAudioLanguage($defaultAudioLanguage)
+  {
+    $this->defaultAudioLanguage = $defaultAudioLanguage;
+  }
+  public function getDefaultAudioLanguage()
+  {
+    return $this->defaultAudioLanguage;
   }
   public function setDefaultLanguage($defaultLanguage)
   {
