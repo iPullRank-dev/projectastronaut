@@ -15,7 +15,7 @@ class AddtoProspectsTable extends Migration
         Schema::table('prospects', function (Blueprint $table) {
             //
 
-            $table->longText('fc_company_description');->nullable();
+            $table->longText('fc_company_description')->nullable();
 
         });
     }

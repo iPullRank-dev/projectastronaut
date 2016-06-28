@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProspectScoresTable extends Migration
+class CreateProspectscoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,7 +29,7 @@ class CreateProspectScoresTable extends Migration
 			$table->integer('link_popularity');
 			
 			// final score formatted as 000.00 to 100.00
-			$table->double('final_score', 5, 2);
+			$table->String('final_score');
 			
 			// soft delete flag, automagically managed
 			$table->softDeletes();

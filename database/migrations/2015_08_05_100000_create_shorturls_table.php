@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShortUrlsTable extends Migration
+class CreateShorturlsTable extends Migration
 {
     /**
      * Run the migrations.
