@@ -586,9 +586,9 @@ class Ajax extends Controller
                 $inurl = $find -> id . '_' . $email_address . '=' . $id;
 
                 // spelling - "hashed"
-                $hased = base64_encode($inurl);
+                $hashed = base64_encode($inurl);
 
-                $urldata = ['company_id' => $find -> id, 'user_id' => $id, 'url_hash' => $hased];
+                $urldata = ['company_id' => $find -> id, 'user_id' => $id, 'url_hash' => $hashed];
 
                 DB::table('shorturls') ->insert($urldata);
 
@@ -622,17 +622,14 @@ class Ajax extends Controller
 
                 // changed this array assignment to be one statement
 
-                $lead[] = Array('EMAIL_ADDRESS' => $email_address, 
-                                'ORGANIZATION_NAME' => $company_name,
-                                'TAGS' => array(array("TAG_NAME" => 'Unbounce lead')));
 
-                /*$lead['EMAIL_ADDRESS'] = $email_address;
+                $lead['EMAIL_ADDRESS'] = $email_address;
                 $lead['ORGANIZATION_NAME'] = $company_name;
-                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead")); */
+                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead")); 
 
                 $api_data = json_encode($lead);
 
-                $service_url = 'http://localhost/rankApi';
+                $service_url = 'https://api.insight.ly/v2.1/Leads';
 
                 // make curl command its own function just in case you need to do something like this again in another place
                 $ch = curl_init($service_url); 

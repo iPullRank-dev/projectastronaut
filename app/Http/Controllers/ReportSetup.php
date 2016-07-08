@@ -182,7 +182,7 @@ class ReportSetup extends Controller
         $copy = DB::select('select * from copytext');
             foreach ($copy as $value) {
                 $currentquad = $value -> quad;
-                $finder = $reportdata[0]->lala;
+                $finder = $reportdata[0]->$currentquad;
                 $finder = strtolower($finder);
                 if($finder != 'null' && $finder != null){
                 $copydata[$currentquad] = $value -> $finder;

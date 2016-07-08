@@ -49,7 +49,7 @@
             <h1 style="font-size:120px">404</h1>
             <h2>Sorry, We can't find what you are looking for...</h2>
             <br>
-            <a class="btn btn-dark">Back to Home</a>
+            <a class="btn btn-dark" href="http://ipullrank.com/">Go To iPullRank</a>
         </div>
     </body>
 </html>

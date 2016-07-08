@@ -18,15 +18,33 @@ var topbarWidth = $('.topbar').width();
 var headerLeftWidth = $('.header-left').width();
 var headerRightWidth = $('.header-right').width();
 var start = delta = end = 0;
+
+var windowLoad = false;
 $(window).load(function() {
     "use strict";
+    if(!windowLoad){
+        windowLoad = true;
     setTimeout(function() {
         $('.loader-overlay').addClass('loaded');
         $('body > section').animate({
             opacity: 1,
         }, 400);
     }, 500);
+    }
 });
+
+setTimeout(function(){
+    if(!windowLoad){
+        windowLoad = true;
+    setTimeout(function() {
+        $('.loader-overlay').addClass('loaded');
+        $('body > section').animate({
+            opacity: 1,
+        }, 400);
+    }, 500);
+    }
+},10000);
+
 
 
 /* ==========================================================*/
