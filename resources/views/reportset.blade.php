@@ -140,7 +140,7 @@
                         echo "<td>" . $item->fc_company_name . "</td>";
                         echo "<td>" . $item->final_grade . "</td>";
                         echo "<td>" . $item->user_total . "</td>";
-                        echo "<td class='text-right'><a class='btn btn-sm btn-default' href='../display-report=" . $item->id ."' target='_blank'>Preview</a> <a class='btn btn-sm btn-default' name='edit' value='" . $item->id . "'><i class='icon-note'></i></a> <a class='btn btn-sm btn-default' name='code' value='" . $item->id . "'><i class='fa fa-file-code-o'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";   
+                        echo "<td class='text-right'><a class='btn btn-sm btn-default' href='../display-report-authed/?report=" . $item->id ."' target='_blank'>Preview</a> <a class='btn btn-sm btn-default' name='edit' value='" . $item->id . "'><i class='icon-note'></i></a> <a class='btn btn-sm btn-default' name='code' value='" . $item->id . "'><i class='fa fa-file-code-o'></i></a> <a class='delete btn btn-sm btn-danger' href='javascript:;'><i class='icons-office-52'></i></a></td>";   
                         echo "</tr>";
                         };
                         ?> 

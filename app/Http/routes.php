@@ -19,7 +19,7 @@ Route::get('aaa', function(){return view('pdf');});
 
 Route::get('/admin/company-view', 'CompanyView@index');
 Route::get('/display-report', 'DisplayReport@index');
-Route::get('/display-report-authed={id}', 'DisplayReport@authed');
+Route::get('/display-report-authed', 'internalDisplayReport@index');
 // Route::get('/display-report', 'DisplayReport@unidentified');
 
 //Route::get('/admin/', 'Login@index');

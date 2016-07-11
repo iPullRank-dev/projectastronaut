@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class DisplayReport extends Controller
+class internalDisplayReport extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,28 +17,18 @@ class DisplayReport extends Controller
      * @return Response
      */
 
-	// show the report
+            public function __construct()
+    {
+    $this->middleware('auth');
+    } 
+
+
+    // show the report
     public function index(Request $request)
     {
-		//return "Yo does this work?";
-
-		// need all pageviews over time
-		//$analyticsData = LaravelAnalytics::getVisitorsAndPageViews(7);
-
-		// need conversions over time
-		// $conversions = LaravelAnalytics::performQuery($startDate, $endDate, $metrics, $others = array());
-
-		//$data = array('analytics' => $analyticsData,'conversions' => $conversions);
-		//return view("report",$data);
-
         $id = $request -> query('report');
-        $realid = 0;
-        if(base64_encode(base64_decode($id, true)) === $id){
-            $unhash = base64_decode($id);
-            $position = strpos($unhash,"_");
-            $realid = substr($unhash, 0, $position);
-            //$position = strpos($unhash,"=");
-            //$userid = substr($unhash, $position+1, strlen($unhash)-$position-1);
+
+            $realid = $id;
             $reportdata = DB::select('select * from prospectscores where company_id='.$realid);
             $companyinfo = DB::select('select * from prospects where id='.$realid);
             $copy = DB::select('select * from copytext');
@@ -46,21 +36,23 @@ class DisplayReport extends Controller
                 $currentquad = $value -> quad;
                 $finder = $reportdata[0]->$currentquad;
                 $finder = strtolower($finder);
+                if($finder != 'null' && $finder != null){
                 $copydata[$currentquad] = $value -> $finder;
+                }else{
+                $copydata[$currentquad] = 'No Data'; 
+                };
             }
-            return view("report",["data"=>$reportdata,"companyinfo"=>$companyinfo,"hash"=>$id,"copycontent" => $copydata]);
-        }else{
-            return view("404");
-        }
+            return view("reportin",["data"=>$reportdata,"companyinfo"=>$companyinfo,"copycontent" => $copydata]);
+
     }
-	
+    
     
 
-	// Show the page with the modal for the unidentified user
+    // Show the page with the modal for the unidentified user
     public function unidentified()
     {
         //
-		return view("report");
+        return view("report");
     }
 
 
@@ -130,3 +122,4 @@ class DisplayReport extends Controller
         //
     }
 }
+
