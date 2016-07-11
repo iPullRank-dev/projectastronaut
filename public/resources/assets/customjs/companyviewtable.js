@@ -519,10 +519,12 @@ $('#email-send').click(function () {
     email.maincontent = $('#summernote').code();
     email.contactid = $('#email-subject').attr("contactid");
     email.accountowner = dbowener;
+    email = JSON.stringify(email);
     $.ajax({
         url: "../ajax-sendmail3",
         async: false,
         type: "POST",
+        dataType:"JSON",
         beforeSend: function (xhr) {
             var token = $('meta[name="csrf_token"]').attr('content');
 

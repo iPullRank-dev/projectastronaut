@@ -28,9 +28,11 @@
                     <h3><?php echo $data[0]->full_name ?></h3>
                 </div>    
             </div>
+<!--
             <div style="float:right;">
                 <button type="button" class="btn btn-dark"><i class="fa fa-download"></i>Export</button>
             </div>
+-->
             <div class="fixer"></div>
     </div>
     </div>

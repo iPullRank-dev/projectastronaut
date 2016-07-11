@@ -408,11 +408,14 @@ class Ajax extends Controller
         };
     }
 
-    public function sendmail3()
+    public function sendmail3(Request $request)
     {
-        if (isset($_POST['indata']))
+
+        $data = $request->all();
+        if (isset($data['indata']))
         {   
-            $pdata = $_POST['indata'];
+            $pdata = json_decode($data['indata'],true);
+
             $sender = DB::table('adminusers')
                 ->where('email','=',$pdata['accountowner'])->first();
             $senderemail = $sender -> email;
@@ -432,6 +435,9 @@ class Ajax extends Controller
             });
 
             return $user->id;
+
+
+
             
         }
         else{
