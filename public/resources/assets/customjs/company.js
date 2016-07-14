@@ -7,7 +7,7 @@ var gConversion = [];
 var gSessions = [];
 var gConversion2 = [];
     
-console.log(gadata.conversionRows);    
+//console.log(gadata.conversionRows);    
     
 for(var i = 0; i < n; i++){
     gdate[i] = gadata.rows[i][0];

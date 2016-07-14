@@ -520,6 +520,7 @@ $('#email-send').click(function () {
     email.contactid = $('#email-subject').attr("contactid");
     email.accountowner = dbowener;
     email = JSON.stringify(email);
+    console.log(email);
     $.ajax({
         url: "../ajax-sendmail3",
         async: false,

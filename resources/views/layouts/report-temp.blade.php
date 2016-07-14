@@ -242,43 +242,50 @@
 
 
         <!--popup contact-->
-
+        
+        
+<!--                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>-->
+        
         <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog ">
+            <div class="modal-dialog rich-dialog">
                 <div class="modal-content">
-                    
-                                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                        <h4 class="modal-title"><strong>Contact</strong>Us</h4>
-                    </div>
-                    <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="rich-dialog-box" style="background-image:url('../resources/assets/images/c.png');">
+                                <h2>Wait, We’ve Got Business to Do!  </h2>
+                                <p>Checked out your Vector? Turn our insights into actionable solutions with iPullRank. You’ve come this far – let us take you further. </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="modal-body">
 
                         <form name="insightly_web_to_lead" action="https://upnx0cdb.insight.ly/WebToLead/Create" method="post" target="_blank" id="contactForm-{{$companyinfo[0]->id}}" class="insightlyForm">
                             <input type="hidden" name="formId" value="H+SstglQZgGtzp2OFmhFhQ==" />
-                            <label for="insightly_firstName">First Name: *</label>
+                            <label for="insightly_firstName">First Name: (required)</label>
                             <input id="insightly_FirstName" name="FirstName" type="text" required class="form-control form-white"/>
                             <br/>
-                            <label for="insightly_lastName">Last Name: *</label>
+                            <label for="insightly_lastName">Last Name: (required)</label>
                             <input id="insightly_LastName" name="LastName" type="text" class="form-control form-white" required/>
                             <br/>
                             <label for="insightly_organization">Organization: </label>
                             <input id="insightly_Organization" name="OrganizationName" type="text" class="form-control form-white"/>
                             <br/>
-                            <label for="email">Email: *</label>
+                            <label for="email">Email: (required)</label>
                             <input id="insightly_Email" name="email" type="email" required class="form-control form-white"/>
                             <br/>
                             <label for="phone">Phone: </label>
                             <input id="insightly_Phone" name="phone" type="text" class="form-control form-white"/>
                             <br/>
                             <input type="hidden" id="insightly_ResponsibleUser" name="ResponsibleUser" value="816681" />
-                            <br/>
                             <input type="hidden" id="insightly_LeadSource" name="LeadSource" value="624937" />
-                            <span>Fields with * are required.</span>
-                            <div style="text-align:right;margin-top:20px;">
-                            <input type="submit" value="Submit" class="btn btn-dark"/>
-                            </div>
+                            <br>
+                            <input type="submit" value="Improve your SEO today!" class="btn btn-dark"/ style="width:100%;margin:0px;text-align:center;">
+   
                         </form>
                     </div>
+                        </div>
+                    </div>
+                
                 </div>
             </div>
         </div>

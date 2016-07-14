@@ -48,7 +48,7 @@ form .alert{
     -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
-    height:50px;
+    height:60px;
     background: #fff;
     padding:10px;
 }
@@ -276,4 +276,60 @@ form .alert{
 
 .popover.bottom>.arrow{
     border-bottom: none;
+}
+
+.rich-dialog{
+    width:100%;
+    max-width: 700px;
+        background-color: #eeeeee;
+}
+
+.rich-dialog .modal-content{
+    background-color: #eeeeee;
+}
+
+.rich-dialog-box{
+    background-color: #319db5;
+    color: #fff;
+    height: 415px;
+    padding: 10px 30px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.rich-dialog form{
+    margin-bottom: 0px;
+}
+
+.rich-dialog .modal-body{
+    padding: 30px; 
+    padding-left: 0px;
+}
+
+.rich-dialog-box h2{
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.rich-dialog-box p{
+    text-align: center;
+}
+
+@media (max-width:768px){
+    .rich-dialog{
+    width:auto;
+    max-width: inherit;
+}
+    
+    .rich-dialog-box{
+    height: auto;
+    background-image:none !important;
+}
+    
+    .rich-dialog .modal-body{
+    padding-left: 30px;
+}
+    
 }
