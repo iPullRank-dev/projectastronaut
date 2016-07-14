@@ -293,7 +293,7 @@ $("input[name='newsubmit']").on('click', function (e) {
                     console.log('oh,poor kid, not one cares this account!');
                 };
                 countdowntimer();
-                //setTimeout(function(){ window.location = "http://www.ipullrank.com";}, 3000);
+                setTimeout(function(){ window.location = "http://www.ipullrank.com/vector-report";}, 3000);
             } else {
                 thisForm.find('.alert').show();
                 thisForm.find('ul').html('<li>This email already exists.</li>');
