@@ -82,7 +82,7 @@ $(function () {
             var nRow = $(this).parents('tr')[0];
             var aData = oTable.fnGetData(nRow);
             var company_name = aData[1];
-            console.log(company_name);
+            //console.log(company_name);
 
 
             $.ajax({
@@ -100,10 +100,10 @@ $(function () {
                     deletecompany: company_name
                 },
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
 
@@ -150,7 +150,7 @@ $(function () {
         $("a[name='edit']").live('click', function (e) {
             e.preventDefault();
             var id = $(this).attr('value');
-            console.log(id);
+            //console.log(id);
             $.ajax({
                 url: "../ajax-loadeditor",
                 async: false,
@@ -197,7 +197,7 @@ $(function () {
                     $('#editmodal').modal('show');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
         });
@@ -205,7 +205,7 @@ $(function () {
         $("a[name='code']").live('click', function (e) {
             e.preventDefault();
             var id = $(this).attr('value');
-            console.log(id);
+            //console.log(id);
             $.ajax({
                 url: "../ajax-loadcode",
                 async: false,
@@ -226,7 +226,7 @@ $(function () {
                     $('#codemodal').modal('show');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
         });
@@ -271,8 +271,8 @@ $(function () {
         e.preventDefault();
         var newcode = $('#codebox').val();
         var id = $('#codebox').attr('name');
-        console.log(newcode);
-        console.log(id);
+        //console.log(newcode);
+        //console.log(id);
         var passdata = [id, newcode];
         $.ajax({
             url: "../ajax-savecode",
@@ -289,11 +289,11 @@ $(function () {
                 scode: passdata
             },
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 $('#codemodal').modal('hide');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Something went wrong " + errorThrown);
+                //console.log("Something went wrong " + errorThrown);
             },
         });
     });
@@ -314,7 +314,7 @@ $(function () {
     });
 
     $("#checkall").on('ifClicked', function () {
-        console.log('a');
+        //console.log('a');
         $('input:checkbox').not(this).iCheck('toggle');
     });
 

@@ -2,7 +2,7 @@ $(document).ready(function() {
 //chart functions
 
 
-console.log(gadata);
+//console.log(gadata);
 var n = gadata.rows.length;
 var gdate = [];
 var gConversion = [];
@@ -14,8 +14,8 @@ for(var i = 0; i < n; i++){
     gSessions[i] = gadata.rows[i][2];  
 };
 
-console.log(gdate);
-console.log('aaa' + n);    
+//console.log(gdate);
+//console.log('aaa' + n);    
     
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.maintainAspectRatio = false;

@@ -18,10 +18,10 @@ $(function () {
             uid: data
         },
         success: function (output) {
-            console.log(output);
+            //console.log(output);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         }
     });
 }
@@ -54,10 +54,10 @@ $(function () {
             indata: companyid
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 }
@@ -103,13 +103,13 @@ $(function () {
         function saveRow(oTable, nRow, oldEmail) {
             var jqInputs = $('input', nRow);
             var passdata = [];
-            console.log(jqInputs[0].value);
+            //console.log(jqInputs[0].value);
             for (var i = 0; i <= 3; i++) {
                 passdata[i] = jqInputs[i].value;
             };
             passdata[4] = companyid;
             passdata[5] = oldEmail;
-            console.log(passdata);
+            //console.log(passdata);
             //ajax call to db
 
 
@@ -129,15 +129,15 @@ $(function () {
                     update: passdata
                 },
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data);
                     uid = data;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
 
-            console.log(jqInputs[0].value);
+            //console.log(jqInputs[0].value);
 
             var fakeActive = 0;
             if (dbowener != null) {
@@ -163,7 +163,7 @@ $(function () {
             passdata[5] = companyname;
 
             //ajax call to db
-            console.log('test');
+            //console.log('test');
             var uid = 0;
             $.ajax({
                 url: "../ajax-insertuser",
@@ -180,24 +180,24 @@ $(function () {
                     userdata: passdata
                 },
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data)
                     uid = data;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
 
-            //console.log(companyid);
-            //console.log(dbowener);
+            ////console.log(companyid);
+            ////console.log(dbowener);
             var fakeActive = 0;
 
 
 
 
 
-            //console.log(passdata);
-            //console.log(uid);
+            ////console.log(passdata);
+            ////console.log(uid);
             oTable.fnUpdate('<div class=\"uhead\"><img src=\"' + passdata[0] + '\" height=\"40\"></div>', nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
@@ -268,7 +268,7 @@ $(function () {
             var aiNew = oTable.fnAddData(['', '', '', '', '',
                     '<p class="text-center"><a class="edit btn btn-dark" href=""><i class="fa fa-pencil-square-o"></i>Edit</a> <a class="delete btn btn-danger" href=""><i class="fa fa-times-circle"></i> Remove</a></p>'
             ]);
-            console.log(aiNew[0]);
+            //console.log(aiNew[0]);
             var nRow = oTable.fnGetNodes(aiNew[0]);
             editRownew(oTable, nRow);
             nEditing = nRow;
@@ -300,10 +300,10 @@ $(function () {
                     deleteuser: email
                 },
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
 
@@ -336,7 +336,7 @@ $(function () {
                 nEditing = nRow;
             } else if (nEditing == nRow && this.innerHTML == "Save") {
                 /* This row is being edited and should be saved */
-                console.log(tempSaver);
+                //console.log(tempSaver);
                 saveRow(oTable, nEditing, tempSaver);
                 nEditing = null;
                 // alert("Updated! Do not forget to do some ajax to sync with backend :)");
@@ -379,7 +379,7 @@ $(function () {
         $("a[name='userurl']").live('click', function (e) {
             e.preventDefault();
             var id = $(this).attr('value');
-            console.log(id);
+            //console.log(id);
             $.ajax({
                 url: "../ajax-userurl",
                 async: false,
@@ -400,7 +400,7 @@ $(function () {
                     $('#urlModal').modal('show');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Something went wrong " + errorThrown);
+                    //console.log("Something went wrong " + errorThrown);
                 },
             });
         });
@@ -430,7 +430,7 @@ $(function () {
                             hashedUrl = window.location.hostname + "/display-report?report=" + data;
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            console.log("Something went wrong " + errorThrown);
+                            //console.log("Something went wrong " + errorThrown);
                         },
                     });
 
@@ -453,7 +453,7 @@ $(function () {
                     $('#email-subject').val('Welcome to your iPullrank Vector Report!');
                     $('#email-subject').attr("contactid", id);
                     $('#emailModal').modal('show');
-                    //console.log($('#summernote').code());
+                    ////console.log($('#summernote').code());
                     } else {
             alert('Account Manager is needed');
         }
@@ -473,7 +473,7 @@ $(function () {
     $('#account-save').click(function () {
     var accountOwener = $('#account-list').val();
 
-    console.log(accountOwener);
+    //console.log(accountOwener);
 
     var package = [companyid, accountOwener];
 
@@ -495,14 +495,14 @@ $(function () {
             //sendWelcomeEmails(companyid, accountOwener);
             //activeUsers(companyid);
             activeIndicatorCss();
-            console.log(data);
+            //console.log(data);
             $('.account-panel').html(
                 "<div class='panel bg-green'><div class='panel-content companyviewgrade'><div><div class='account-owner'><p>This account is owned by:</p><h4>" + accountOwener + "</h4><button type='button' class='btn btn-dark' id='account_edit' data-toggle='modal' data-target='#accountModal'>Edit</button></div></div></div></div>"
             );
             dbowener = accountOwener;
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -520,7 +520,7 @@ $('#email-send').click(function () {
     email.contactid = $('#email-subject').attr("contactid");
     email.accountowner = dbowener;
     email = JSON.stringify(email);
-    console.log(email);
+    //console.log(email);
     $.ajax({
         url: "../ajax-sendmail3",
         async: false,
@@ -537,13 +537,13 @@ $('#email-send').click(function () {
             indata: email
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             activesingle(data);
             activeCurrentContact();
             activeIndicatorCss();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 });

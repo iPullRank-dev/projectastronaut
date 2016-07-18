@@ -19,7 +19,7 @@ function authProcess(result) {
         success: function (data) {
 
             if (data[0] == 1) {
-                console.log('aha! company:' + data[1] + ' user' + data[2]);
+                //console.log('aha! company:' + data[1] + ' user' + data[2]);
                 dataLayer.push({
                     'event': 'authEvent',
                     'authCompany': 'authcompany',
@@ -36,7 +36,7 @@ function authProcess(result) {
             };
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 };
@@ -59,10 +59,10 @@ function sendMail(dataBag) {
             indata: dataBag
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -75,7 +75,7 @@ function sendMail2(id, msg, sender) {
     passdata.hash = hash;
     passdata.sender = sender;
     passdata = JSON.stringify(passdata);
-    console.log(passdata);
+    //console.log(passdata);
     $.ajax({
         url: "../ajax-sendmail2",
         async: false,
@@ -92,10 +92,10 @@ function sendMail2(id, msg, sender) {
             getdata: passdata
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -113,26 +113,26 @@ function countdowntimer() {
 //form validation function
 
 function formValidate(form) {
-    console.log('running validation');
+    //console.log('running validation');
     var checker = true;
     var alertMessage = '';
     form.find('input').each(function () {
-        //console.log('find one field');
+        ////console.log('find one field');
         if ($(this).prop('required') || $(this).data('required')) {
-            //console.log('checking if it is required');
+            ////console.log('checking if it is required');
             if ($(this).val().length <= 0) {
                 $(this).addClass('error-input');
                 $(this).attr('placeholder', 'Required');
                 alertMessage += "<li>Required field is missing.</li>";
                 checker = false;
             } else if ($(this).attr('type') == 'email' || $(this).data('email')) {
-                //console.log('looks like it is email');
+                ////console.log('looks like it is email');
                 var email = $(this).val();
                 if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
                     $(this).addClass('error-input');
                     $(this).attr('placeholder', 'Required');
                     alertMessage += "<li>Please check if the email is formatted correctly.</li>";
-                    console.log('error');
+                    //console.log('error');
                     checker = false;
                 }
             }
@@ -144,13 +144,13 @@ function formValidate(form) {
     } else {
         form.find('.alert').hide();
     }
-    console.log(checker);
+    //console.log(checker);
     return checker;
 }
 
 function contactForm(){
     $('#contactModal').modal('show');
-    console.log('yeah');
+    //console.log('yeah');
 }
 
 function contactPop(){
@@ -173,7 +173,7 @@ if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elain
 $('#therank').popover({html:true});
 
 if (isMobile) {
-    console.log('im mobile hahahahahaha');
+    //console.log('im mobile hahahahahaha');
     $('#verifyModal').modal('show');
 } else {
     new Fingerprint2().get(function (result) {
@@ -184,7 +184,7 @@ if (isMobile) {
 $("input[name='verify']").on('click', function (e) {
     e.preventDefault();
     var email = $('#verify_email').val();
-    console.log(email);
+    //console.log(email);
     $.ajax({
         url: "../ajax-reportauthemail",
         async: false,
@@ -202,7 +202,7 @@ $("input[name='verify']").on('click', function (e) {
         success: function (data) {
 
             if (data[0] == 1 && data[1] == c_id) {
-                console.log('aha! company:' + data[1] + ' user' + data[2]);
+                //console.log('aha! company:' + data[1] + ' user' + data[2]);
                 dataLayer.push({
                     'event': 'authEvent',
                     'authCompany': 'authcompany',
@@ -217,11 +217,11 @@ $("input[name='verify']").on('click', function (e) {
                 $('#verifyModal').modal('hide');
             } else {
                 $('#verifyalert').html("Sorry, we didn't find your email in our system. Try another email, or <a id='newuser'>get access as a new user</a>");
-                console.log('wrong');
+                //console.log('wrong');
             };
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -239,7 +239,7 @@ $("input[name='newsubmit']").on('click', function (e) {
     e.preventDefault();
     var thisForm = $("input[name='newsubmit']").parent().parent('form');
     if (!formValidate(thisForm)) {
-        console.log('will quite');
+        //console.log('will quite');
         return;
     }
     var userdata = [];
@@ -249,7 +249,7 @@ $("input[name='newsubmit']").on('click', function (e) {
     userdata[3] = $("input[name='new_email']").val();
     userdata[4] = c_id;
     userdata[5] = c_name;
-    console.log(c_id + c_name);
+    //console.log(c_id + c_name);
     $.ajax({
         url: "../ajax-insertuser",
         async: false,
@@ -265,12 +265,12 @@ $("input[name='newsubmit']").on('click', function (e) {
             userdata: userdata
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             if (data != "duplicate") {
                 $('#newModal').modal('hide');
                 $('#doneModal').modal('show');
                 if (c_account != null) {
-                    console.log('it has account manager! email is sent!');
+                    //console.log('it has account manager! email is sent!');
                     $.ajax({
                         url: "../ajax-active",
                         async: false,
@@ -286,10 +286,10 @@ $("input[name='newsubmit']").on('click', function (e) {
                             uid: data
                         },
                         success: function (output) {
-                            console.log(output);
+                            //console.log(output);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            console.log("Something went wrong " + errorThrown);
+                            //console.log("Something went wrong " + errorThrown);
                         }
                     });
                     var emailData = {};
@@ -297,7 +297,7 @@ $("input[name='newsubmit']").on('click', function (e) {
                     emailData.account = c_account;
                     sendMail(emailData);
                 } else {
-                    console.log('oh,poor kid, not one cares this account!');
+                    //console.log('oh,poor kid, not one cares this account!');
                 };
                 countdowntimer();
                 setTimeout(function(){ window.location = "http://www.ipullrank.com/vector-report";}, 3000);
@@ -307,7 +307,7 @@ $("input[name='newsubmit']").on('click', function (e) {
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -323,9 +323,9 @@ $("input[name='newback']").on('click',function(e){
 $("input[name='submitinvite']").on('click', function (e) {
     e.preventDefault();
     var thisForm = $("input[name='submitinvite']").parent().parent('form');
-    console.log(formValidate(thisForm));
+    //console.log(formValidate(thisForm));
     if (!formValidate(thisForm)) {
-        console.log('will quite');
+        //console.log('will quite');
         return;
     }
     var userdata = [];
@@ -336,7 +336,7 @@ $("input[name='submitinvite']").on('click', function (e) {
     userdata[4] = c_id;
     userdata[5] = c_name;
     var msg = $("#invite_msg").val();
-    console.log(c_id + c_name);
+    //console.log(c_id + c_name);
     $.ajax({
         url: "../ajax-insertuser",
         async: false,
@@ -353,7 +353,7 @@ $("input[name='submitinvite']").on('click', function (e) {
         },
         success: function (data) {
             if (data != "duplicate") {
-                console.log(data);
+                //console.log(data);
                 dataLayer.push({
                     'event': 'inviteEvent',
                     'authCompanyid': c_id
@@ -370,7 +370,7 @@ $("input[name='submitinvite']").on('click', function (e) {
                     }
                 });
                 if (c_account != null) {
-                    console.log('it has account manager! email is sent!');
+                    //console.log('it has account manager! email is sent!');
                     $.ajax({
                         url: "../ajax-active",
                         async: false,
@@ -386,15 +386,15 @@ $("input[name='submitinvite']").on('click', function (e) {
                             uid: data
                         },
                         success: function (output) {
-                            console.log(output);
+                            //console.log(output);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            console.log("Something went wrong " + errorThrown);
+                            //console.log("Something went wrong " + errorThrown);
                         }
                     });
                     sendMail2(data, msg, c_account);
                 } else {
-                    console.log('oh,poor kid, not one cares this account!');
+                    //console.log('oh,poor kid, not one cares this account!');
                 };
             } else {
                 thisForm.find('.alert').show();
@@ -402,7 +402,7 @@ $("input[name='submitinvite']").on('click', function (e) {
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Something went wrong " + errorThrown);
+            //console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -410,7 +410,7 @@ $("input[name='submitinvite']").on('click', function (e) {
 });
 
 $('.insightlyForm').submit(function(e){
-    console.log('form go!');
+    //console.log('form go!');
     $('#contactModal').modal('hide');
                     dataLayer.push({
                     'event': 'contactTrackB',

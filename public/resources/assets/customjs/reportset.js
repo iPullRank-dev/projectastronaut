@@ -35,7 +35,7 @@ $(document).ready(function() {
     $("a[name='code']").on('click', function(e) {
         e.preventDefault();
         var id = $(this).attr('value');
-        console.log(id);
+        //console.log(id);
         $.ajax({
             url: "../ajax-loadcode",
             async: false,
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 $('#codemodal').modal('show');
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Something went wrong " + errorThrown);
+                //console.log("Something went wrong " + errorThrown);
             },
         });
     });
@@ -66,8 +66,8 @@ $(document).ready(function() {
         e.preventDefault();
         var newcode = $('#codebox').val();
         var id = $('#codebox').attr('name');
-        console.log(newcode);
-        console.log(id);
+        //console.log(newcode);
+        //console.log(id);
         var passdata = [id, newcode];
         $.ajax({
             url: "../ajax-savecode",
@@ -84,11 +84,11 @@ $(document).ready(function() {
                 scode: passdata
             },
             success: function(data) {
-                console.log(data);
+                //console.log(data);
                 $('#codemodal').modal('hide');
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Something went wrong " + errorThrown);
+                //console.log("Something went wrong " + errorThrown);
             },
         });
     });
@@ -109,7 +109,7 @@ $(document).ready(function() {
     });
 
     $("#checkall").on('ifClicked', function() {
-        console.log('a');
+        //console.log('a');
         $('input:checkbox').not(this).iCheck('toggle');
     });
 
