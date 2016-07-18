@@ -65,7 +65,8 @@ form .alert{
 }
 
 .panel-content div{
-    line-height: 25px;
+    line-height: 2em;
+    font-size: 16px;
 }
 
 .grade{
@@ -305,6 +306,12 @@ form .alert{
 .rich-dialog .modal-body{
     padding: 30px; 
     padding-left: 0px;
+}
+
+.rich-dialog .modal-body button.close{
+        position: relative;
+    top: -15px;
+    right: -15px;
 }
 
 .rich-dialog-box h2{

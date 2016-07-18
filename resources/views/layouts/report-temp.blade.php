@@ -79,7 +79,7 @@
 
         <div id="reporthead">
             <div style="float:left;">
-                <h1><img src="../resources/assets/images/logo/black.png" width="120px" height="40px"></a>
+                <h1><a href="http://ipullrank.com/vector-report/"><img src="../resources/assets/images/logo/black.png" width="120px" height="40px"></a>
 </h1>
             </div>
             <div style="float:right">
@@ -258,6 +258,7 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
 
                         <form name="insightly_web_to_lead" action="https://upnx0cdb.insight.ly/WebToLead/Create" method="post" target="_blank" id="contactForm-{{$companyinfo[0]->id}}" class="insightlyForm">
                             <input type="hidden" name="formId" value="H+SstglQZgGtzp2OFmhFhQ==" />
@@ -271,7 +272,7 @@
                             <input id="insightly_Organization" name="OrganizationName" type="text" class="form-control form-white"/>
                             <br/>
                             <label for="email">Email: (required)</label>
-                            <input id="insightly_Email" name="email" type="email" required class="form-control form-white"/>
+                            <input id="insightly_Email" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required class="form-control form-white"/>
                             <br/>
                             <label for="phone">Phone: </label>
                             <input id="insightly_Phone" name="phone" type="text" class="form-control form-white"/>
@@ -307,7 +308,7 @@
                                                 <div style="font-size: 70px;color: rgba(255,255,255,0.9);">@yield('grade')</div>
                                                 <div style="font-size:17px;">Grade</div>
                                                 <div class="rank">
-                                                    <span style="color:rgba(0,0,0,0.3)">Overall Rank: @yield('rank')<a id="therank" href="#" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="To view the full ranking list of all the reports in our database, click <a href='#'>here</a>"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
+                                                    <span style="color:rgba(0,0,0,0.3)">Overall Rank: @yield('rank')<a id="therank" href="#" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="To view the full ranking list of all the reports in our database, click <a href='http://ipullrank.com/vector-report/'>here</a>"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -548,7 +549,6 @@
 
     <script src="../resources/assets/js/widgets/todo_list.js"></script>
 
-    <script src="../resources/assets/customjs/table_editable.js"></script>
 
     @yield('pagejs')
 

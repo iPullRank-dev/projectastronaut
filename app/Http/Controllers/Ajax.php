@@ -345,9 +345,9 @@ class Ajax extends Controller
         {   
             // watch spelling on var names
 
-            $pdata = $_POST['indata'];
-            $id = $pdata[0];
-            $account_owenr = $pdata[1];
+            $pdata = json_decode($_POST['indata'],true);
+            $id = $pdata['id'];
+            $account_owenr = $pdata['account'];
             
             $user = DB::table('prospectusers')->where('id','=',$id)->first();
             $url = DB::table('shorturls')->where('user_id','=',$id)->first();
@@ -362,7 +362,7 @@ class Ajax extends Controller
             });
 
 
-            return $user->url;
+            return json_encode($user->url);
             
         }
         else{
@@ -374,12 +374,12 @@ class Ajax extends Controller
     {
         if (isset($_POST['getdata']))
         {   
-            $data = $_POST['getdata'];
+            $data = json_decode($_POST['getdata'],true);
            
-            $user = DB::table('prospectusers')->where('id','=',$data[0])->first();
-            $url = DB::table('shorturls')->where('user_id','=',$data[0])->first();
+            $user = DB::table('prospectusers')->where('id','=',$data['id'])->first();
+            $url = DB::table('shorturls')->where('user_id','=',$data['id'])->first();
            
-            $unhash = base64_decode($data[2]);
+            $unhash = base64_decode($data['hash']);
             $position = strpos($unhash,"=");
             $invite = (int)substr($unhash, $position+1);
            
@@ -387,12 +387,12 @@ class Ajax extends Controller
            
             $url = $url -> url_hash;
             $user -> url = $url;
-            $user -> msg = $data[1];
+            $user -> msg = $data['msg'];
             $user -> inviter = $inviterinfo ->full_name;
             $user -> invitermail = $inviterinfo ->email;
             $user -> sub = $user -> inviter . " sent you top-secret information about your company website!
 ";
-            $user -> sender = $data[3];
+            $user -> sender = $data['sender'];
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->sender, 'Welcome to you report');
@@ -400,7 +400,7 @@ class Ajax extends Controller
             });
 
 
-            return $users;
+            return json_encode($user);
             
         }
         else{

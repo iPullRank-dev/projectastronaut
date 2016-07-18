@@ -42,10 +42,12 @@ function authProcess(result) {
 };
 
 function sendMail(dataBag) {
+    dataBag = JSON.stringify(dataBag);
     $.ajax({
         url: "../ajax-sendmail",
         async: false,
         type: "POST",
+        dataType:"JSON",
         beforeSend: function (xhr) {
             var token = $('meta[name="csrf_token"]').attr('content');
 
@@ -67,15 +69,18 @@ function sendMail(dataBag) {
 };
 
 function sendMail2(id, msg, sender) {
-    var passdata = [];
-    passdata[0] = id;
-    passdata[1] = msg;
-    passdata[2] = hash;
-    passdata[3] = sender;
+    var passdata = {};
+    passdata.id = id;
+    passdata.msg = msg;
+    passdata.hash = hash;
+    passdata.sender = sender;
+    passdata = JSON.stringify(passdata);
+    console.log(passdata);
     $.ajax({
         url: "../ajax-sendmail2",
         async: false,
         type: "POST",
+        dataType:"JSON",
         beforeSend: function (xhr) {
             var token = $('meta[name="csrf_token"]').attr('content');
 
@@ -149,7 +154,7 @@ function contactForm(){
 }
 
 function contactPop(){
-    setTimeout(contactForm,3000);
+    setTimeout(contactForm,20000);
 }
 
 $('input').focusin(function () {
@@ -287,7 +292,9 @@ $("input[name='newsubmit']").on('click', function (e) {
                             console.log("Something went wrong " + errorThrown);
                         }
                     });
-                    var emailData = [data, c_account];
+                    var emailData = {};
+                    emailData.id = data;
+                    emailData.account = c_account;
                     sendMail(emailData);
                 } else {
                     console.log('oh,poor kid, not one cares this account!');
@@ -404,6 +411,7 @@ $("input[name='submitinvite']").on('click', function (e) {
 
 $('.insightlyForm').submit(function(e){
     console.log('form go!');
+    $('#contactModal').modal('hide');
                     dataLayer.push({
                     'event': 'contactTrackB',
                     'authCompanyid': c_id
