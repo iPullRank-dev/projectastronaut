@@ -215,6 +215,18 @@ class ReportSetup extends Controller
             ->update($cgrade);    
         
         return redirect('/admin/report-setup/');
+    }
+
+    public function export(){
+        $companycontacts = DB::select('select * from shorturls');
+        foreach ($companycontacts as $value) {
+            $data[] = (array)$value;  
+        };
+        Excel::create('Filename', function($excel)use($data) {
+            $excel->sheet('sheet1',function($sheet)use($data){
+                $sheet->fromArray($data);
+            });
+        })->download('xls');
     }   
 
     

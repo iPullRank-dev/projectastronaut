@@ -118,6 +118,7 @@
                     <div >
                     <button type="button" id="upfile" class="btn btn-dark" style="float:left;margin-left:0px;"><i class="fa fa-upload"></i>Upload</button>
                          <a type="button" class="btn btn-success" style="float:right;" id="print" href="./print" target="_blank"><i class="fa fa-print"></i>Print Reports</a>
+                        <a type="button" class="btn btn-dark" style="float:right;margin-left:0px;" href="./exportall" target="_blank"><i class="fa fa-download"></i>Export Urls</a>
                     <!--<button type="button" class="btn btn-success" style="float:right;"  id="table-edit_new"><i class="fa fa-plus"></i>Add New Line</button>-->
                    
                         <div class="fixer"></div>
