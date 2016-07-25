@@ -17,7 +17,7 @@ Thank you for taking the time to view your report. We’d love to hear your thou
 Sincerely,
 </p>
 <p>
-The iPullRank Team
+<?php echo $user->sender_name ?>
 </p>
 <p>
 Message from <?php echo $user-> inviter ?>: <?php echo $user->msg ?>

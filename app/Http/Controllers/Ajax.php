@@ -347,14 +347,16 @@ class Ajax extends Controller
 
             $pdata = json_decode($_POST['indata'],true);
             $id = $pdata['id'];
-            $account_owenr = $pdata['account'];
+            $sender = DB::table('adminusers')
+                ->where('email','=',$pdata['account'])->first();
             
             $user = DB::table('prospectusers')->where('id','=',$id)->first();
             $url = DB::table('shorturls')->where('user_id','=',$id)->first();
             
             $url = $url -> url_hash;
             $user -> url = $url;
-            $user -> sender = $account_owenr;
+            $user -> sender = $pdata['account'];
+            $user -> sender_name = $sender -> username;
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->sender, 'Welcome to you report');
@@ -384,7 +386,10 @@ class Ajax extends Controller
             $invite = (int)substr($unhash, $position+1);
            
             $inviterinfo = DB::table('prospectusers')->where('id','=',$invite)->first();
-           
+            
+            $sender = DB::table('adminusers')
+                ->where('email','=',$data['sender'])->first();
+
             $url = $url -> url_hash;
             $user -> url = $url;
             $user -> msg = $data['msg'];
@@ -393,6 +398,7 @@ class Ajax extends Controller
             $user -> sub = $user -> inviter . " sent you top-secret information about your company website!
 ";
             $user -> sender = $data['sender'];
+            $user -> sender_name = $sender -> username;
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->sender, 'Welcome to you report');

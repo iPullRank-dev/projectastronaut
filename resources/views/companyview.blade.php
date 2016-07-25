@@ -8,6 +8,7 @@
         var companyname = <?php echo json_encode($data[0]->fc_company_name); ?>;
         var gadata = <?php echo json_encode($analytics);?>;
         var dbowener = <?php echo json_encode($data[0]->account_with)?>;
+        var manager = <?php echo json_encode($data[0]->manager)?>;
     </script>
 
 
@@ -114,7 +115,7 @@
                         <div class="col-md-4">
                             <div class="circle">
                             <div class="wrapper">
-                            <div class="gradein"><?php echo $grade[0]->final_grade ?></div>
+                            <div class="gradein" style="line-height:40px"><?php echo $grade[0]->final_grade ?></div>
                             <div>Final Grade</div>
                                 </div>
                             </div>

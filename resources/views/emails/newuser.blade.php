@@ -18,5 +18,5 @@ We'd love to hear your thoughts on our findings. Feel free to contact us using t
     Sincerely,
 </p>
 <p>
-The iPullRank Team
+<?php echo $user->sender_name ?>
 </p>
