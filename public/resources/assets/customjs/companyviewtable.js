@@ -211,7 +211,11 @@ $(function () {
                     $('td:nth-child(5)', this).addClass('active-indicator');
                 }
             });
-
+            
+            $('.paginate_button a').on('click',function(){
+                activeIndicatorCss();
+            });
+            
             activeIndicatorCss();
 
         }
@@ -242,7 +246,7 @@ $(function () {
 
         var oTable = $('#table-editable2').dataTable({
             // set the initial value
-            "iDisplayLength": 10,
+            "iDisplayLength": 15,
             "oLanguage": {
 
                 "oPaginate": {
@@ -444,13 +448,13 @@ $(function () {
                         $('#email-send-alert').show();
                     }
 
-                    var templateEmail = '<p>Hello, ' + receiver + '</p>';
+                    var templateEmail = '<p>Hi, ' + receiver + '</p>';
 
-                    templateEmail += "<p>Thank you for requesting this awesome report about how your site is doing on Google. iPullRank is super excited for you to have this insider info about your website!</p><p>To recap, we analyzed your site and discovered some interesting information about how you’re ranking on Google. We hate to keep you in suspense any longer so here’s the link:</p><p>URL:<a href='http://" + hashedUrl + "'>" + hashedUrl + "</a></p><p>It’s been a pleasure working with you. We’d love to hear your thoughts on our findings so we included our contact info below.</p><p>Sincerely,</p><p>" + manager + "</p>";
+                    templateEmail += "<p>Even the best companies out there could use a boost in Organic Search. That’s why we’ve created this exclusive Vector Report for " + companyname + ". The report provides an in-depth analysis of all the factors that are affecting your website’s Google Rankings. We’d hate to keep you waiting – take a look:";
 
 
                     $('#summernote').code(templateEmail);
-                    $('#email-subject').val('Welcome to your iPullrank Vector Report!');
+                    $('#email-subject').val('An Exclusive Inside Look at your Site\'s SEO!');
                     $('#email-subject').attr("contactid", id);
                     $('#emailModal').modal('show');
                     ////console.log($('#summernote').code());

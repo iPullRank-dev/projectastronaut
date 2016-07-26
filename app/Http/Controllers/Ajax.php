@@ -359,8 +359,8 @@ class Ajax extends Controller
             $user -> sender_name = $sender -> username;
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
-                $m->from($user->sender, 'Welcome to you report');
-                $m->to($user->email, $user->full_name)->subject($user->full_name . ", here is your access to your site's report.");
+                $m->from($user->sender, 'Vector Report');
+                $m->to($user->email, $user->full_name)->subject($user->full_name . ', your site’s SEO report card is ready for you!');
             });
 
 
@@ -401,8 +401,8 @@ class Ajax extends Controller
             $user -> sender_name = $sender -> username;
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
-                $m->from($user->sender, 'Welcome to you report');
-                $m->to($user->email, $user->full_name)->subject('Welcome to iPullrank Vector Report');
+                $m->from($user->sender, 'Vector Report');
+                $m->to($user->email, $user->full_name)->subject('SEO help is on the way from ' . $user -> inviter);
             });
 
 
@@ -429,14 +429,17 @@ class Ajax extends Controller
 
             $user = DB::table('prospectusers')
                 ->where('id','=',$pdata['contactid'])->first();
+            $url = DB::table('shorturls')->where('id','=',$pdata['contactid'])->first();
 
+
+            $user -> url = $url -> url_hash;
             $user -> sendername = $sendername;
             $user -> senderemail = $senderemail;
             $user -> emailcontent = $pdata['maincontent'];
             $user -> subjectline = $pdata['subject'];
                 
             Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
-                $m->from($user->senderemail, $user->sendername);
+                $m->from($user->senderemail, 'Vector Report');
                 $m->to($user->email, $user->full_name)->subject($user->subjectline);
             });
 
