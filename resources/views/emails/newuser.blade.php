@@ -11,63 +11,74 @@
 
 
 
-    <style type="text/css">
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-text-size-adjust: none;
-        }
-        
-        .main-sec {
-            width: 500px;
-        }
-        
-        @media only screen and (max-width:800px) {
-            td[class=nl_spacer] {
-                width: 20px;
-            }
-            .overlay {
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-        }
-        
-        @media only screen and (max-width:600px) {
-            td[class=nl_column] {
-                width: 100%;
-                display: block;
-                -moz-box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-            }
-        }
-        
-        @media only screen and (max-width:600px) {
-            table[class=nl_center] {
-                margin: 0px auto;
-            }
-            .main-sec {
-                width: 100%;
-            }
-        }
-        
-        @media only screen and (max-width:600px) {
-            td[class=nl_spacer] {
-                width: 10px;
-            }
-        }
-        
-        @media only screen and (max-width:600px) {
-            img[class=nl_center_img] {
-                height: auto;
-                margin: 0px auto;
-                display: block;
-            }
-        }
-    </style>
-</head>
+<style type="text/css">
+		*{
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+			-webkit-text-size-adjust:none;
+		}
+		.main-sec{
+			width:700px;
+		}
+	@media only screen and (max-width:800px){
+		.main{
+			width:100% !important;
+			max-width:800px;
+			min-width:0px !important;
+		}
 
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" yahoo="fix" style="margin:0px; padding:0px;font-family:'Lato',sans-serif;">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="max-width:800px;">
+}	@media only screen and (min-width:801px){
+		.main{
+			width:100% !important;
+			max-width:800px;
+			min-width:0px !important;
+		}
+
+}	@media only screen and (max-width:800px){
+		td[class=nl_spacer]{
+			width:20px;
+		}
+
+}	@media only screen and (max-width:800px){
+		.overlay{
+			background-color:rgba(0,0,0,0.5);
+		}
+
+}	@media only screen and (max-width:600px){
+		td[class=nl_column]{
+			width:100%;
+			display:block;
+			-moz-box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			box-sizing:border-box;
+		}
+
+}	@media only screen and (max-width:600px){
+		table[class=nl_center]{
+			margin:0px auto;
+		}
+
+}	@media only screen and (max-width:600px){
+		.main-sec{
+			width:100%;
+		}
+
+}	@media only screen and (max-width:600px){
+		td[class=nl_spacer]{
+			width:10px;
+		}
+
+}	@media only screen and (max-width:600px){
+		img[class=nl_center_img]{
+			height:auto;
+			margin:0px auto;
+			display:block;
+		}
+
+}</style></head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" yahoo="fix" style="margin:0px; padding:0px;-webkit-text-size-adjust: none;">
+    <table class="main" border="0" cellpadding="0" cellspacing="0" align="center" style="width:800px;min-width:800px;">
         <tr valign="top">
             <td>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0">
