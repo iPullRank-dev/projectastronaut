@@ -640,7 +640,7 @@ class Ajax extends Controller
 
                 $lead['EMAIL_ADDRESS'] = $email_address;
                 $lead['ORGANIZATION_NAME'] = $company_name;
-                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce lead")); 
+                $lead['TAGS'] = array(array("TAG_NAME" => "Unbounce Vector landingpage lead")); 
 
                 $api_data = json_encode($lead);
 
