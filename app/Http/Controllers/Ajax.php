@@ -588,6 +588,7 @@ class Ajax extends Controller
             $email_address = $form_data->email[0];
             $company_name = $form_data->company_name[0];
             $contact_name = $form_data->name[0];
+            $need_agency = $form_data->need_agency[0];
 
             $find = DB::table('prospects')->where('fc_company_name','like',$company_name)->first();
             if($find != null){
@@ -637,7 +638,7 @@ class Ajax extends Controller
 
                 // changed this array assignment to be one statement
 
-
+                $lead['LEAD_DESCRIPTION'] = $need_agency;
                 $lead['EMAIL_ADDRESS'] = $email_address;
                 $lead['ORGANIZATION_NAME'] = $company_name;
                 $lead['TAGS'] = array(array("TAG_NAME" => "vector_landingpage_lead")); 
