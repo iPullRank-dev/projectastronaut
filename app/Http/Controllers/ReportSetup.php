@@ -219,7 +219,15 @@ class ReportSetup extends Controller
 
     public function export(){
         $companycontacts = DB::select('select * from shorturls');
+
+
+        $companycontacts = DB::table('shorturls')
+                            ->join('prospects', 'shorturls.company_id', '=', 'prospects.id')
+                            ->select('shorturls.*', 'prospects.fc_company_name')
+                            ->get();
+
         foreach ($companycontacts as $value) {
+            $value->real_url = "http://vector.ipullrank.com/display-report?report=".$value->url_hash;
             $data[] = (array)$value;  
         };
         Excel::create('Filename', function($excel)use($data) {
