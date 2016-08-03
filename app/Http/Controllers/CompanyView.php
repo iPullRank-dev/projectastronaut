@@ -52,11 +52,6 @@ class CompanyView extends Controller
         $companyscore = DB::select('select * from prospectscores where company_id='.$id);
         $adminusers = DB::select('select * from adminusers');
 
-        $owener = DB::table('adminusers')
-                ->where('email','=',$companyDetail[0] -> account_with)->first();
-
-        $companyDetail[0] -> manager = $owener -> username;
-
         $usernumber = [];
         $day = new \Datetime(date("Y-m-d",strtotime('-30 days')));
         for($i = 0; $i<=30;$i++){
