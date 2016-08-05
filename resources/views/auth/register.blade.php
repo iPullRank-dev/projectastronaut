@@ -84,6 +84,10 @@
                         <input type="password" name="password_confirmation" id="confirmpwd" class="form-control form-white password2" placeholder="Repeat Password" required>
                         <i class="icon-lock"></i>
                     </div>
+                    <div class="append-icon m-b-20">
+                        <input type="password" name="code" id="code" class="form-control form-white password2" placeholder="access code" required>
+                        <i class="icon-lock"></i>
+                    </div>
        
 
                         <input type="submit" id="register-button"

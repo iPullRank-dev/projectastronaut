@@ -58,10 +58,14 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['code'] == 'iPull@rank'){
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        }else{
+            
+        }
     }
 }

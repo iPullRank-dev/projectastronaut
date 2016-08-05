@@ -72,7 +72,7 @@
 
                         <div class="clearfix">
                             <!--<p class="pull-left m-t-20"><a id="password" href="#">Forgot password?</a></p>-->
-                            <p class="m-t-20" style="text-align:center;"><a href="register">New here? Sign up</a></p>
+<!--                            <p class="m-t-20" style="text-align:center;"><a href="register">New here? Sign up</a></p>-->
                         </div>
                     </form>
                     <!--<form class="form-password" role="form">
