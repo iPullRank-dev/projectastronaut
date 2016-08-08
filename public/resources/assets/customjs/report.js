@@ -92,10 +92,10 @@ function sendMail2(id, msg, sender) {
             getdata: passdata
         },
         success: function (data) {
-            //console.log(data);
+//            console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            //console.log("Something went wrong " + errorThrown);
+//            console.log("Something went wrong " + errorThrown);
         },
     });
 
@@ -249,6 +249,7 @@ $("input[name='newsubmit']").on('click', function (e) {
     userdata[3] = $("input[name='new_email']").val();
     userdata[4] = c_id;
     userdata[5] = c_name;
+    userdata[6] = 'no';
     //console.log(c_id + c_name);
     $.ajax({
         url: "../ajax-insertuser",
@@ -335,6 +336,7 @@ $("input[name='submitinvite']").on('click', function (e) {
     userdata[3] = $("input[name='invite_email']").val();
     userdata[4] = c_id;
     userdata[5] = c_name;
+    userdata[6] = 'no';
     var msg = $("#invite_msg").val();
     //console.log(c_id + c_name);
     $.ajax({

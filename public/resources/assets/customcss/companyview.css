@@ -66,7 +66,7 @@
 
 .active-indicator:before{
     content:"\f111";
-    color: #000;
+    color: #18A689;
 }
 
 .acitve-a:before{
@@ -74,7 +74,7 @@
 }
 
 .active-ina:before{
-    color: #C75757;
+    color: #18A689;
 }
 
 #email-send{

@@ -161,6 +161,7 @@ $(function () {
             };
             passdata[4] = companyid;
             passdata[5] = companyname;
+            passdata[6] = 'reply';
 
             //ajax call to db
             //console.log('test');

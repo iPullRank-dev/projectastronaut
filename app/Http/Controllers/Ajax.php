@@ -128,7 +128,7 @@ class Ajax extends Controller
                 return 'duplicate';
             }
             else{
-    		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5],'created_at' => date("Y-m-d H:i:s")];
+    		$indata = ['email' => $newdata[3], 'full_name' => $newdata[1], 'title' => $newdata[2], 'company_id' => $newdata[4], 'fc_gravatar' => $newdata[0], 'company' => $newdata[5],'created_at' => date("Y-m-d H:i:s"),"active" => 1];
     		
     		$id = DB::table('prospectusers')->insertGetId($indata);
     		
@@ -140,7 +140,38 @@ class Ajax extends Controller
 
             DB::table('shorturls') ->insert($urldata);
 
-		return $id;
+
+            if($newdata[6] == 'reply'){
+            //add this contact to REPLY
+                $reply = array();
+                $reply['campaignId'] = 24161;
+                $reply['email'] = $indata['email'];
+                $reply['firstName'] = $indata['full_name'];
+                $reply['company'] = $indata['company'];
+                $reply['customFields'] = array(array(
+                    "key" => "PAURL",
+                    "value" => "http://vector.ipullrank.com/display-report?report=".$hased."&company=".str_replace(' ', '_', $indata['company'])
+                    ));
+
+                $api_data = json_encode($reply);
+
+                $service_url = 'https://run.replyapp.io/api/v1/actions/addandpushtocampaign';
+
+                // make curl command its own function just in case you need to do something like this again in another place
+                $ch = curl_init($service_url); 
+                curl_setopt($ch, 
+                            CURLOPT_HTTPHEADER, 
+                            array('Content-Type: application/json', 
+                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                $server_output = curl_exec ($ch);
+                curl_close ($ch);
+            }
+
+		    return $id;
             }
 		}else{
 		return 'false call';
@@ -444,34 +475,6 @@ class Ajax extends Controller
                 $m->to($user->email, $user->full_name)->subject($user->subjectline);
             });
 
-
-            //add this contact to REPLY
-            $reply = array();
-                $reply['campaignId'] = 23928;
-                $reply['email'] = $user->email;
-                $reply['firstName'] = $user->full_name;
-                $reply['company'] = $user->company;
-                $reply['customFields'] = array(array(
-                    "key" => "PAURL",
-                    "value" => "http://vector.ipullrank.com/display-report?report=".$user -> url
-                    ));
-
-                $api_data = json_encode($reply);
-
-                $service_url = 'https://run.replyapp.io/api/v1/actions/addandpushtocampaign';
-
-                // make curl command its own function just in case you need to do something like this again in another place
-                $ch = curl_init($service_url); 
-                curl_setopt($ch, 
-                            CURLOPT_HTTPHEADER, 
-                            array('Content-Type: application/json', 
-                            'X-Api-Key: 7NqDwGcoiQ-kpw02ksj8xA2'));
-                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-                $server_output = curl_exec ($ch);
-                curl_close ($ch);
 
             return $user->id;
 

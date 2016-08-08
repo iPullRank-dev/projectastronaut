@@ -135,6 +135,7 @@ class ReportSetup extends Controller
                 $ranklist = array_splice($storescore, $keyrecorder);
 
                 $indata['created_at'] = date("Y-m-d H:i:s");
+                $companydata[$i]['account_with'] = 'louis@ipullrank.com';
                 $companyid = DB::table('prospects')->insertGetId($companydata[$i]);
                 $storescore['company_id'] = $companyid;
                 $storescore['created_at'] = date("Y-m-d H:i:s");
@@ -159,6 +160,8 @@ class ReportSetup extends Controller
                 $companyid = $companyid -> id;
                 $indata2['company_id'] = $companyid;
                 $indata2['created_at'] = date("Y-m-d H:i:s");
+                $indata2['active'] = 1;
+
                 $userid = DB::table('prospectusers')->insertGetId($indata2);
                 $urldata['company_id'] = $companyid;
                 $urldata['user_id'] = $userid;
@@ -167,6 +170,34 @@ class ReportSetup extends Controller
                 $hased = base64_encode($inurl);
                 $urldata['url_hash'] = $hased;
                 DB::table('shorturls') ->insert($urldata);
+
+                //add this contact to REPLY
+                $reply = array();
+                $reply['campaignId'] = 24161;
+                $reply['email'] = $indata2['email'];
+                $reply['firstName'] = $indata2['full_name'];
+                $reply['company'] = $indata2['company'];
+                $reply['customFields'] = array(array(
+                    "key" => "PAURL",
+                    "value" => "http://vector.ipullrank.com/display-report?report=".$hased."&company=".str_replace(' ', '_', $indata2['company'])
+                    ));
+
+                $api_data = json_encode($reply);
+
+                $service_url = 'https://run.replyapp.io/api/v1/actions/addandpushtocampaign';
+
+                // make curl command its own function just in case you need to do something like this again in another place
+                $ch = curl_init($service_url); 
+                curl_setopt($ch, 
+                            CURLOPT_HTTPHEADER, 
+                            array('Content-Type: application/json', 
+                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                $server_output = curl_exec ($ch);
+                curl_close ($ch);
 
             };};
 
