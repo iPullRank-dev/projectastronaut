@@ -227,7 +227,7 @@ class ReportSetup extends Controller
                             ->get();
 
         foreach ($companycontacts as $value) {
-            $value->real_url = "http://vector.ipullrank.com/display-report?report=".$value->url_hash;
+            $value->real_url = "http://vector.ipullrank.com/display-report?report=".$value->url_hash."&company=".str_replace(' ', '_', $value->fc_company_name);
             $data[] = (array)$value;  
         };
         Excel::create('Filename', function($excel)use($data) {

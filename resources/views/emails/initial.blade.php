@@ -110,7 +110,7 @@
                                 <p style="text-align:center;">
                                     <br>
                                     <br>
-                                    <a href="http://vector.ipullrank.com/display-report?report=<?php echo $user->url ?>" style="display:inline-blocl;padding:15px 20px;background-color:#54AABD;color:#fff;text-decoration:none;font-weight:bold;">Let's See My Website's Report Card</a>
+                                    <a href="http://vector.ipullrank.com/display-report?report=<?php echo $user->url ?>&company=<?php echo $user->ucompany ?>" style="display:inline-blocl;padding:15px 20px;background-color:#54AABD;color:#fff;text-decoration:none;font-weight:bold;">Let's See My Website's Report Card</a>
                                 </p>
                             </div>
                         </td>

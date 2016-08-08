@@ -355,6 +355,7 @@ class Ajax extends Controller
             $user -> url = $url;
             $user -> sender = $pdata['account'];
             $user -> sender_name = $sender -> username;
+            $user -> ucompany = str_replace(' ', '_', $user->company);
 
             Mail::send('emails.newuser', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->sender, 'Vector Report');
@@ -397,6 +398,7 @@ class Ajax extends Controller
 ";
             $user -> sender = $data['sender'];
             $user -> sender_name = $sender -> username;
+            $user -> ucompany = str_replace(' ', '_', $user->company);
 
             Mail::send('emails.inviteuser', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->sender, 'Vector Report');
@@ -435,6 +437,7 @@ class Ajax extends Controller
             $user -> senderemail = $senderemail;
             $user -> emailcontent = $pdata['maincontent'];
             $user -> subjectline = $pdata['subject'];
+            $user -> ucompany = str_replace(' ', '_', $user->company);
                 
             Mail::send('emails.initial', ['user' => $user], function ($m) use ($user) {
                 $m->from($user->senderemail, 'Vector Report');
