@@ -173,9 +173,12 @@ class ReportSetup extends Controller
 
                 //add this contact to REPLY
                 $reply = array();
-                $reply['campaignId'] = 24161;
+                $reply['campaignId'] = 24295;
                 $reply['email'] = $indata2['email'];
-                $reply['firstName'] = $indata2['full_name'];
+                // $reply['firstName'] = $indata2['full_name'];
+                $name_array = explode(' ', $indata2['full_name'],2);
+                    $reply['lastName'] = $name_array[1];
+                    $reply['firstName'] = $name_array[0];
                 $reply['company'] = $indata2['company'];
                 $reply['customFields'] = array(array(
                     "key" => "PAURL",

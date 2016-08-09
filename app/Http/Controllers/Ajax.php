@@ -144,9 +144,14 @@ class Ajax extends Controller
             if($newdata[6] == 'reply'){
             //add this contact to REPLY
                 $reply = array();
-                $reply['campaignId'] = 24161;
+                $reply['campaignId'] = 24295;
                 $reply['email'] = $indata['email'];
-                $reply['firstName'] = $indata['full_name'];
+
+                $name_array = explode(' ', $indata['full_name'],2);
+                    $reply['lastName'] = $name_array[1];
+                    $reply['firstName'] = $name_array[0];
+
+                // $reply['firstName'] = $indata['full_name'];
                 $reply['company'] = $indata['company'];
                 $reply['customFields'] = array(array(
                     "key" => "PAURL",
@@ -640,6 +645,40 @@ class Ajax extends Controller
                 $urldata = ['company_id' => $find -> id, 'user_id' => $id, 'url_hash' => $hashed];
 
                 DB::table('shorturls') ->insert($urldata);
+
+
+                            //add this contact to REPLY
+                $reply = array();
+                $reply['campaignId'] = 24295;
+                $reply['email'] = $indata['email'];
+
+                $name_array = explode(' ', $indata['full_name'],2);
+                    $reply['lastName'] = $name_array[1];
+                    $reply['firstName'] = $name_array[0];
+
+                // $reply['firstName'] = $indata['full_name'];
+                $reply['company'] = $indata['company'];
+                $reply['customFields'] = array(array(
+                    "key" => "PAURL",
+                    "value" => "http://vector.ipullrank.com/display-report?report=".$hashed."&company=".str_replace(' ', '_', $indata['company'])
+                    ));
+
+                $api_data = json_encode($reply);
+
+                $service_url = 'https://run.replyapp.io/api/v1/actions/addandpushtocampaign';
+
+                // make curl command its own function just in case you need to do something like this again in another place
+                $ch = curl_init($service_url); 
+                curl_setopt($ch, 
+                            CURLOPT_HTTPHEADER, 
+                            array('Content-Type: application/json', 
+                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                $server_output = curl_exec ($ch);
+                curl_close ($ch);
 
 
             }
