@@ -176,9 +176,15 @@ class ReportSetup extends Controller
                 $reply['campaignId'] = 24295;
                 $reply['email'] = $indata2['email'];
                 // $reply['firstName'] = $indata2['full_name'];
-                $name_array = explode(' ', $indata2['full_name'],2);
+
+
+                if (strpos($indata2['full_name'], ' ') !== false) {
+                    $name_array = explode(' ', $indata2['full_name'],2);
                     $reply['lastName'] = $name_array[1];
                     $reply['firstName'] = $name_array[0];
+                }else{
+                    $reply['firstName'] = $indata2['full_name'];
+                }
                 $reply['company'] = $indata2['company'];
                 $reply['customFields'] = array(array(
                     "key" => "PAURL",

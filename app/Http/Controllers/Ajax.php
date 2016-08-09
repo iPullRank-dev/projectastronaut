@@ -147,9 +147,13 @@ class Ajax extends Controller
                 $reply['campaignId'] = 24295;
                 $reply['email'] = $indata['email'];
 
-                $name_array = explode(' ', $indata['full_name'],2);
+                if (strpos($indata['full_name'], ' ') !== false) {
+                    $name_array = explode(' ', $indata['full_name'],2);
                     $reply['lastName'] = $name_array[1];
                     $reply['firstName'] = $name_array[0];
+                }else{
+                    $reply['firstName'] = $indata['full_name'];
+                }
 
                 // $reply['firstName'] = $indata['full_name'];
                 $reply['company'] = $indata['company'];
@@ -652,9 +656,14 @@ class Ajax extends Controller
                 $reply['campaignId'] = 24295;
                 $reply['email'] = $indata['email'];
 
-                $name_array = explode(' ', $indata['full_name'],2);
+                if (strpos($indata['full_name'], ' ') !== false) {
+                    $name_array = explode(' ', $indata['full_name'],2);
                     $reply['lastName'] = $name_array[1];
                     $reply['firstName'] = $name_array[0];
+                }else{
+                    $reply['firstName'] = $indata['full_name'];
+                }
+
 
                 // $reply['firstName'] = $indata['full_name'];
                 $reply['company'] = $indata['company'];
