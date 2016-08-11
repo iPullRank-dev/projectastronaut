@@ -250,6 +250,13 @@ class ReportSetup extends Controller
             ->where('id', $input['id'])
             ->update($cinfo);
 
+        $rankinfo['company'] = $cinfo['fc_company_name'];
+        $rankinfo['vector_ranking'] = $cgrade['rank'];
+
+        DB::table('rank')
+            ->where('id',$input['id'])
+            ->update($rankinfo);
+
         DB::table('prospectscores')
             ->where('company_id', $input['id'])
             ->update($cgrade);    

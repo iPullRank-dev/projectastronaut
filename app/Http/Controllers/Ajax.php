@@ -512,6 +512,8 @@ class Ajax extends Controller
 
             DB::table('shorturls')->where('company_id', '=', $id)->delete();
 
+            DB::table('rank')->where('id', '=', $id)->delete();
+
             
             //DB::insert('insert into prospectusers (email, full_name, title, company_id, fc_gravatar, company) values (?, ?, ?, ?, ?, ?)', [$newuserdata[3], $newuserdata[1], $newuserdata[2], $newuserdata[4], $newuserdata[0], $newuserdata[5]]);
             
