@@ -351,7 +351,7 @@
 
 @yield('pagejs')
 
-<!-- END PAGE SCRIPTS -->
+<!-- END PAGE SCRIPTS aug 11-->
 
 </body>
 
