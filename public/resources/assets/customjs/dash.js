@@ -7,11 +7,13 @@ var n = gadata.rows.length;
 var gdate = [];
 var gConversion = [];
 var gSessions = [];
+var gConversion2 = [];
     
 for(var i = 0; i < n; i++){
     gdate[i] = gadata.rows[i][0];
-    gConversion[i] = gadata.rows[i][1];
-    gSessions[i] = gadata.rows[i][2];  
+    gConversion[i] = gadata.conversionRows[i][1];
+    gSessions[i] = gadata.rows[i][2];
+    gConversion2[i] = gadata.conversionRows2[i][1];
 };
 
 //console.log(gdate);
@@ -25,23 +27,33 @@ var data = {
     datasets: [
         {
             label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: "rgba(24,166,137,0.2)",
+            strokeColor: "rgba(24,166,137,1)",
+            pointColor: "rgba(24,166,137,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            pointHighlightStroke: "rgba(24,166,137,1)",
             data: gSessions
         },
         {
             label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
+            fillColor: "rgba(165,139,211,0.2)",
+            strokeColor: "rgba(165,139,211,1)",
+            pointColor: "rgba(165,139,211,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
             data: gConversion
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(221,104,104,0.2)",
+            strokeColor: "rgba(221,104,104,1)",
+            pointColor: "rgba(221,104,104,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: gConversion2
         }
     ]
 };
