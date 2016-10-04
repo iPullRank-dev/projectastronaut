@@ -66,6 +66,7 @@ Route::post('/ajax-sendmail', 'Ajax@sendmail');
 Route::post('/ajax-sendmail2', 'Ajax@sendmail2');
 Route::post('/ajax-sendmail3', 'Ajax@sendmail3');
 Route::get('/testmail', 'tests@sendmail');
+Route::post('/contact-form','Ajax@contactForm');
 
 Route::post('/admin/uploadnew','NewCompany@upload');
 Route::post('/admin/updatecompany','ReportSetup@updatecompany');

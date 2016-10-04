@@ -273,7 +273,7 @@
                             <div class="modal-body">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
 
-                        <form name="insightly_web_to_lead" action="https://upnx0cdb.insight.ly/WebToLead/Create" method="post" target="_blank" id="contactForm-{{$companyinfo[0]->id}}" class="insightlyForm">
+                        <form name="contact form" action="/contact-form" method="post" target="_blank" id="contactForm-{{$companyinfo[0]->id}}" class="insightlyForm">
                             <input type="hidden" name="formId" value="H+SstglQZgGtzp2OFmhFhQ==" />
                             <label for="insightly_firstName">First Name: (required)</label>
                             <input id="insightly_FirstName" name="FirstName" type="text" required class="form-control form-white"/>
@@ -290,8 +290,7 @@
                             <label for="phone">Phone: </label>
                             <input id="insightly_Phone" name="phone" type="text" class="form-control form-white"/>
                             <br/>
-                            <input type="hidden" id="insightly_ResponsibleUser" name="ResponsibleUser" value="816681" />
-                            <input type="hidden" id="insightly_LeadSource" name="LeadSource" value="624937" />
+                            <span class="submit-error"></span>
                             <br>
                             <input type="submit" value="Improve your SEO today!" class="btn btn-dark"/ style="width:100%;margin:0px;text-align:center;">
    

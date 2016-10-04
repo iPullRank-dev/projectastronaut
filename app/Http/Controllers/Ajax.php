@@ -702,7 +702,8 @@ class Ajax extends Controller
                 //call to insightly api
 
                 if(strpos($contact_name,' ') === false){
-                        $lead['LAST_NAME'] = $contact_name;
+                        $form_lastname = $contact_name;
+                        $form_firstname = '';
                 }
 
                 // this won't work on a long name like Laura Almeida de Viera
@@ -711,40 +712,52 @@ class Ajax extends Controller
                 // and the substr before and after the space
                 else{
                     $name_array = explode(' ', $contact_name,2);
-                    $lead['LAST_NAME'] = $name_array[1];
-                    $lead['FIRST_NAME'] = $name_array[0];
+                    $form_lastname = $name_array[1];
+                    $form_firstname = $name_array[0];
                 }
 
+                $arr = array(
+            'properties' => array(
+                array(
+                    'property' => 'email',
+                    'value' => $email_address
+                ),
+                array(
+                    'property' => 'firstname',
+                    'value' => $form_firstname
+                ),
+                array(
+                    'property' => 'lastname',
+                    'value' => $form_lastname
+                ),
+                array(
+                    'property' => 'company',
+                    'value' => $company_name
+                ),
+                array(
+                    'property' => 'form_source',
+                    'value' => 'vector landingpage form'
+                )
+            )
+        );
 
-                // print_r($name_array);
-                // $lead['LAST_NAME'] = $contact_name;
+        $post_json = json_encode($arr);
 
-                // changed this array assignment to be one statement
 
-                $lead['LEAD_DESCRIPTION'] = $need_agency;
-                $lead['EMAIL_ADDRESS'] = $email_address;
-                $lead['ORGANIZATION_NAME'] = $company_name;
-                $lead['TAGS'] = array(array("TAG_NAME" => "vector_landingpage_lead")); 
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=0daf4e6d-b636-4fa6-8355-302bef532bd3';
 
-                $api_data = json_encode($lead);
-
-                $service_url = 'https://api.insight.ly/v2.1/Leads';
-
-                // make curl command its own function just in case you need to do something like this again in another place
-                $ch = curl_init($service_url); 
-                curl_setopt($ch, 
-                            CURLOPT_HTTPHEADER, 
-                            array('Content-Type: application/json', 
-                            'Authorization: Basic NGViYWYzMmQtODQyNS00MzZkLTkzNTktMTVjMWNkM2ZmNjU0'));
-                curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
+                $ch = curl_init(); 
+                curl_setopt($ch, CURLOPT_URL, $endpoint);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $post_json);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POST, 1);
 
 
                 $server_output = curl_exec ($ch);
+                $reponse_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+                $curl_errors = curl_error($ch);
                 curl_close ($ch);
-
-                print_r($server_output);
 
             }
 
@@ -762,6 +775,61 @@ class Ajax extends Controller
             return 'wrong api key';
         }
 
+
+    }
+
+    public function contactForm(Request $request){
+        $data = $request->all();
+
+        $arr = array(
+            'properties' => array(
+                array(
+                    'property' => 'email',
+                    'value' => $data['email']
+                ),
+                array(
+                    'property' => 'firstname',
+                    'value' => $data['FirstName']
+                ),
+                array(
+                    'property' => 'lastname',
+                    'value' => $data['LastName']
+                ),
+                array(
+                    'property' => 'company',
+                    'value' => $data['OrganizationName']
+                ),
+                array(
+                    'property' => 'phone',
+                    'value' => $data['phone']
+                ),
+                array(
+                    'property' => 'form_source',
+                    'value' => 'vector contact form'
+                )
+            )
+        );
+
+        $post_json = json_encode($arr);
+
+
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=0daf4e6d-b636-4fa6-8355-302bef532bd3';
+
+                $ch = curl_init(); 
+                curl_setopt($ch, CURLOPT_URL, $endpoint);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, $post_json);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, 1);
+
+
+                $server_output = curl_exec ($ch);
+                $reponse_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+                $curl_errors = curl_error($ch);
+                curl_close ($ch);
+
+
+                echo json_encode($reponse_code);
 
     }
    
