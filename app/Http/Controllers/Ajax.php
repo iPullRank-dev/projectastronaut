@@ -737,7 +737,11 @@ class Ajax extends Controller
                 array(
                     'property' => 'form_source',
                     'value' => 'vector landingpage form'
-                )
+                ),
+                array(
+                        'property' => 'hs_lead_status',
+                        'value' => 'NEW'
+                    )
             )
         );
 
@@ -806,7 +810,12 @@ class Ajax extends Controller
                 array(
                     'property' => 'form_source',
                     'value' => 'vector contact form'
+                ),
+                array(
+                    'property' => 'hs_lead_status',
+                    'value' => 'NEW'
                 )
+
             )
         );
 

@@ -83,7 +83,7 @@ $(function () {
             var aData = oTable.fnGetData(nRow);
             var company_name = aData[1];
             //console.log(company_name);
-
+            
 
             $.ajax({
                 url: "../ajax-deletecompany",
