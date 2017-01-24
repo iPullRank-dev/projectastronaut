@@ -171,7 +171,7 @@ class Ajax extends Controller
                 curl_setopt($ch, 
                             CURLOPT_HTTPHEADER, 
                             array('Content-Type: application/json', 
-                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                            ''));
                 curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -683,7 +683,7 @@ class Ajax extends Controller
                 curl_setopt($ch, 
                             CURLOPT_HTTPHEADER, 
                             array('Content-Type: application/json', 
-                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                            'X-Api-Key:'));
                 curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -748,7 +748,7 @@ class Ajax extends Controller
         $post_json = json_encode($arr);
 
 
-        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=0daf4e6d-b636-4fa6-8355-302bef532bd3';
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=';
 
                 $ch = curl_init(); 
                 curl_setopt($ch, CURLOPT_URL, $endpoint);
@@ -772,7 +772,7 @@ class Ajax extends Controller
 
         $api = $_SERVER['HTTP_API_KEY'];
 
-        if ($api == 'aXB1bGxyYW5r'){
+        if ($api == ''){
             $ranklist = DB::select('select * from rank');
             return json_encode($ranklist);
         }else{
@@ -822,7 +822,7 @@ class Ajax extends Controller
         $post_json = json_encode($arr);
 
 
-        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=0daf4e6d-b636-4fa6-8355-302bef532bd3';
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contact?hapikey=';
 
                 $ch = curl_init(); 
                 curl_setopt($ch, CURLOPT_URL, $endpoint);

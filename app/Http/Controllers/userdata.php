@@ -27,18 +27,18 @@ class userdata extends Controller
         $others = array("dimensions" => "ga:date","filters" => "ga:eventCategory==authuser;ga:eventLabel==" . $id);
         
         // lazy inefficient way to get this in the format that I want
-        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
         //print_r($gaResponse);
 
 
         //contactRequest conversion
         $others2 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==contactRequestB;ga:eventAction==" . $id);
-        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others2)),true);
+        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others2)),true);
 
 
         //inviteRequest conversion
         $others3 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==inviteSent;ga:eventAction==" . $id);
-        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others3)),true);
+        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others3)),true);
 
 
         $finalGA['schema'] = array('date','conversion','sessions');

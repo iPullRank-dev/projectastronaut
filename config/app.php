@@ -78,10 +78,6 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'ILXtAzcdyg8QTkx7YE83yRHTORMyOCr7'),
-
-    'cipher' => 'AES-256-CBC',
-
     /*
     |--------------------------------------------------------------------------
     | Logging Configuration

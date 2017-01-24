@@ -36,16 +36,16 @@ class dashboard extends Controller
         $others = array("dimensions" => "ga:date");
         
         // lazy inefficient way to get this in the format that I want
-        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
+        $gaResponse = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal1Completions,ga:sessions",$others)),true);
         //print_r($gaResponse);
 
 
 
         $others2 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==inviteSent");
-        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others2)),true);
+        $gaResponse2 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal1Completions",$others2)),true);
 
         $others3 = array("dimensions" => "ga:date","filters" => "ga:eventCategory==contactRequestB");
-        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:111234771')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others3)),true);
+        $gaResponse3 = json_decode(json_encode(\Spatie\LaravelAnalytics\LaravelAnalyticsFacade::setSiteId('ga:')->performQuery($dt,$kickoffdate,"ga:goal3Completions",$others3)),true);
 
         $finalGA['schema'] = array('date','conversion','sessions');
         $finalGA['rows'] = $gaResponse['rows'];

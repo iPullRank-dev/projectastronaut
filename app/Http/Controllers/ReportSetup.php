@@ -200,7 +200,7 @@ class ReportSetup extends Controller
                 curl_setopt($ch, 
                             CURLOPT_HTTPHEADER, 
                             array('Content-Type: application/json', 
-                            'X-Api-Key: zGdGw4SstbiHREvWT0a3Cw2'));
+                            'X-Api-Key: '));
                 curl_setopt( $ch, CURLOPT_POSTFIELDS, $api_data);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
